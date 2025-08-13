@@ -1,12 +1,20 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+//import ProfileAvatar from "\src\app\ProfileAvatar.tsx";
+import type { Metadata } from 'next';
+import Image from "next/image";
 
 // =============================
 // Bharat Kaushik — Portfolio (Dark, Minimal → Premium polish)
-// Now includes a featured project: AI‑Powered Risk‑Radar with images (Image 1 & Image 2)
-// To use your attachments in Next/Vite: place them at /public/images/ as below.
-//   /public/images/ai-risk-radar-1.png   ← Image 1 (dashboard)
-//   /public/images/ai-risk-radar-2.png   ← Image 2 (n8n workflow)
+// Projects finalized: AI‑Powered Risk‑Radar, Industry Digest, Content‑to‑Insights
+// Impact finalized: 6 detailed items with premium modal (Problem/Action/Result/Learnings)
+// Image files expected in /public (root):
+//   /images/ai-risk-radar-1.png
+//   /images/ai-risk-radar-2.png
+//   /industry-digest-outer.png
+//   /industry-digest-workflow.png
+//   /content-to-insights-outer.png
+//   /content-to-insights-workflow.png
 // =============================
 
 // ---- Utilities ----
@@ -41,8 +49,7 @@ function ScrollProgress() {
         }}
         aria-hidden
       />
-    </div>
-  );
+    </div>);
 }
 
 // ---- Active section observer ----
@@ -135,19 +142,21 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ---- Data ----
+// ---- Data (Projects) ----
 const data = {
   hero: {
-    title: "Tech‑to‑Ops builder with IIMA MBA",
+    name: "Bharat Kaushik",
+    title: "Tech‑to‑Ops builder with IIMA MBA", // tagline
     subhead: "Aligning people, processes, and tech to remove uncertainty from execution",
+    photo: { src: "/images/avatar.jpg", alt: "Bharat Kaushik" }, // put your image at /images/public/avatar.jpg
     ctas: [
-      { label: "Download CV", href: "/cv.pdf", type: "primary" },
-      { label: "Email", href: "mailto:you@domain.com", type: "ghost" },
-      { label: "Call", href: "tel:+91XXXXXXXXXX", type: "ghost" },
+      { label: "Download CV", href: "/Bharat_Kaushik_IIMA.pdf", type: "primary" },
+      { label: "Email", href: "mailto:bharat.15dck@gmail.com", type: "ghost" },
+      { label: "Call", href: "tel:+919953779868", type: "ghost" },
     ],
   },
   projects: [
-    // === Featured project from your brief ===
+    // 1) AI‑Powered Risk‑Radar
     {
       id: "ai-risk-radar",
       title: "AI‑Powered Risk‑Radar",
@@ -155,16 +164,16 @@ const data = {
       stack: "Looker Studio | n8n",
       summary:
         "Real-time dashboard that ingests global news, scores supply chain disruptions on impact and visualises them on an interactive world map with trends and filters.",
-      cover: { src: "/images/ai-risk-radar-1.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
+      cover: { src: "/images/risk-radar-outer.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
       metrics: ["Real‑time map", "Ranked disruptions", "Trend lines & filters"],
       roleTools: "PM/Builder — NewsAPI, n8n, Google Sheets, Gemini, Looker Studio",
       screenshots: [
-        { src: "/images/ai-risk-radar-1.png", alt: "Dashboard overview" }, // Image 1
-        { src: "/images/ai-risk-radar-2.png", alt: "n8n pipeline" },      // Image 2
+        { src: "/images/risk-radar-inner.png", alt: "Dashboard overview" },
+        { src: "/images/risk-radar-workflow.png", alt: "n8n pipeline" },
       ],
       problem:
         "Global supply chain disruptions—whether physical, cyber, trade, or infrastructure—are reported across fragmented sources with inconsistent severity metrics. Decision‑makers lack a single real‑time, geospatial view that scores and ranks these disruptions for rapid situational awareness.",
-      prdLink: "#", // optional: link to Product Requirement Document
+      prdLink: "#",
       approach: [
         "Ingested global news feeds via NewsAPI → n8n → Google Sheets with deduplication and enrichment.",
         "Built a strict LLM classification schema (Gemini) to extract disruption type, impacted nodes, and sub‑scores for severity factors.",
@@ -183,25 +192,70 @@ const data = {
         "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
       ],
     },
-
-    // (Existing examples)
-    { id: "risk-radar", title: "Supply Chain Risk Radar", year: "2025", summary: "Unified disruption signals → real‑time, geo‑ranked risks.", metrics: ["98% review time cut", "15% faster response", "Weekly exec brief"],
-      roleTools: "PM/Analyst — n8n, Python, Looker Studio",
-      screenshots: [{ src: "", alt: "Risk map" }, { src: "", alt: "Before→After" }],
-      problem: "Fragmented inputs led to slow, inconsistent decisions.",
-      approach: ["Aggregated 12+ sources via n8n", "Geo‑tag & rank events", "Concise exec dashboard"],
-      outcome: ["98% less manual review", "15% faster response", "Standard taxonomy"],
-      learnings: "Opinionated metrics > endless charts.",
+    // 2) Industry Digest
+    {
+      id: "industry-digest",
+      title: "Industry Digest",
+      year: "2025",
+      stack: "n8n | SQL | REST API | Automation",
+      summary:
+        "Zero-cost n8n + Gemini pipeline that lands a Monday-morning email distilling EPC wins, setbacks & macro trends in 7 min, saving 3 hrs each week.",
+      cover: { src: "/images/industry-digest-outer.png", alt: "Industry Digest" },
+      screenshots: [
+        { src: "/images/industry-digest-outer.png", alt: "Industry Digest" },
+        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest — n8n workflow" },
+      ],
+      problem:
+        "New to the EPC sector, I burned 3 hrs every Sunday scanning 30+ sources for contract wins, policy shifts and interview fodder—still missed early signals.",
+      approach: [
+        "n8n workflow (self-host) schedules Mon 09:00 IST → crawls News, press pages, exchange filings.",
+        "Boolean + regex filter → Gemini clusters into Wins / Setbacks / Strategy Moves / Macro; pulls deal value, geography, keywords.",
+        "Builds comparative table + bullet insights, wraps in branded HTML, and ships via SMTP to my inbox (and any CCs).",
+      ],
+      outcome: [
+        "3 hrs → 7 min (-96% effort); weekly snapshot delivered before coffee.",
+        "Now being used to send industry digest to senior leadership as well.",
+      ],
+      learnings: [
+        "Scheduling workflows without babysitting.",
+        "Run frequency vs cloud costs: balancing speed with budget.",
+      ],
     },
-    { id: "industry-digest", title: "Industry Digest Automation", year: "2025", summary: "Automated sector scanning (30+ sources).", metrics: ["3h → 7min", "Early signal capture", "Reusable pipeline"], roleTools: "n8n, regex, LLM clustering",
-      screenshots: [{ src: "", alt: "Digest" }, { src: "", alt: "Workflow" }],
-      problem: "Manual tracking was slow & noisy.", approach: ["Crawls + de‑dupe + filters", "LLM clustering", "Weekly brief export"], outcome: ["~96% time saved", "Better signal‑to‑noise"], learnings: "Light taxonomy beats RSS firehose.", },
+    // 3) Content‑to‑Insights Pipeline
+    {
+      id: "content-to-insights",
+      title: "Content‑to‑Insights Pipeline",
+      year: "2025",
+      stack: "n8n | SQL | REST API | Automation",
+      summary:
+        "Auto-summarises YouTube talks into a searchable Notion hub in 5 min, slashing research time 30×.",
+      cover: { src: "/images/content-to-insights-outer.png", alt: "Content‑to‑Insights — card cover" },
+      screenshots: [
+        { src: "/images/content-to-insights-workflow.png", alt: "Content‑to‑Insights — card cover" },
+        //{ src: "/images/content-to-insights-workflow.png", alt: "Content‑to‑Insights — workflow" },
+      ],
+      problem: [
+        "Research drag: each new tech talk cost 4 hrs to watch, note, and file—insights scattered across docs.",
+        "Wanted focus: needed a hands-free way to surface ‘share-worthy’ takeaways, fast.",
+      ],
+      approach: [
+        "n8n workflow (7 nodes) – YouTube API fetches fresh video IDs → pull captions → GPT-4o distils 3-line summary + tags → push to Notion DB.",
+        "Zero-code stack – all services on free tiers; variable LLM spend.",
+        "Search & share – Notion filters by tag/topic; daily Slack digest posts newest insights.",
+      ],
+      outcome: [
+        "4 hrs → 5 min (-98% effort), 30× faster insight capture.",
+        "Archived 60+ videos in the first month.",
+        "Run-rate: ₹0 infra + LLM API cost.",
+      ],
+      learnings: [
+        "Introduction to workflow automation.",
+        "Revision: REST API (auth, pagination, & rate limits), ETL workflows.",
+      ],
+    },
   ],
-  impact: [
-    { title: "PMO for International Expo (250k visitors)", orgRoleYear: "CISF — PMO Lead, 2023–24", summary: "Orchestrated 8 workstreams; integrated tech, ops, stakeholders.", metrics: ["100% SLA", "Zero critical incidents", "Cross‑agency alignment"] },
-    { title: "Threat‑Triage ML Pipeline", orgRoleYear: "IB — Ops Manager, 2021–23", summary: "AWS prototype reduced triage time & improved prioritization.", metrics: ["85% faster", "Repeatable workflow"] },
-  ],
-  contact: { email: "you@domain.com", phone: "+91XXXXXXXXXX", linkedin: "https://www.linkedin.com/in/your-handle/" },
+  // legacy impact list removed; using premium Impact component below
+  contact: { email: "bharat.15dck@gmail.com", phone: "+919953779868", linkedin: "https://www.linkedin.com/in/bahratk1512" },
 };
 
 // ---- Nav ----
@@ -241,6 +295,55 @@ function Nav() {
     </header>
   );
 }
+// ---- Premium Profile Avatar (inline) ----
+function ProfileAvatar({
+  src = "/avatar.jpg",
+  alt = "Profile photo",
+  size = 96, // px
+}: {
+  src?: string;
+  alt?: string;
+  size?: number;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      el.style.transform = `translateY(-2px) rotateY(${x / 28}deg) rotateX(${-y / 28}deg)`;
+    };
+    const onLeave = () => {
+      el.style.transform = "";
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="group relative mx-auto mb-6 rounded-full overflow-hidden ring-1 ring-zinc-800 transition-transform duration-300 will-change-transform hover:scale-[1.04]"
+      style={{ width: size, height: size, perspective: 600 }}
+    >
+      {/* soft halo */}
+      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6),0_0_0_8px_rgba(224,224,224,0.06)] group-hover:shadow-[0_12px_38px_-12px_rgba(0,0,0,0.7),0_0_0_10px_rgba(224,224,224,0.08)] transition-shadow duration-300" />
+      <Image src={src} alt={alt} fill className="object-cover" priority />
+      {/* subtle radial gloss */}
+      <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.08),transparent_40%)]" />
+    </div>
+  );
+}
 
 // ---- Hero ----
 function Hero() {
@@ -248,25 +351,36 @@ function Hero() {
     <Section id="home">
       <Reveal>
         <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
+          {/* Avatar */}
+          {data.hero.photo?.src && (
+  <ProfileAvatar
+    src={data.hero.photo.src}
+    alt={data.hero.photo.alt || "Profile photo"}
+    size={96} // tweak to 112 / 128 if you want larger
+  />
+)}
+
+
+          {/* Name */}
+          <h1 className="text-[clamp(30px,5.6vw,56px)] font-bold text-zinc-100 tracking-tight">{data.hero.name}</h1>
+
+          {/* Tagline badges */}
+          <div className="flex items-center justify-center gap-3 mt-3 mb-4">
             <Badge>Program Manager · Tech→Ops</Badge>
-            <span className="inline-flex items-center gap-2">
-              <Badge>
-                <span className="relative inline-flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-300 opacity-30" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-zinc-200" />
-                </span>
-                IIMA MBA
-              </Badge>
-            </span>
+            <Badge>IIMA MBA</Badge>
           </div>
-          <h1 className="text-[clamp(28px,5.2vw,48px)] font-bold text-zinc-100 mb-4">
+
+          {/* Tagline (old title) */}
+          <p className="text-zinc-300 leading-relaxed max-w-2xl mx-auto">
             {data.hero.title}
-          </h1>
-          <p className="text-zinc-300 leading-relaxed max-w-2xl mx-auto mb-8">
+          </p>
+          {/* Subhead */}
+          <p className="text-zinc-400 leading-relaxed max-w-2xl mx-auto mt-2">
             {data.hero.subhead}
           </p>
-          <div className="flex justify-center gap-4">
+
+          {/* CTAs */}
+          <div className="flex justify-center gap-4 mt-8">
             {data.hero.ctas.map((c) => (
               <a
                 key={c.label}
@@ -289,18 +403,16 @@ function Hero() {
   );
 }
 
-// ---- Projects ----
+// ---- Projects (Work) ----
 function Projects() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = useMemo(() => data.projects.find((p) => p.id === activeId) || null, [activeId]);
 
-  // body scroll lock when modal open
   useEffect(() => {
     if (active) { document.body.style.overflow = "hidden"; } else { document.body.style.overflow = ""; }
     return () => { document.body.style.overflow = ""; };
   }, [active]);
 
-  // modal keyboard handling
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -335,7 +447,6 @@ function Projects() {
               aria-expanded={activeId === p.id}
             >
               <Card>
-                {/* Optional cover image for premium look */}
                 {p.cover?.src ? (
                   <div className="mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
                     <img
@@ -378,7 +489,6 @@ function Projects() {
               <button onClick={() => setActiveId(null)} className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded" aria-label="Close">✕</button>
             </div>
 
-            {/* sticky mini‑TOC */}
             <div className="sticky top-0 bg-zinc-950/80 backdrop-blur mt-4 pt-2 pb-2 z-10 border-b border-zinc-900">
               <nav className="text-xs text-zinc-400 flex gap-4">
                 <a href="#p-summary" className="hover:text-zinc-100">Summary</a>
@@ -389,7 +499,6 @@ function Projects() {
               </nav>
             </div>
 
-            {/* Project Summary */}
             <div id="p-summary" className="mt-4">
               {active.screenshots?.[0]?.src ? (
                 <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
@@ -399,10 +508,15 @@ function Projects() {
               <p className="text-zinc-300">{active.summary}</p>
             </div>
 
-            {/* Problem */}
             <div id="p-problem" className="mt-6">
               <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
-              <p className="text-sm text-zinc-300">{active.problem}</p>
+              {Array.isArray(active.problem) ? (
+                <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+                  {active.problem.map((p, i) => (<li key={i}>{p}</li>))}
+                </ul>
+              ) : (
+                <p className="text-sm text-zinc-300">{active.problem}</p>
+              )}
               {active.prdLink && (
                 <div className="mt-2 text-xs">
                   <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>
@@ -412,7 +526,6 @@ function Projects() {
               )}
             </div>
 
-            {/* Action */}
             <div id="p-approach" className="mt-6">
               <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
               {active.screenshots?.[1]?.src ? (
@@ -425,7 +538,6 @@ function Projects() {
               </ul>
             </div>
 
-            {/* Result */}
             <div id="p-outcome" className="mt-6">
               <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
               <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
@@ -433,7 +545,6 @@ function Projects() {
               </ul>
             </div>
 
-            {/* Learnings */}
             <div id="p-learnings" className="mt-6">
               <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
               <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
@@ -447,25 +558,334 @@ function Projects() {
   );
 }
 
-// ---- Impact ----
+// ---- Impact (Premium: 6 items + modal) ----
 function Impact() {
+  const impacts = [
+    {
+      id: "eoffice-2023",
+      title: "e-Office rollout (2023)",
+      subtitle: "Paperless HQ, –90 % TAT",
+      problem: [
+        "Paper files (≈ 200/day) trapped officers at desks and buried approvals.",
+      ],
+      action: [
+        "Championed e-Office SaaS",
+        "Upgraded legacy PCs/network, wrote SOPs, trained staff, steered multi-stakeholder change.",
+      ],
+      outcome: [
+        "Admin SLA –90 % and paper eliminated within 14 weeks",
+      ],
+      learnings: [
+        "Change-management levers (super-users, floor-walks, quick-win metrics)",
+        "Digitised legacy SOPs without feature creep - kept focus on time-to-value.",
+      ],
+    },
+    {
+      id: "py-triage-2019",
+      title: "Python triage Engine (2019)",
+      subtitle: "NLP | Random Forest | AWS",
+      problem: [
+        "Remote area - improper network coverage",
+        "Manual profiling of “high-impact” entities drained analyst hours and missed signals.",
+      ],
+      action: [
+        "Coded a Python + NLP classifier with nightly AWS crawlers; tuned keywords for local threats.",
+      ],
+      outcome: [
+        "Analyst cycle-time –85 %, freeing > 1 FTE/day",
+      ],
+      learnings: [
+        "Cultivated the “small-automation, big-impact” mindset.",
+        "Balanced precision vs. speed in NLP models handling sensitive data",
+      ],
+    },
+    {
+      id: "defexpo-pmo-2022",
+      title: "Defence Expo PMO (2022)",
+      subtitle: "8 work-streams | Multi-agency",
+      problem: [
+        "250k+ visitors, 75+ foreign delegations, zero-failure tolerance",
+        "20 days to build security & logistics, leading over 600 personnel",
+      ],
+      action: [
+        "Directed 8 workstreams, integrated 2k+ CCTV streams into a single multi-agency control room",
+        "Ran daily stand-ups with multi-agency stakeholders",
+      ],
+      outcome: [
+        "Hit 100 % SLA / zero incidents",
+        "Recommended for DG Commendation Roll",
+      ],
+      learnings: [
+        "RAID-log governance; kept eight workstreams on the critical path under strict deadlines.",
+        "Diplomacy & escalation across multiple agencies - aligning tactical actions with strategic goals.",
+      ],
+    },
+    {
+      id: "sales-boost-2023",
+      title: "Sales Analytics Boost (2023)",
+      subtitle: "2x inventory turn | +20 % sales",
+      problem: [
+        "Cash-heavy ops",
+        "Slow stock turns",
+        "Leak-prone storage area",
+      ],
+      action: [
+        "Deployed UPI-enabled POS",
+        "Doubled purchase cadence",
+        "Used SKU analytics to rebalance inventory",
+      ],
+      outcome: [
+        "Inventory turns ×2",
+        "Sales +20 % (₹11 L / month)",
+      ],
+      learnings: [
+        "Learnt and applied the data > gut mindset",
+        "Simple tools & charts can drive meaningful change",
+      ],
+    },
+    {
+      id: "access-redesign-2022",
+      title: "Access-Control Redesign (2022)",
+      subtitle: "40% capex saved",
+      problem: [
+        "Client’s draft blueprint called for dozens of badge readers and turnstiles",
+        "Over-engineered flow for a new critical-infrastructure wing",
+      ],
+      action: [
+        "Understood KPIs for union reps, management, vendors and CISF teams",
+        "Ran an on-site survey with multiple stakeholders",
+        "Eliminated redundancies and re-sequenced traffic into a dual-layer zone that needed far fewer devices",
+      ],
+      outcome: [
+        "Final design required 40% fewer machines",
+        "Delivered a better security depth and kept the project within capex limit",
+        "All stakeholders signed off",
+      ],
+      learnings: [
+        "Stakeholder management masterclass - Security, cost, & convenience pull in different directions",
+        "Vendor management and TCO skills",
+      ],
+    },
+    {
+      id: "currency-press-2022",
+      title: "Currency-Press Consulting (2022)",
+      subtitle: "20% opex saved",
+      problem: [
+        "The client demanded a sharp cut in CISF deployment costs",
+      ],
+      action: [
+        "Interviewed leadership, unions and CISF HQ",
+        "Redesigned the model: digitised pass issuance, added biometric/RFID access at choke points, upgraded IP-CCTV analytics, and re-categorised guard posts so non-core roles could be outsourced",
+      ],
+      outcome: [
+        "Right-sized staffing and tech refresh",
+        "Sliced operating spend by 20% while preserving security coverage",
+      ],
+      learnings: [
+        "As-Is / To-Be mapping",
+        "Negotiating multi-party buy-ins",
+      ],
+    },
+  ];
+
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const active = useMemo(() => impacts.find((i) => i.id === activeId) || null, [activeId]);
+
+  useEffect(() => {
+    document.body.style.overflow = active ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [active]);
+
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (!active) return;
+      if (e.key === "Escape") setActiveId(null);
+      if (e.key === "Tab" && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+          'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const isShift = e.shiftKey;
+        const activeEl = document.activeElement as HTMLElement | null;
+        if (!isShift && activeEl === last) { e.preventDefault(); first.focus(); }
+        if (isShift && activeEl === first) { e.preventDefault(); (last as HTMLElement).focus(); }
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
+
   return (
     <Section id="impact" title="Impact in Previous Roles">
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.impact.map((it, idx) => (
-          <Reveal key={idx} delay={idx * 50}>
-            <Card>
-              <div className="text-zinc-100 font-medium">{it.title}</div>
-              <div className="text-zinc-400 text-sm">{it.orgRoleYear}</div>
-              <p className="text-sm text-zinc-300 mt-2">{it.summary}</p>
-              <ul className="mt-3 text-xs text-zinc-400 list-disc list-inside space-y-1">
-                {it.metrics.map((m, i) => (<li key={i}>{m}</li>))}
-              </ul>
-            </Card>
+        {impacts.map((it, idx) => (
+          <Reveal key={it.id} delay={idx * 50}>
+            <button
+              onClick={() => setActiveId(it.id)}
+              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
+              aria-haspopup="dialog"
+              aria-expanded={activeId === it.id}
+            >
+              <Card>
+                <div className="text-zinc-100 font-medium">{it.title}</div>
+                {it.subtitle && (
+                  <div className="text-zinc-400 text-sm">{it.subtitle}</div>
+                )}
+                {it.outcome?.length ? (
+                  <ul className="mt-3 text-xs text-zinc-400 list-disc list-inside space-y-1">
+                    {it.outcome.slice(0, 2).map((m, i) => (
+                      <li key={i}>{m}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </Card>
+            </button>
           </Reveal>
         ))}
       </div>
+
+      {active && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="impact-title"
+        >
+          <div className="max-w-3xl w-full rounded-2xl border border-zinc-800 bg-zinc-950 p-6 overflow-y-auto max-h-[90vh]">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">
+                  {active.title}
+                </h3>
+                {active.subtitle && (
+                  <div className="text-sm text-zinc-400 mt-1">{active.subtitle}</div>
+                )}
+              </div>
+              <button
+                onClick={() => setActiveId(null)}
+                className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="sticky top-0 bg-zinc-950/80 backdrop-blur mt-4 pt-2 pb-2 z-10 border-b border-zinc-900">
+              <nav className="text-xs text-zinc-400 flex gap-4">
+                <a href="#i-problem" className="hover:text-zinc-100">Problem</a>
+                <a href="#i-action" className="hover:text-zinc-100">Action</a>
+                <a href="#i-result" className="hover:text-zinc-100">Result</a>
+                <a href="#i-learnings" className="hover:text-zinc-100">Learnings</a>
+              </nav>
+            </div>
+
+            <div id="i-problem" className="mt-4">
+              <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
+              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+                {active.problem?.map((p, i) => <li key={i}>{p}</li>)}
+              </ul>
+            </div>
+            <div id="i-action" className="mt-4">
+              <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
+              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+                {active.action?.map((a, i) => <li key={i}>{a}</li>)}
+              </ul>
+            </div>
+            <div id="i-result" className="mt-4">
+              <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
+              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+                {active.outcome?.map((o, i) => <li key={i}>{o}</li>)}
+              </ul>
+            </div>
+            <div id="i-learnings" className="mt-4">
+              <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
+              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+                {active.learnings?.map((l, i) => <li key={i}>{l}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
     </Section>
+  );
+}
+
+// ---- Timeline (horizontal, hover + keyboard, pop-forward) ----
+function Timeline() {
+  const items = [
+    { key: "zs",   label: "ZS",   year: "2018", details: "Analytics & consulting foundation; ops + data basics." },
+    { key: "ib",   label: "IB",   year: "2019", details: "Python NLP triage engine; –85% analyst cycle‑time." },
+    { key: "cisf", label: "CISF", year: "2022", details: "Defence Expo PMO; access‑control redesign; 40% capex saved." },
+    { key: "mha",  label: "MHA",  year: "2023", details: "e‑Office rollout; paperless HQ; –90% admin SLA in 14 weeks." },
+    { key: "kec",  label: "KEC",  year: "2024", details: "Sales analytics boost; 2× inventory turns; +20% sales." },
+  ];
+  const [hover, setHover] = useState<string | null>(null);
+
+  return (
+    <div className="mt-10 select-none">
+      <div className="relative">
+        {/* base line */}
+        <div className="h-[2px] w-full bg-zinc-800 rounded-full" />
+        {/* points */}
+        <div className="relative">
+          <div className="grid grid-cols-5">
+            {items.map((it) => {
+              const active = hover === it.key;
+              const tooltipId = `tt-${it.key}`;
+              return (
+                <div
+                  key={it.key}
+                  className={`relative flex flex-col items-center ${active ? "z-20" : ""}`}
+                  onMouseEnter={() => setHover(it.key)}
+                  onMouseLeave={() => setHover(null)}
+                >
+                  {/* dot (keyboard accessible) */}
+                  <button
+                    className={`relative mt-[-7px] h-3.5 w-3.5 rounded-full bg-zinc-300 ring-2 ring-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-500 transition-transform duration-200 will-change-transform ${
+                      active ? "scale-[1.35] shadow-[0_0_0_6px_rgba(224,224,224,0.06)]" : "scale-100"
+                    }`}
+                    onFocus={() => setHover(it.key)}
+                    onBlur={() => setHover(null)}
+                    onKeyDown={(e) => { if (e.key === "Escape") setHover(null); }}
+                    aria-label={`${it.label} ${it.year}`}
+                    aria-describedby={active ? tooltipId : undefined}
+                    aria-expanded={active}
+                  />
+                  {/* label + year (hover/keyboard synced) */}
+                  <button
+                    className="mt-3 text-center focus:outline-none"
+                    onFocus={() => setHover(it.key)}
+                    onBlur={() => setHover(null)}
+                    aria-label={`${it.label} ${it.year} details`}
+                  >
+                    <div className={`text-sm ${active ? "text-zinc-100 font-semibold" : "text-zinc-200 font-medium"}`}>
+                      {it.label}
+                    </div>
+                    <div className={`text-xs ${active ? "text-zinc-300" : "text-zinc-400"}`}>{it.year}</div>
+                  </button>
+
+                  {/* tooltip */}
+                  {active && (
+                    <div
+                      id={tooltipId}
+                      role="tooltip"
+                      className="absolute -top-28 z-20 w-56 rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
+                    >
+                      <div className="text-zinc-100 text-sm font-medium">{it.label} · {it.year}</div>
+                      <div className="text-zinc-400 text-xs mt-1 leading-relaxed">{it.details}</div>
+                      <div className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -477,6 +897,7 @@ function About() {
         <p className="text-zinc-300 leading-relaxed max-w-3xl">
           I’m a tech‑to‑ops program manager focused on turning complex initiatives into measurable outcomes. I bridge strategy and execution by aligning stakeholders, simplifying processes, and using data & automation to remove ambiguity from delivery.
         </p>
+        <Timeline />
       </Reveal>
     </Section>
   );
@@ -552,7 +973,7 @@ function Footer() {
 
 export default function PortfolioApp() {
   return (
-    <div className="bg-[#121212] min-h-screen text-[#E0E0E0] scroll-smooth">
+      <div className="bg-[#121212] min-h-screen text-[#E0E0E0] scroll-smooth">
       <ScrollProgress />
       <Nav />
       <main>
