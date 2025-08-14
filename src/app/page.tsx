@@ -306,15 +306,13 @@ function Nav() {
     </header>
   );
 }
-// ---- Premium Profile Avatar (inline) ----
+// ---- Premium Profile Avatar (inline, responsive) ----
 function ProfileAvatar({
   src = "/avatar.jpg",
   alt = "Profile photo",
-  size = 96, // px
 }: {
   src?: string;
   alt?: string;
-  size?: number;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -329,9 +327,7 @@ function ProfileAvatar({
       const y = e.clientY - rect.top - rect.height / 2;
       el.style.transform = `translateY(-2px) rotateY(${x / 28}deg) rotateX(${-y / 28}deg)`;
     };
-    const onLeave = () => {
-      el.style.transform = "";
-    };
+    const onLeave = () => { el.style.transform = ""; };
 
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
@@ -344,11 +340,13 @@ function ProfileAvatar({
   return (
     <div
       ref={ref}
-      className="group relative mx-auto mb-6 rounded-full overflow-hidden ring-1 ring-zinc-800 transition-transform duration-300 will-change-transform hover:scale-[1.04]"
-      style={{ width: size, height: size, perspective: 600 }}
+      className="group relative rounded-full overflow-hidden ring-1 ring-zinc-800 transition-transform duration-300 will-change-transform hover:scale-[1.04]
+                 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-56 lg:h-56 xl:w-64 xl:h-64"
+      style={{ perspective: 600 }}
     >
       {/* soft halo */}
-      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6),0_0_0_8px_rgba(224,224,224,0.06)] group-hover:shadow-[0_12px_38px_-12px_rgba(0,0,0,0.7),0_0_0_10px_rgba(224,224,224,0.08)] transition-shadow duration-300" />
+      <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6),0_0_0_8px_rgba(224,224,224,0.06)]
+                      group-hover:shadow-[0_12px_38px_-12px_rgba(0,0,0,0.7),0_0_0_10px_rgba(224,224,224,0.08)] transition-shadow duration-300" />
       <Image src={src} alt={alt} fill className="object-cover" priority />
       {/* subtle radial gloss */}
       <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.08),transparent_40%)]" />
@@ -356,57 +354,80 @@ function ProfileAvatar({
   );
 }
 
-// ---- Hero ----
+
+// ---- Hero (2-column on desktop, stacked on mobile) ----
 function Hero() {
   return (
     <Section id="home">
+      {/* non-intrusive background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="h-full w-full bg-[radial-gradient(80%_60%_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]" />
+      </div>
+
       <Reveal>
-        <div className="text-center">
-          {/* Avatar */}
-          {data.hero.photo?.src && (
-  <ProfileAvatar
-    src={data.hero.photo.src}
-    alt={data.hero.photo.alt || "Profile photo"}
-    size={96} // tweak to 112 / 128 if you want larger
-  />
-)}
+        <div className="relative mx-auto max-w-6xl px-4 py-8 sm:py-10 md:py-12 lg:py-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left: large avatar on desktop */}
+            <div className="flex justify-center lg:justify-start">
+              {data.hero.photo?.src && (
+                <ProfileAvatar
+                  src={data.hero.photo.src}
+                  alt={data.hero.photo.alt || "Profile photo"}
+                />
+              )}
+            </div>
 
+            {/* Right: content */}
+            <div className="text-center lg:text-left">
+              {/* Single-line name */}
+              <h1 className="whitespace-nowrap text-zinc-100 font-bold tracking-tight
+                             text-[clamp(28px,8vw,40px)]
+                             sm:text-[clamp(32px,6.5vw,48px)]
+                             md:text-[clamp(40px,5.8vw,56px)]
+                             lg:text-[clamp(44px,4.8vw,64px)]
+                             xl:text-[clamp(48px,4vw,72px)]">
+                {data.hero.name}
+              </h1>
 
-          {/* Name */}
-          <h1 className="text-[clamp(30px,5.6vw,56px)] font-bold text-zinc-100 tracking-tight">{data.hero.name}</h1>
+              {/* badges */}
+              <div className="mt-3 mb-4 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
+                <Badge>Program Manager · Tech→Ops</Badge>
+                <Badge className="hidden sm:inline">IIMA MBA</Badge>
+              </div>
 
-          {/* Tagline badges */}
-          <div className="flex items-center justify-center gap-3 mt-3 mb-4">
-            <Badge>Program Manager · Tech→Ops</Badge>
-            <Badge>IIMA MBA</Badge>
-          </div>
+              {/* tagline + subhead */}
+              <p className="text-zinc-300 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
+                {data.hero.title}
+              </p>
+              <p className="text-zinc-400 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 mt-2 text-sm sm:text-base">
+                {data.hero.subhead}
+              </p>
 
-          {/* Tagline (old title) */}
-          <p className="text-zinc-300 leading-relaxed max-w-2xl mx-auto">
-            {data.hero.title}
-          </p>
-          {/* Subhead */}
-          <p className="text-zinc-400 leading-relaxed max-w-2xl mx-auto mt-2">
-            {data.hero.subhead}
-          </p>
+              {/* CTAs */}
+              <div className="mt-6 sm:mt-7 flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
+                {data.hero.ctas.map((c) => (
+                  <a
+                    key={c.label}
+                    href={c.href}
+                    className={
+                      c.type === "primary"
+                        ? "px-4 sm:px-5 py-2 bg-zinc-100 text-zinc-900 rounded-xl text-sm font-medium hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-600"
+                        : "px-4 sm:px-5 py-2 border border-zinc-700 text-zinc-100 rounded-xl text-sm hover:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+                    }
+                  >
+                    <span className="[background:linear-gradient(currentColor,currentColor)_0_100%/0_1px_no-repeat] hover:[background-size:100%_1px] [transition:background-size_.2s_ease]">
+                      {c.label}
+                    </span>
+                  </a>
+                ))}
+              </div>
 
-          {/* CTAs */}
-          <div className="flex justify-center gap-4 mt-8">
-            {data.hero.ctas.map((c) => (
-              <a
-                key={c.label}
-                href={c.href}
-                className={
-                  c.type === "primary"
-                    ? "px-5 py-2 bg-zinc-100 text-zinc-900 rounded-xl text-sm font-medium hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                    : "px-5 py-2 border border-zinc-700 text-zinc-100 rounded-xl text-sm hover:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                }
-              >
-                <span className="[background:linear-gradient(currentColor,currentColor)_0_100%/0_1px_no-repeat] hover:[background-size:100%_1px] [transition:background-size_.2s_ease]">
-                  {c.label}
-                </span>
-              </a>
-            ))}
+              {/* optional: desktop-only quick links to pull next section into view */}
+              {/* <div className="hidden lg:flex mt-6 gap-4 text-sm text-zinc-400">
+                <a href="#work" className="underline underline-offset-4 hover:text-zinc-200">See recent projects →</a>
+                <a href="#impact" className="underline underline-offset-4 hover:text-zinc-200">See impact →</a>
+              </div> */}
+            </div>
           </div>
         </div>
       </Reveal>
@@ -461,7 +482,7 @@ useEffect(() => {
   }, [active]);
 
   return (
-    <Section id="work" title="Recent Projects">
+    <Section id="work" title="Recent Projects" >
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
@@ -987,7 +1008,7 @@ function About() {
     {/* ...your previous content inside the section... */}
 
     {/* Text block */}
-    <div className="mt-16 max-w-3xl space-y-6">
+    <div className="mt-12 max-w-3xl space-y-6">
       <p className="text-zinc-300 leading-relaxed text-justify">
         Every day, I connect the dots: bridging teams, streamlining workflows, and translating analytics into smarter operations.
       </p>
