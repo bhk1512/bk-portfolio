@@ -198,6 +198,11 @@ const data = {
       title: "Industry Digest",
       year: "2025",
       stack: "n8n | SQL | REST API | Automation",
+       metrics: [
+      "Automated crawl (30+ sources)",
+      "LLM‑clustered insights",
+      "Mon 09:00 email digest",
+    ],
       summary:
         "Zero-cost n8n + Gemini pipeline that lands a Monday-morning email distilling EPC wins, setbacks & macro trends in 7 min, saving 3 hrs each week.",
       cover: { src: "/images/industry-digest-outer.png", alt: "Industry Digest" },
@@ -227,6 +232,11 @@ const data = {
       title: "Content‑to‑Insights Pipeline",
       year: "2025",
       stack: "n8n | SQL | REST API | Automation",
+        metrics: [
+      "3‑line summaries + tags",
+      "Searchable Notion hub",
+      "Daily Slack digest",
+    ],
       summary:
         "Auto-summarises YouTube talks into a searchable Notion hub in 5 min, slashing research time 30×.",
       cover: { src: "/images/content-to-insights-outer.png", alt: "Content‑to‑Insights — card cover" },
