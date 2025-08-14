@@ -990,33 +990,80 @@ function Writing() {
 // ---- Contact ----
 function Contact() {
   const { email, phone, linkedin } = data.contact;
+
   return (
     <Section id="contact" title="Get in touch">
       <Reveal>
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
-            <form onSubmit={(e) => { e.preventDefault(); alert("Thanks! I will get back to you."); }} className="space-y-3">
+            <form
+              className="space-y-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const form = e.currentTarget as HTMLFormElement;
+                if (!form.checkValidity()) {
+                  form.reportValidity(); // show native error bubbles
+                  return;
+                }
+                alert("Thanks! I will get back to you.");
+                form.reset();
+              }}
+            >
               <div>
-                <label className="block text-sm text-zinc-300 mb-1">Name</label>
-                <input className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+                <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-name">Name</label>
+                <input
+                  id="ct-name"
+                  name="name"
+                  required
+                  autoComplete="name"
+                  placeholder="Your name"
+                  className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+                />
               </div>
+
               <div>
-                <label className="block text-sm text-zinc-300 mb-1">Email</label>
-                <input type="email" className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+                <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-email">Email</label>
+                <input
+                  id="ct-email"
+                  type="email"
+                  name="email"
+                  required
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+                />
               </div>
+
               <div>
-                <label className="block text-sm text-zinc-300 mb-1">Message</label>
-                <textarea rows={4} className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+                <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-message">Message</label>
+                <textarea
+                  id="ct-message"
+                  name="message"
+                  required
+                  minLength={10}
+                  rows={4}
+                  placeholder="How can I help?"
+                  className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
+                />
               </div>
-              <button className="rounded-xl bg-zinc-100 text-zinc-900 px-4 py-2 text-sm font-medium hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-600">Send</button>
+
+              <button
+                type="submit"
+                className="rounded-xl bg-zinc-100 text-zinc-900 px-4 py-2 text-sm font-medium hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-600"
+              >
+                Send
+              </button>
             </form>
           </Card>
+
           <Card>
             <div className="space-y-2 text-sm">
               <div className="text-zinc-400">Email</div>
               <a className="text-zinc-100 hover:underline" href={`mailto:${email}`}>{email}</a>
+
               <div className="text-zinc-400 mt-3">Phone</div>
               <a className="text-zinc-100 hover:underline" href={`tel:${phone}`}>{phone}</a>
+
               <div className="text-zinc-400 mt-3">LinkedIn</div>
               <a className="text-zinc-100 hover:underline" href={linkedin}>{linkedin}</a>
             </div>
