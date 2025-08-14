@@ -274,9 +274,10 @@ function Nav() {
       {/* subtle brand accent line under nav */}
       <div className="h-0.5 bg-gradient-to-r from-zinc-800 via-zinc-600/60 to-zinc-800" />
       <div className="backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60 border-b border-zinc-900">
-        <nav className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <nav className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <a href="#home" className="font-medium text-zinc-100">BK</a>
-          <ul className="flex gap-4 text-sm">
+          <ul className="flex gap-3 sm:gap-4 text-[13px] sm:text-sm flex-wrap pr-2">
+
             {items.map((it) => (
               <li key={it.id}>
                 <a
@@ -908,7 +909,18 @@ function Timeline() {
   >
     <div className="text-zinc-100 text-sm font-medium">{it.label} · {it.year}</div>
     <div className="text-zinc-400 text-xs mt-1 leading-relaxed">{it.details}</div>
-    <div className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800" />
+
+    {/* arrow – centers normally; snaps near the dot at edges */}
+    <div
+      className={[
+        "absolute -bottom-2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800",
+        it.key === items[0].key
+          ? "left-[18px]"          // roughly over the first dot
+          : it.key === items[items.length - 1].key
+            ? "right-[18px]"       // roughly over the last dot
+            : "left-1/2 -translate-x-1/2", // centered
+      ].join(" ")}
+    />
   </div>
 )}
                 </div>
