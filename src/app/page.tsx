@@ -276,7 +276,7 @@ function Nav() {
       <div className="backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60 border-b border-zinc-900">
         <nav className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <a href="#home" className="font-medium text-zinc-100">BK</a>
-          <ul className="flex gap-3 sm:gap-4 text-[13px] sm:text-sm flex-wrap pr-2">
+          <ul className="flex gap-3 sm:gap-4 text-[13px] sm:text-sm flex-wrap justify-center sm:justify-start pr-2">
 
             {items.map((it) => (
               <li key={it.id}>
