@@ -767,67 +767,75 @@ function Impact() {
       </div>
 
       {active && (
-        <div
-          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="impact-title"
-        >
-          <div className="max-w-3xl w-full rounded-2xl border border-zinc-800 bg-zinc-950 p-6 overflow-y-auto max-h-[90vh]">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">
-                  {active.title}
-                </h3>
-                {active.subtitle && (
-                  <div className="text-sm text-zinc-400 mt-1">{active.subtitle}</div>
-                )}
-              </div>
-              <button
-                onClick={() => setActiveId(null)}
-                className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
-                aria-label="Close"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="sticky top-0 bg-zinc-950/80 backdrop-blur mt-4 pt-2 pb-2 z-10 border-b border-zinc-900">
-              <nav className="text-xs text-zinc-400 flex gap-4">
-                <a href="#i-problem" className="hover:text-zinc-100">Problem</a>
-                <a href="#i-action" className="hover:text-zinc-100">Action</a>
-                <a href="#i-result" className="hover:text-zinc-100">Result</a>
-                <a href="#i-learnings" className="hover:text-zinc-100">Learnings</a>
-              </nav>
-            </div>
-
-            <div id="i-problem" className="mt-4">
-              <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.problem?.map((p, i) => <li key={i}>{p}</li>)}
-              </ul>
-            </div>
-            <div id="i-action" className="mt-4">
-              <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.action?.map((a, i) => <li key={i}>{a}</li>)}
-              </ul>
-            </div>
-            <div id="i-result" className="mt-4">
-              <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.outcome?.map((o, i) => <li key={i}>{o}</li>)}
-              </ul>
-            </div>
-            <div id="i-learnings" className="mt-4">
-              <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.learnings?.map((l, i) => <li key={i}>{l}</li>)}
-              </ul>
-            </div>
-          </div>
+  <div
+    className="fixed inset-0 z-50 bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="impact-title"
+    onClick={(e) => { if (e.target === e.currentTarget) setActiveId(null); }}
+  >
+    <div
+      ref={modalRef}
+      className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">
+            {active.title}
+          </h3>
+          {active.subtitle && (
+            <div className="text-sm text-zinc-400 mt-1">{active.subtitle}</div>
+          )}
         </div>
-      )}
+        <button
+          onClick={() => setActiveId(null)}
+          className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
+        <nav className="text-xs text-zinc-400 flex gap-4">
+          <a href="#i-problem" className="hover:text-zinc-100">Problem</a>
+          <a href="#i-action" className="hover:text-zinc-100">Action</a>
+          <a href="#i-result" className="hover:text-zinc-100">Result</a>
+          <a href="#i-learnings" className="hover:text-zinc-100">Learnings</a>
+        </nav>
+      </div>
+
+      <div id="i-problem" className="mt-4">
+        <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.problem?.map((p, i) => <li key={i}>{p}</li>)}
+        </ul>
+      </div>
+
+      <div id="i-action" className="mt-4">
+        <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.action?.map((a, i) => <li key={i}>{a}</li>)}
+        </ul>
+      </div>
+
+      <div id="i-result" className="mt-4">
+        <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.outcome?.map((o, i) => <li key={i}>{o}</li>)}
+        </ul>
+      </div>
+
+      <div id="i-learnings" className="mt-4">
+        <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.learnings?.map((l, i) => <li key={i}>{l}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+)}
+          
     </Section>
   );
 }
