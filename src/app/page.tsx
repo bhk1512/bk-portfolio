@@ -888,16 +888,21 @@ function Timeline() {
 
                   {/* tooltip */}
                   {active && (
-                    <div
-                      id={tooltipId}
-                      role="tooltip"
-                      className="absolute -top-28 z-20 w-56 rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
-                    >
-                      <div className="text-zinc-100 text-sm font-medium">{it.label} · {it.year}</div>
-                      <div className="text-zinc-400 text-xs mt-1 leading-relaxed">{it.details}</div>
-                      <div className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800" />
-                    </div>
-                  )}
+  <div
+    id={tooltipId}
+    role="tooltip"
+    className="absolute -top-28 z-20 w-56 max-w-[90vw] rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
+    style={{
+      left: it.key === items[0].key ? 0 : it.key === items[items.length - 1].key ? 'auto' : '50%',
+      right: it.key === items[items.length - 1].key ? 0 : 'auto',
+      transform: it.key === items[0].key || it.key === items[items.length - 1].key ? 'none' : 'translateX(-50%)',
+    }}
+  >
+    <div className="text-zinc-100 text-sm font-medium">{it.label} · {it.year}</div>
+    <div className="text-zinc-400 text-xs mt-1 leading-relaxed">{it.details}</div>
+    <div className="absolute left-1/2 -bottom-2 -translate-x-1/2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800" />
+  </div>
+)}
                 </div>
               );
             })}
@@ -992,7 +997,7 @@ function Footer() {
 
 export default function PortfolioApp() {
   return (
-      <div className="bg-[#121212] min-h-screen text-[#E0E0E0] scroll-smooth">
+      <div className="bg-[#121212] min-h-screen text-[#E0E0E0] scroll-smooth overflow-x-hidden">
       <ScrollProgress />
       <Nav />
       <main>
