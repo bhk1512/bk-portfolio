@@ -404,8 +404,10 @@ function Hero() {
   );
 }
 
+
 // ---- Projects (Work) ----
 function Projects() {
+  const [savedScrollY, setSavedScrollY] = useState(0);
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = useMemo(() => data.projects.find((p) => p.id === activeId) || null, [activeId]);
 
@@ -430,7 +432,7 @@ useEffect(() => {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
-      if (e.key === "Escape") setActiveId(null);
+      if (e.key === "Escape") { setActiveId(null); window.scrollTo(0, savedScrollY); }
       if (e.key === "Tab" && modalRef.current) {
         const focusable = modalRef.current.querySelectorAll<HTMLElement>(
           'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -454,11 +456,11 @@ useEffect(() => {
         {data.projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
             <button
-              onClick={() => setActiveId(p.id)}
-              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
-              aria-haspopup="dialog"
-              aria-expanded={activeId === p.id}
-            >
+  onClick={() => { setSavedScrollY(window.scrollY); setActiveId(p.id); }}
+  className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
+  aria-haspopup="dialog"
+  aria-expanded={activeId === p.id}
+>
               <Card>
                 {p.cover?.src ? (
                   <div className="mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
@@ -497,7 +499,9 @@ useEffect(() => {
     role="dialog"
     aria-modal="true"
     aria-labelledby="case-title"
-    onClick={(e) => { if (e.target === e.currentTarget) setActiveId(null); }}
+    onClick={(e) => {
+      if (e.target === e.currentTarget) { setActiveId(null); window.scrollTo(0, savedScrollY); }
+    }}
   >
     <div
       ref={modalRef}
@@ -513,12 +517,10 @@ useEffect(() => {
           </div>
         </div>
         <button
-          onClick={() => setActiveId(null)}
+          onClick={() => { setActiveId(null); window.scrollTo(0, savedScrollY); }}
           className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
           aria-label="Close"
-        >
-          ✕
-        </button>
+        >✕</button>
       </div>
 
       <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
@@ -551,9 +553,7 @@ useEffect(() => {
         )}
         {active.prdLink && (
           <div className="mt-2 text-xs">
-            <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>
-              Product Requirement Document
-            </a>
+            <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>Product Requirement Document</a>
           </div>
         )}
       </div>
@@ -580,20 +580,20 @@ useEffect(() => {
       <div id="p-learnings" className="mt-6">
         <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
         <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-          {Array.isArray(active.learnings)
-            ? active.learnings.map((l: string, i: number) => (<li key={i}>{l}</li>))
-            : <li>{active.learnings}</li>}
+          {Array.isArray(active.learnings) ? active.learnings.map((l: string, i: number) => (<li key={i}>{l}</li>)) : <li>{active.learnings}</li>}
         </ul>
       </div>
     </div>
   </div>
 )}
+
     </Section>
   );
 }
 
 // ---- Impact (Premium: 6 items + modal) ----
 function Impact() {
+  const [savedScrollY, setSavedScrollY] = useState(0);
   const impacts = [
     {
       id: "eoffice-2023",
@@ -746,7 +746,7 @@ useEffect(() => {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
-      if (e.key === "Escape") setActiveId(null);
+      if (e.key === "Escape") { setActiveId(null); window.scrollTo(0, savedScrollY); }
       if (e.key === "Tab" && modalRef.current) {
         const focusable = modalRef.current.querySelectorAll<HTMLElement>(
           'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -770,11 +770,11 @@ useEffect(() => {
         {impacts.map((it, idx) => (
           <Reveal key={it.id} delay={idx * 50}>
             <button
-              onClick={() => setActiveId(it.id)}
-              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
-              aria-haspopup="dialog"
-              aria-expanded={activeId === it.id}
-            >
+  onClick={() => { setSavedScrollY(window.scrollY); setActiveId(it.id); }}
+  className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
+  aria-haspopup="dialog"
+  aria-expanded={activeId === it.id}
+>
               <Card>
                 <div className="text-zinc-100 font-medium">{it.title}</div>
                 {it.subtitle && (
@@ -799,30 +799,28 @@ useEffect(() => {
     role="dialog"
     aria-modal="true"
     aria-labelledby="impact-title"
-    onClick={(e) => { if (e.target === e.currentTarget) setActiveId(null); }}
+    onClick={(e) => {
+      if (e.target === e.currentTarget) { setActiveId(null); window.scrollTo(0, savedScrollY); }
+    }}
   >
     <div
       ref={modalRef}
-       tabIndex={-1}
+      tabIndex={-1}
       className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
-        style={{ scrollbarGutter: "stable both-edges" }}
-   >
+      style={{ scrollbarGutter: "stable both-edges" }}
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">
-            {active.title}
-          </h3>
+          <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
           {active.subtitle && (
             <div className="text-sm text-zinc-400 mt-1">{active.subtitle}</div>
           )}
         </div>
         <button
-          onClick={() => setActiveId(null)}
+          onClick={() => { setActiveId(null); window.scrollTo(0, savedScrollY); }}
           className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
           aria-label="Close"
-        >
-          ✕
-        </button>
+        >✕</button>
       </div>
 
       <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
@@ -864,6 +862,7 @@ useEffect(() => {
     </div>
   </div>
 )}
+
           
     </Section>
   );
