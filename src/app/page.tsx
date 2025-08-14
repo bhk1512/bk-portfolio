@@ -265,7 +265,7 @@ const data = {
     },
   ],
   // legacy impact list removed; using premium Impact component below
-  contact: { email: "bharat.15dck@gmail.com", phone: "+919953779868", linkedin: "https://www.linkedin.com/in/bahratk1512" },
+  contact: { email: "bharat.15dck@gmail.com", phone: "+919953779868", linkedin: "https://www.linkedin.com/in/bharatk1512" },
 };
 
 // ---- Nav ----
