@@ -479,81 +479,100 @@ function Projects() {
       </div>
 
       {active && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="case-title">
-          <div ref={modalRef} className="max-w-3xl w-full rounded-2xl border border-zinc-800 bg-zinc-950 p-6 overflow-y-auto max-h-[90vh]">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 id="case-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
-                <div className="text-sm text-zinc-400 mt-1">{active.year}{active.stack ? ` · ${active.stack}` : ""}</div>
-              </div>
-              <button onClick={() => setActiveId(null)} className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded" aria-label="Close">✕</button>
-            </div>
-
-            <div className="sticky top-0 bg-zinc-950/80 backdrop-blur mt-4 pt-2 pb-2 z-10 border-b border-zinc-900">
-              <nav className="text-xs text-zinc-400 flex gap-4">
-                <a href="#p-summary" className="hover:text-zinc-100">Summary</a>
-                <a href="#p-problem" className="hover:text-zinc-100">Problem</a>
-                <a href="#p-approach" className="hover:text-zinc-100">Action</a>
-                <a href="#p-outcome" className="hover:text-zinc-100">Result</a>
-                <a href="#p-learnings" className="hover:text-zinc-100">Learnings</a>
-              </nav>
-            </div>
-
-            <div id="p-summary" className="mt-4">
-              {active.screenshots?.[0]?.src ? (
-                <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
-                  <img loading="lazy" src={active.screenshots[0].src} alt={active.screenshots[0].alt} className="w-full h-auto object-cover" />
-                </div>
-              ) : null}
-              <p className="text-zinc-300">{active.summary}</p>
-            </div>
-
-            <div id="p-problem" className="mt-6">
-              <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
-              {Array.isArray(active.problem) ? (
-                <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                  {active.problem.map((p, i) => (<li key={i}>{p}</li>))}
-                </ul>
-              ) : (
-                <p className="text-sm text-zinc-300">{active.problem}</p>
-              )}
-              {active.prdLink && (
-                <div className="mt-2 text-xs">
-                  <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>
-                    Product Requirement Document
-                  </a>
-                </div>
-              )}
-            </div>
-
-            <div id="p-approach" className="mt-6">
-              <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
-              {active.screenshots?.[1]?.src ? (
-                <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
-                  <img loading="lazy" src={active.screenshots[1].src} alt={active.screenshots[1].alt} className="w-full h-auto object-cover" />
-                </div>
-              ) : null}
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.approach.map((a, i) => (<li key={i}>{a}</li>))}
-              </ul>
-            </div>
-
-            <div id="p-outcome" className="mt-6">
-              <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {active.outcome.map((o, i) => (<li key={i}>{o}</li>))}
-              </ul>
-            </div>
-
-            <div id="p-learnings" className="mt-6">
-              <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
-              <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
-                {Array.isArray(active.learnings) ? active.learnings.map((l: string, i: number) => (<li key={i}>{l}</li>)) : <li>{active.learnings}</li>}
-              </ul>
-            </div>
+  <div
+    className="fixed inset-0 z-50 bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="case-title"
+    onClick={(e) => { if (e.target === e.currentTarget) setActiveId(null); }}
+  >
+    <div
+      ref={modalRef}
+      className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 id="case-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
+          <div className="text-sm text-zinc-400 mt-1">
+            {active.year}{active.stack ? ` · ${active.stack}` : ""}
           </div>
         </div>
-      )}
+        <button
+          onClick={() => setActiveId(null)}
+          className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
+        <nav className="text-xs text-zinc-400 flex gap-4">
+          <a href="#p-summary" className="hover:text-zinc-100">Summary</a>
+          <a href="#p-problem" className="hover:text-zinc-100">Problem</a>
+          <a href="#p-approach" className="hover:text-zinc-100">Action</a>
+          <a href="#p-outcome" className="hover:text-zinc-100">Result</a>
+          <a href="#p-learnings" className="hover:text-zinc-100">Learnings</a>
+        </nav>
+      </div>
+
+      <div id="p-summary" className="mt-4">
+        {active.screenshots?.[0]?.src ? (
+          <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
+            <img loading="lazy" src={active.screenshots[0].src} alt={active.screenshots[0].alt} className="w-full h-auto object-cover" />
+          </div>
+        ) : null}
+        <p className="text-zinc-300">{active.summary}</p>
+      </div>
+
+      <div id="p-problem" className="mt-6">
+        <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
+        {Array.isArray(active.problem) ? (
+          <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+            {active.problem.map((p, i) => (<li key={i}>{p}</li>))}
+          </ul>
+        ) : (
+          <p className="text-sm text-zinc-300">{active.problem}</p>
+        )}
+        {active.prdLink && (
+          <div className="mt-2 text-xs">
+            <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>
+              Product Requirement Document
+            </a>
+          </div>
+        )}
+      </div>
+
+      <div id="p-approach" className="mt-6">
+        <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
+        {active.screenshots?.[1]?.src ? (
+          <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
+            <img loading="lazy" src={active.screenshots[1].src} alt={active.screenshots[1].alt} className="w-full h-auto object-cover" />
+          </div>
+        ) : null}
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.approach.map((a, i) => (<li key={i}>{a}</li>))}
+        </ul>
+      </div>
+
+      <div id="p-outcome" className="mt-6">
+        <h4 className="text-zinc-200 font-medium mb-2">Result</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {active.outcome.map((o, i) => (<li key={i}>{o}</li>))}
+        </ul>
+      </div>
+
+      <div id="p-learnings" className="mt-6">
+        <h4 className="text-zinc-200 font-medium mb-2">Learnings</h4>
+        <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+          {Array.isArray(active.learnings)
+            ? active.learnings.map((l: string, i: number) => (<li key={i}>{l}</li>))
+            : <li>{active.learnings}</li>}
+        </ul>
+      </div>
+    </div>
+  </div>
+)}
     </Section>
   );
 }
