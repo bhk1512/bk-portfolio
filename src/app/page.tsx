@@ -18,7 +18,7 @@ import Image from "next/image";
 // =============================
 
 // ---- Utilities ----
-const SECTION_IDS = ["home", "work", "impact", "about", "writing", "contact"] as const;
+const SECTION_IDS = ["home", "work", "skills", "certs", "impact", "about", "writing", "contact"] as const;
 type SectionId = typeof SECTION_IDS[number];
 
 // ---- Scroll progress bar (fixed at top) ----
@@ -266,7 +266,159 @@ const data = {
   ],
   // legacy impact list removed; using premium Impact component below
   contact: { email: "bharat.15dck@gmail.com", phone: "+919953779868", linkedin: "https://www.linkedin.com/in/bharatk1512" },
+  //skills and certifications
+  skills: {
+    categories: [
+      {
+        name: "Technical",
+        items: [
+          "Python",
+          "SQL",
+          "AWS",
+          "Excel",
+          "Looker Studio",
+          "Power BI",
+          "No‑Code / Low‑Code",
+        ],
+      },
+      {
+        name: "Professional",
+        items: [
+          "Program Leadership",
+          "Dashboarding",
+          "Process Improvement",
+          "Stakeholder Management",
+        ],
+      },
+    ],
+    note: undefined, // or a short line if you want, else keep undefined
+  },
+
+  certs: [
+    {
+      title: "Lean Six Sigma Green Belt",
+      issuer: "—",
+      year: "2023",
+      url: "https://drive.google.com/file/d/16Ffwaq9l6f-vfz9FsXctV4cTvBa-CnUI/view?usp=drive_link",
+      logo: "/images/certs/lss.png", // optional
+    },
+    {
+      title: "Google Project Management",
+      issuer: "Google",
+      year: "2024",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/KCUUV7XE5JAW",
+      logo: "/images/certs/gpm.png",
+    },
+    {
+      title: "Google Business Intelligence",
+      issuer: "Google",
+      year: "2023",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/E4757BBK9LWU",
+      logo: "/images/certs/gbi.png",
+    },
+    {
+      title: "Google Data Analytics Professional",
+      issuer: "Google",
+      year: "2023",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/FSUJE6R7S3AJ",
+      logo: "/images/certs/gda.png",
+    },
+    {
+      title: "Google Cloud Digital Leader",
+      issuer: "Google",
+      year: "2023",
+      url: "https://www.coursera.org/account/accomplishments/specialization/certificate/Z5VVXSNRHJND",
+      logo: "/images/certs/gcdl.png",
+    },
+  ],
 };
+
+function Skills() {
+  const categories = data.skills?.categories ?? [];
+  const note = data.skills?.note;
+
+  return (
+    <Section id="skills" title="Skills">
+      <Reveal>
+        <div className="grid lg:grid-cols-2 gap-6">
+          {categories.map((cat, i) => (
+            <Reveal key={cat.name} delay={i * 60}>
+              <Card>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-zinc-100 font-medium">{cat.name}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((s: string) => (
+                    <Badge key={s}>{s}</Badge>
+                  ))}
+                </div>
+              </Card>
+            </Reveal>
+          ))}
+        </div>
+        {note ? <p className="text-xs text-zinc-400 mt-4">{note}</p> : null}
+      </Reveal>
+    </Section>
+  );
+}
+
+function Certifications() {
+  const certs = data.certs ?? [];
+
+  return (
+    <Section id="certs" title="Certifications">
+      {!certs.length ? (
+        <Card>
+          <p className="text-zinc-300 text-sm">
+            (Add your certifications in <code>data.certs</code> to show them here.)
+          </p>
+        </Card>
+      ) : (
+        <Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certs.map((c, i) => (
+              <Reveal key={`${c.title}-${i}`} delay={i * 60}>
+                <Card>
+                  <div className="flex items-start gap-3">
+                    {c.logo ? (
+                      <div className="relative w-10 h-10 shrink-0 rounded-lg overflow-hidden ring-1 ring-zinc-800 bg-zinc-900">
+                        <img
+                          src={c.logo}
+                          alt={`${c.issuer || "Issuer"} logo`}
+                          className="w-full h-full object-contain p-1.5"
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="min-w-0">
+                      <div className="text-zinc-100 text-sm font-medium leading-tight">
+                        {c.title}
+                      </div>
+                      <div className="text-zinc-400 text-xs mt-0.5">
+                        {(c.issuer || "—")}{c.year ? ` · ${c.year}` : ""}
+                      </div>
+                      {c.url ? (
+                        <div className="mt-2">
+                          <a
+                            href={c.url}
+                            className="text-xs text-zinc-300 underline underline-offset-4 hover:text-white"
+                          >
+                            View credential →
+                          </a>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </Reveal>
+      )}
+    </Section>
+  );
+}
+
 
 // ---- Nav ----
 function Nav() {
@@ -584,7 +736,7 @@ useEffect(() => {
         )}
         {active.prdLink && (
           <div className="mt-2 text-xs">
-            <a className="text-zinc-300 underline hover:text-white" href={active.prdLink}>Product Requirement Document</a>
+            <a className="text-zinc-300 underline hover:text-white" href= "/PRD Supply Chain Risk Radar.pdf" >Product Requirement Document</a>
           </div>
         )}
       </div>
@@ -1150,6 +1302,8 @@ export default function PortfolioApp() {
       <main>
         <Hero />
         <Projects />
+         <Skills />          {/* new */}
+        <Certifications />  {/* new */}
         <Impact />
         <About />
         <Writing />
