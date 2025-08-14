@@ -881,11 +881,11 @@ useEffect(() => {
 // ---- Timeline (horizontal, hover + keyboard, pop-forward) ----
 function Timeline() {
   const items = [
-    { key: "zs",   label: "ZS",   year: "2018", details: "Analytics & consulting foundation; ops + data basics." },
-    { key: "ib",   label: "IB",   year: "2019", details: "Python NLP triage engine; –85% analyst cycle‑time." },
-    { key: "cisf", label: "CISF", year: "2022", details: "Defence Expo PMO; access‑control redesign; 40% capex saved." },
-    { key: "mha",  label: "MHA",  year: "2023", details: "e‑Office rollout; paperless HQ; –90% admin SLA in 14 weeks." },
-    { key: "kec",  label: "KEC",  year: "2024", details: "Sales analytics boost; 2× inventory turns; +20% sales." },
+  { key: "zs",   label: "ZS",   year: "2016", details: "Analytics & consulting foundation; ops + data basics." },
+{ key: "mha",  label: "MHA",  year: "2018", details: "Blending tech with risk ops for smarter decisions." },
+{ key: "cisf", label: "CISF", year: "2020", details: "Orchestrating people, tech and security under one roof." },
+{ key: "iima", label: "IIMA", year: "2024", details: "Strategy & ops deep dive; honed change-management & commercial lens" },
+{ key: "kec",  label: "KEC",  year: "2025", details: "Ongoing..." },
   ];
   const [hover, setHover] = useState<string | null>(null);
 
@@ -975,10 +975,32 @@ function About() {
   return (
     <Section id="about" title="About">
       <Reveal>
-        <p className="text-zinc-300 leading-relaxed max-w-3xl">
-          I’m a tech‑to‑ops program manager focused on turning complex initiatives into measurable outcomes. I bridge strategy and execution by aligning stakeholders, simplifying processes, and using data & automation to remove ambiguity from delivery.
-        </p>
-        <Timeline />
+        <section id="timeline" className="scroll-mt-24">
+  <h2 className="text-xl font-semibold tracking-tight text-zinc-100">Career timeline</h2>
+  {/* existing <Timeline /> or the items markup goes here */}
+  <div className="mt-6">
+    <Timeline />
+  </div>
+</section>
+      <section>
+  <Reveal>
+    {/* ...your previous content inside the section... */}
+
+    {/* Text block */}
+    <div className="mt-16 max-w-3xl space-y-6">
+      <p className="text-zinc-300 leading-relaxed text-justify">
+        Every day, I connect the dots: bridging teams, streamlining workflows, and translating analytics into smarter operations.
+      </p>
+
+      <p className="text-zinc-300 leading-relaxed text-justify">
+        From laying the analytics foundation at ZS to integrating solutions across operations, I’ve learned one truth: clarity, collaboration, and tech are what make execution thrive.
+        <br />
+        Now, I help cut through uncertainty so we can move faster, smarter and build a future rooted in confident, clear execution.
+      </p>
+    </div>
+  </Reveal>
+</section>
+        
       </Reveal>
     </Section>
   );
