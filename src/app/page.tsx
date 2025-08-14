@@ -415,6 +415,18 @@ function Projects() {
   }, [active]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+  // After: const modalRef = useRef<HTMLDivElement | null>(null);
+useEffect(() => {
+  if (active) {
+    // wait for DOM paint, then reset
+    requestAnimationFrame(() => {
+      if (modalRef.current) {
+        modalRef.current.scrollTop = 0;
+        modalRef.current.focus();
+      }
+    });
+  }
+}, [active]); // or [activeId] if you prefer
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
@@ -489,7 +501,9 @@ function Projects() {
   >
     <div
       ref={modalRef}
+      tabIndex={-1}
       className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
+      style={{ scrollbarGutter: "stable both-edges" }}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -717,6 +731,18 @@ function Impact() {
   }, [active]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+  // After: const modalRef = useRef<HTMLDivElement | null>(null);
+useEffect(() => {
+  if (active) {
+    // wait for DOM paint, then reset
+    requestAnimationFrame(() => {
+      if (modalRef.current) {
+        modalRef.current.scrollTop = 0;
+        modalRef.current.focus();
+      }
+    });
+  }
+}, [active]); // or [activeId] if you prefer
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
@@ -777,8 +803,10 @@ function Impact() {
   >
     <div
       ref={modalRef}
+       tabIndex={-1}
       className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
-    >
+        style={{ scrollbarGutter: "stable both-edges" }}
+   >
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">
