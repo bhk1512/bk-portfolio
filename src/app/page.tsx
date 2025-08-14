@@ -20,6 +20,11 @@ import Image from "next/image";
 // ---- Utilities ----
 const SECTION_IDS = ["home", "work", "skills", "certs", "impact", "about", "writing", "contact"] as const;
 type SectionId = typeof SECTION_IDS[number];
+type Affiliation = {
+  name: string;
+  url: string;
+  logo: { src: string; width: number; height: number };
+};
 
 // ---- Scroll progress bar (fixed at top) ----
 function ScrollProgress() {
@@ -165,6 +170,28 @@ const data = {
       { label: "Download CV", href: "/Bharat_Kaushik_IIMA.pdf", type: "primary" },
       { label: "Email", href: "mailto:bharat.15dck@gmail.com", type: "ghost" },
       { label: "Call", href: "tel:+919953779868", type: "ghost" },
+    ],
+    affiliations: [
+      {
+        name: "IIM Ahmedabad",
+        url: "https://www.iima.ac.in/",
+        logo: { src: "/images/affiliations/iima.png", width: 84, height: 24 },
+      },
+      {
+        name: "CISF",
+        url: "https://cisf.gov.in/",
+        logo: { src: "/images/affiliations/cisf.png", width: 64, height: 24 },
+      },
+      {
+        name: "MHA",
+        url: "https://mha.gov.in/",
+        logo: { src: "/images/affiliations/mha.png", width: 64, height: 24 },
+      },
+      {
+        name: "ZS",
+        url: "https://www.zs.com/",
+        logo: { src: "/images/affiliations/zs.svg", width: 64, height: 24 },
+      },
     ],
   },
   projects: [
@@ -373,7 +400,38 @@ function Skills() {
     </Section>
   );
 }
+function AffiliationBar() {
+  // cast ensures TS knows affiliations exists and is an array of Affiliation
+  const items = ((data.hero as { affiliations?: Affiliation[] }).affiliations ?? []) as Affiliation[];
+  if (!items.length) return null;
 
+  return (
+    <div className="mt-5 pt-3 border-t border-zinc-800/60">
+      <span className="sr-only">Affiliations</span>
+      <div className="flex items-center justify-center lg:justify-start gap-5 sm:gap-6 overflow-x-auto">
+        {items.map((a: Affiliation) => (
+          <a
+            key={a.name}
+            href={a.url}
+            aria-label={a.name}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group"
+          >
+            <Image
+              src={a.logo.src}
+              alt={`${a.name} logo`}
+              width={a.logo.width}
+              height={a.logo.height}
+              loading="lazy"
+              className="grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition"
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
 function Certifications() {
   const certs = data.certs ?? [];
 
@@ -518,7 +576,6 @@ function ProfileAvatar({
   );
 }
 
-
 // ---- Hero (2-column on desktop, stacked on mobile) ----
 function Hero() {
   return (
@@ -544,12 +601,14 @@ function Hero() {
             {/* Right: content */}
             <div className="text-center lg:text-left">
               {/* Single-line name */}
-              <h1 className="whitespace-nowrap text-zinc-100 font-bold tracking-tight
-                             text-[clamp(28px,8vw,40px)]
-                             sm:text-[clamp(32px,6.5vw,48px)]
-                             md:text-[clamp(40px,5.8vw,56px)]
-                             lg:text-[clamp(44px,4.8vw,64px)]
-                             xl:text-[clamp(48px,4vw,72px)]">
+              <h1
+                className="whitespace-nowrap text-zinc-100 font-bold tracking-tight
+                           text-[clamp(28px,8vw,40px)]
+                           sm:text-[clamp(32px,6.5vw,48px)]
+                           md:text-[clamp(40px,5.8vw,56px)]
+                           lg:text-[clamp(44px,4.8vw,64px)]
+                           xl:text-[clamp(48px,4vw,72px)]"
+              >
                 {data.hero.name}
               </h1>
 
@@ -559,7 +618,7 @@ function Hero() {
                 <Badge className="hidden sm:inline">IIMA MBA</Badge>
               </div>
 
-              {/* tagline + subhead */}
+              {/* tagline + subhead (keep only one copy) */}
               <p className="text-zinc-300 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
                 {data.hero.title}
               </p>
@@ -567,7 +626,10 @@ function Hero() {
                 {data.hero.subhead}
               </p>
 
-              {/* CTAs */}
+              {/* Affiliation bar */}
+              <AffiliationBar />
+
+              {/* CTAs (single wrapper) */}
               <div className="mt-6 sm:mt-7 flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4">
                 {data.hero.ctas.map((c) => (
                   <a
@@ -586,7 +648,7 @@ function Hero() {
                 ))}
               </div>
 
-              {/* optional: desktop-only quick links to pull next section into view */}
+              {/* optional: desktop-only quick links */}
               {/* <div className="hidden lg:flex mt-6 gap-4 text-sm text-zinc-400">
                 <a href="#work" className="underline underline-offset-4 hover:text-zinc-200">See recent projects →</a>
                 <a href="#impact" className="underline underline-offset-4 hover:text-zinc-200">See impact →</a>
@@ -598,6 +660,7 @@ function Hero() {
     </Section>
   );
 }
+
 
 
 // ---- Projects (Work) ----
