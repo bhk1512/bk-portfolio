@@ -125,13 +125,25 @@ function Section({ id, title, children }: { id: string; title?: string; children
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
+function Badge({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <span className="inline-flex items-center rounded-full border border-zinc-700/70 px-3 py-1 text-xs text-zinc-300 bg-zinc-950/40 backdrop-blur">
+    <span
+      className={
+        "inline-flex items-center rounded-full border border-zinc-700/70 px-3 py-1 text-xs text-zinc-300 bg-zinc-950/40 backdrop-blur " +
+        className
+      }
+    >
       {children}
     </span>
   );
 }
+
 
 function Card({ children }: { children: React.ReactNode }) {
   return (
