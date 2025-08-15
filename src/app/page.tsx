@@ -676,6 +676,13 @@ function Projects() {
   }, [active]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const scrollInModal = (targetId: string) => {
+  const el = modalRef.current?.querySelector<HTMLElement>(`#${targetId}`);
+  if (!el || !modalRef.current) return;
+  const stickyHeader = 48; // px, adjust if you tweak the sticky nav height
+  const top = el.offsetTop - stickyHeader;
+  modalRef.current.scrollTo({ top, behavior: "smooth" });
+};
   // After: const modalRef = useRef<HTMLDivElement | null>(null);
 useEffect(() => {
   if (active) {
@@ -763,11 +770,11 @@ useEffect(() => {
     }}
   >
     <div
-      ref={modalRef}
-      tabIndex={-1}
-      className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
-      style={{ scrollbarGutter: "stable both-edges" }}
-    >
+  ref={modalRef}
+  tabIndex={-1}
+  className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
+  style={{ scrollbarGutter: "stable both-edges" }}
+>
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 id="case-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
@@ -783,14 +790,14 @@ useEffect(() => {
       </div>
 
       <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
-        <nav className="text-xs text-zinc-400 flex gap-4">
-          <a href="#p-summary" className="hover:text-zinc-100">Summary</a>
-          <a href="#p-problem" className="hover:text-zinc-100">Problem</a>
-          <a href="#p-approach" className="hover:text-zinc-100">Action</a>
-          <a href="#p-outcome" className="hover:text-zinc-100">Result</a>
-          <a href="#p-learnings" className="hover:text-zinc-100">Learnings</a>
-        </nav>
-      </div>
+  <nav className="text-xs text-zinc-400 flex gap-4">
+    <button onClick={() => scrollInModal("p-summary")}  className="hover:text-zinc-100">Summary</button>
+    <button onClick={() => scrollInModal("p-problem")}  className="hover:text-zinc-100">Problem</button>
+    <button onClick={() => scrollInModal("p-approach")} className="hover:text-zinc-100">Action</button>
+    <button onClick={() => scrollInModal("p-outcome")}  className="hover:text-zinc-100">Result</button>
+    <button onClick={() => scrollInModal("p-learnings")} className="hover:text-zinc-100">Learnings</button>
+  </nav>
+</div>
 
       <div id="p-summary" className="mt-4">
         {active.screenshots?.[0]?.src ? (
@@ -990,6 +997,14 @@ function Impact() {
   }, [active]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
+  // right after: const modalRef = useRef<HTMLDivElement | null>(null);
+const scrollInModal = (targetId: string) => {
+  const el = modalRef.current?.querySelector<HTMLElement>(`#${targetId}`);
+  if (!el || !modalRef.current) return;
+  const stickyHeader = 48; // height of the sticky in-modal nav
+  modalRef.current.scrollTo({ top: el.offsetTop - stickyHeader, behavior: "smooth" });
+};
+
   // After: const modalRef = useRef<HTMLDivElement | null>(null);
 useEffect(() => {
   if (active) {
@@ -1063,11 +1078,11 @@ useEffect(() => {
     }}
   >
     <div
-      ref={modalRef}
-      tabIndex={-1}
-      className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto"
-      style={{ scrollbarGutter: "stable both-edges" }}
-    >
+  ref={modalRef}
+  tabIndex={-1}
+  className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
+  style={{ scrollbarGutter: "stable both-edges" }}
+>
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
@@ -1083,13 +1098,13 @@ useEffect(() => {
       </div>
 
       <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
-        <nav className="text-xs text-zinc-400 flex gap-4">
-          <a href="#i-problem" className="hover:text-zinc-100">Problem</a>
-          <a href="#i-action" className="hover:text-zinc-100">Action</a>
-          <a href="#i-result" className="hover:text-zinc-100">Result</a>
-          <a href="#i-learnings" className="hover:text-zinc-100">Learnings</a>
-        </nav>
-      </div>
+  <nav className="text-xs text-zinc-400 flex gap-4">
+    <button onClick={() => scrollInModal("i-problem")}   className="hover:text-zinc-100">Problem</button>
+    <button onClick={() => scrollInModal("i-action")}    className="hover:text-zinc-100">Action</button>
+    <button onClick={() => scrollInModal("i-result")}    className="hover:text-zinc-100">Result</button>
+    <button onClick={() => scrollInModal("i-learnings")} className="hover:text-zinc-100">Learnings</button>
+  </nav>
+</div>
 
       <div id="i-problem" className="mt-4">
         <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>

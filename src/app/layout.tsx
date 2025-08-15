@@ -26,8 +26,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        data-gramm="false" // ask Grammarly not to mutate the DOM
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
