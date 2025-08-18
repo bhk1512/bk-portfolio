@@ -787,12 +787,21 @@ useEffect(() => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
-            <button
+            <div
+              role="button"
+              tabIndex={0}
               onClick={() => { setSavedScrollY(window.scrollY); setActiveId(p.id); }}
-              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSavedScrollY(window.scrollY);
+                  setActiveId(p.id);
+                }
+              }}
+              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl cursor-pointer"
               aria-haspopup="dialog"
               aria-expanded={activeId === p.id}
->
+            >
               <Card>
                 {p.cover?.src ? (
                   <div className="mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
@@ -828,7 +837,7 @@ useEffect(() => {
                 prdHref={(p as any).prdLink}
               />
               </Card>
-            </button>
+            </div>
           </Reveal>
         ))}
       </div>
@@ -1112,12 +1121,21 @@ useEffect(() => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {impacts.map((it, idx) => (
           <Reveal key={it.id} delay={idx * 50}>
-            <button
-  onClick={() => { setSavedScrollY(window.scrollY); setActiveId(it.id); }}
-  className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
-  aria-haspopup="dialog"
-  aria-expanded={activeId === it.id}
->
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => { setSavedScrollY(window.scrollY); setActiveId(it.id); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setSavedScrollY(window.scrollY);
+                  setActiveId(it.id);
+                }
+              }}
+              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl cursor-pointer"
+              aria-haspopup="dialog"
+              aria-expanded={activeId === it.id}
+            >
               <Card>
                 <div className="text-zinc-100 font-medium">{it.title}</div>
                 {it.subtitle && (
@@ -1131,7 +1149,7 @@ useEffect(() => {
                   </ul>
                 ) : null}
               </Card>
-            </button>
+            </div>
           </Reveal>
         ))}
       </div>
