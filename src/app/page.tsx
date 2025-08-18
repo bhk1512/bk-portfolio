@@ -17,6 +17,29 @@ import Image from "next/image";
 //   /content-to-insights-workflow.png
 // =============================
 
+type Project = {
+  id: string;
+  title: string;
+  year?: string;
+  stack?: string;
+  summary?: string;
+  prdLink?: string;
+  cover?: { src: string; alt: string };
+  metrics?: string[];
+  screenshots?: { src: string; alt: string }[];
+  problem?: string | string[];
+  approach?: string[];
+  outcome?: string[];
+  learnings?: string[];
+  // add other keys you’re actually using
+};
+type ImpactItem = {
+  id: string;
+  title: string;
+  summary?: string;
+  // add other fields used by the Impact section
+};
+
 // ---- Utilities ----
 const SECTION_IDS = ["home", "work", "skills", "certs", "impact", "about", "writing", "contact"] as const;
 type SectionId = typeof SECTION_IDS[number];
@@ -230,7 +253,7 @@ const data = {
         "Dashboard storytelling: reduce to one clear screen of truth.",
         "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
       ],
-       demoLink: "https://lookerstudio.google.com/your-risk-radar-link",   // <— add
+      // demoLink: "https://lookerstudio.google.com/your-risk-radar-link",   // <— add
     },
     // 2) Industry Digest
     {
@@ -265,7 +288,7 @@ const data = {
         "Scheduling workflows without babysitting.",
         "Run frequency vs cloud costs: balancing speed with budget.",
       ],
-      demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
+      //demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
     },
     // 3) Content‑to‑Insights Pipeline
@@ -304,7 +327,7 @@ const data = {
         "Introduction to workflow automation.",
         "Revision: REST API (auth, pagination, & rate limits), ETL workflows.",
       ],
-       demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
+      // demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
       prdLink: "/PRDs/Product Requirements Document – Content-to-Insights Pipeline.pdf",
     },
   ],
@@ -376,6 +399,8 @@ const data = {
     },
   ],
 };
+
+const projects: Project[] = data.projects;
 
 function Skills() {
   const categories = data.skills?.categories ?? [];
@@ -669,11 +694,11 @@ function Hero() {
 
 function ActionButtons({
   onOpen,
-  demoHref,
+
   prdHref,
 }: {
   onOpen: () => void;
-  demoHref?: string;
+
   prdHref?: string;
 }) {
   const base =
@@ -685,19 +710,6 @@ function ActionButtons({
 
   return (
     <div className="mt-4 flex flex-wrap gap-2">
-      {demoHref ? (
-        <a
-          href={demoHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className={`${base} ${primary}`}
-          aria-label="View Demo"
-        >
-          View Demo
-        </a>
-      ) : null}
-
       <button
         type="button"
         onClick={(e) => {
@@ -785,7 +797,7 @@ useEffect(() => {
   return (
     <Section id="work" title="Recent Projects" >
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.projects.map((p, i) => (
+        {projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
             <div
               role="button"
@@ -833,8 +845,7 @@ useEffect(() => {
                   setSavedScrollY(window.scrollY);
                   setActiveId(p.id);
                 }}
-                demoHref={(p as any).demoLink}
-                prdHref={(p as any).prdLink}
+               
               />
               </Card>
             </div>
