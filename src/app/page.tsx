@@ -23,6 +23,7 @@ type Project = {
   year?: string;
   stack?: string;
   summary?: string;
+  demoLink?: string;
   prdLink?: string;
   cover?: { src: string; alt: string };
   metrics?: string[];
@@ -253,7 +254,8 @@ const data = {
         "Dashboard storytelling: reduce to one clear screen of truth.",
         "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
       ],
-      // demoLink: "https://lookerstudio.google.com/your-risk-radar-link",   // <— add
+    demoLink: "https://lookerstudio.google.com/your-risk-radar-link",
+       // <— add
     },
     // 2) Industry Digest
     {
@@ -288,7 +290,7 @@ const data = {
         "Scheduling workflows without babysitting.",
         "Run frequency vs cloud costs: balancing speed with budget.",
       ],
-      //demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
+      demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
     },
     // 3) Content‑to‑Insights Pipeline
@@ -327,7 +329,7 @@ const data = {
         "Introduction to workflow automation.",
         "Revision: REST API (auth, pagination, & rate limits), ETL workflows.",
       ],
-      // demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
+      demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
       prdLink: "/PRDs/Product Requirements Document – Content-to-Insights Pipeline.pdf",
     },
   ],
@@ -694,11 +696,11 @@ function Hero() {
 
 function ActionButtons({
   onOpen,
-
+demoHref,
   prdHref,
 }: {
   onOpen: () => void;
-
+  demoHref?: string;
   prdHref?: string;
 }) {
   const base =
@@ -710,6 +712,18 @@ function ActionButtons({
 
   return (
     <div className="mt-4 flex flex-wrap gap-2">
+      {demoHref ? (
+        <a
+          href={demoHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className={`${base} ${primary}`}
+          aria-label="View Demo"
+        >
+          View Demo
+        </a>
+      ) : null}
       <button
         type="button"
         onClick={(e) => {
@@ -845,7 +859,8 @@ useEffect(() => {
                   setSavedScrollY(window.scrollY);
                   setActiveId(p.id);
                 }}
-               
+               demoHref={p.demoLink}
+                prdHref={p.prdLink}
               />
               </Card>
             </div>
