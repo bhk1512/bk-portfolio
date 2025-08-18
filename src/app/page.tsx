@@ -212,7 +212,7 @@ const data = {
       ],
       problem:
         "Global supply chain disruptions—whether physical, cyber, trade, or infrastructure—are reported across fragmented sources with inconsistent severity metrics. Decision‑makers lack a single real‑time, geospatial view that scores and ranks these disruptions for rapid situational awareness.",
-      prdLink: "#",
+      prdLink: "/PRDs/Product Requirements Document - Risk Radar.pdf",
       approach: [
         "Ingested global news feeds via NewsAPI → n8n → Google Sheets with deduplication and enrichment.",
         "Built a strict LLM classification schema (Gemini) to extract disruption type, impacted nodes, and sub‑scores for severity factors.",
@@ -230,6 +230,7 @@ const data = {
         "Dashboard storytelling: reduce to one clear screen of truth.",
         "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
       ],
+       demoLink: "https://lookerstudio.google.com/your-risk-radar-link",   // <— add
     },
     // 2) Industry Digest
     {
@@ -264,6 +265,8 @@ const data = {
         "Scheduling workflows without babysitting.",
         "Run frequency vs cloud costs: balancing speed with budget.",
       ],
+      demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
+      prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
     },
     // 3) Content‑to‑Insights Pipeline
     {
@@ -301,6 +304,8 @@ const data = {
         "Introduction to workflow automation.",
         "Revision: REST API (auth, pagination, & rate limits), ETL workflows.",
       ],
+       demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
+      prdLink: "/PRDs/Product Requirements Document – Content-to-Insights Pipeline.pdf",
     },
   ],
   // legacy impact list removed; using premium Impact component below
@@ -662,6 +667,67 @@ function Hero() {
   );
 }
 
+function ActionButtons({
+  onOpen,
+  demoHref,
+  prdHref,
+}: {
+  onOpen: () => void;
+  demoHref?: string;
+  prdHref?: string;
+}) {
+  const base =
+    "inline-flex items-center justify-center rounded-xl px-3.5 py-2 text-xs sm:text-sm transition focus:outline-none focus:ring-2 focus:ring-zinc-600";
+  const ghost =
+    "border border-zinc-700 text-zinc-100 hover:bg-zinc-900";
+  const primary =
+    "bg-zinc-100 text-zinc-900 hover:bg-white";
+
+  return (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {demoHref ? (
+        <a
+          href={demoHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className={`${base} ${primary}`}
+          aria-label="View Demo"
+        >
+          View Demo
+        </a>
+      ) : null}
+
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          onOpen();
+        }}
+        className={`${base} ${ghost}`}
+        aria-label="Read Case Study"
+      >
+        Read Case Study
+      </button>
+
+      {prdHref ? (
+        <a
+          href={prdHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className={`${base} ${ghost}`}
+          aria-label="Full PRD (PDF)"
+        >
+          Full PRD
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
+
 
 
 // ---- Projects (Work) ----
@@ -722,10 +788,10 @@ useEffect(() => {
         {data.projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60}>
             <button
-  onClick={() => { setSavedScrollY(window.scrollY); setActiveId(p.id); }}
-  className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
-  aria-haspopup="dialog"
-  aria-expanded={activeId === p.id}
+              onClick={() => { setSavedScrollY(window.scrollY); setActiveId(p.id); }}
+              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl"
+              aria-haspopup="dialog"
+              aria-expanded={activeId === p.id}
 >
               <Card>
                 {p.cover?.src ? (
@@ -753,6 +819,14 @@ useEffect(() => {
                     ))}
                   </ul>
                 ) : null}
+                <ActionButtons
+                onOpen={() => {
+                  setSavedScrollY(window.scrollY);
+                  setActiveId(p.id);
+                }}
+                demoHref={(p as any).demoLink}
+                prdHref={(p as any).prdLink}
+              />
               </Card>
             </button>
           </Reveal>
@@ -816,11 +890,6 @@ useEffect(() => {
           </ul>
         ) : (
           <p className="text-sm text-zinc-300">{active.problem}</p>
-        )}
-        {active.prdLink && (
-          <div className="mt-2 text-xs">
-            <a className="text-zinc-300 underline hover:text-white" href= "/PRD Supply Chain Risk Radar.pdf" >Product Requirement Document</a>
-          </div>
         )}
       </div>
 
