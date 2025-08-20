@@ -254,7 +254,7 @@ const data = {
         "Dashboard storytelling: reduce to one clear screen of truth.",
         "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
       ],
-    demoLink: "https://lookerstudio.google.com/your-risk-radar-link",
+    demoLink: "https://lookerstudio.google.com/s/oGJoVNj7tdw",
        // <— add
     },
     // 2) Industry Digest
