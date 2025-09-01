@@ -290,7 +290,7 @@ const data = {
         "Scheduling workflows without babysitting.",
         "Run frequency vs cloud costs: balancing speed with budget.",
       ],
-      demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",          // <— add (or Streamlit)
+      demoLink: "/samples/Industry-Digest-Sample.jpg",          // <— add (or Streamlit)
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
     },
     // 3) Content‑to‑Insights Pipeline
@@ -329,7 +329,7 @@ const data = {
         "Introduction to workflow automation.",
         "Revision: REST API (auth, pagination, & rate limits), ETL workflows.",
       ],
-      demoLink: "https://www.notion.so/your-notion-hub-or-streamlit",    // <— add
+      demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",    // <— add
       prdLink: "/PRDs/Product Requirements Document – Content-to-Insights Pipeline.pdf",
     },
   ],
