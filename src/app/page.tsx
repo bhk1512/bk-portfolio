@@ -227,7 +227,7 @@ const data = {
       stack: "Looker Studio | n8n",
       summary:
         "Real-time dashboard that ingests global news, classifies disruption events, and scores severity on a 0–10 index; visualized on an interactive world map with trends and filters.",
-      cover: { src: "/images/risk-radar-workflow.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
+      cover: { src: "/images/risk-radar-outer.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
       metrics: ["Real‑time map", "Ranked disruptions", "Trend lines & filters"],
       roleTools: "PM/Builder — NewsAPI, n8n, Google Sheets, Gemini, Looker Studio",
       screenshots: [
@@ -273,7 +273,7 @@ const data = {
       cover: { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
       screenshots: [
         { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
-        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest — n8n workflow" },
+        //{ src: "/samples/indigo-s-greatest-gamble-flying-international.pdf" },
       ],
       problem:
         "New to the EPC sector, I burned 3 hrs every Sunday scanning 30+ sources for contract wins, policy shifts and interview fodder—still missed early signals.",
@@ -290,7 +290,7 @@ const data = {
         "Scheduling workflows without babysitting.",
         "Run frequency vs cloud costs: balancing speed with budget.",
       ],
-      demoLink: "https://www.notion.so/your-notion-db-or-view",          // <— add (or Streamlit)
+      demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",          // <— add (or Streamlit)
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
     },
     // 3) Content‑to‑Insights Pipeline
@@ -306,7 +306,7 @@ const data = {
     ],
       summary:
         "Auto-summarises YouTube talks into a searchable Notion hub in 5 min, slashing research time 30×.",
-      cover: { src: "/images/content-to-insights-outer.png", alt: "Content‑to‑Insights — card cover" },
+      cover: { src: "/images/content-to-insights-card-cover.png", alt: "Content‑to‑Insights — card cover" },
       screenshots: [
         { src: "/images/content-to-insights-workflow.png", alt: "Content‑to‑Insights — card cover" },
         //{ src: "/images/content-to-insights-workflow.png", alt: "Content‑to‑Insights — workflow" },
