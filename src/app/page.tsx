@@ -226,8 +226,8 @@ const data = {
       year: "2025",
       stack: "Looker Studio | n8n",
       summary:
-        "Real-time dashboard that ingests global news, scores supply chain disruptions on impact and visualises them on an interactive world map with trends and filters.",
-      cover: { src: "/images/risk-radar-outer.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
+        "Real-time dashboard that ingests global news, classifies disruption events, and scores severity on a 0–10 index; visualized on an interactive world map with trends and filters.",
+      cover: { src: "/images/risk-radar-workflow.png", alt: "Risk‑Radar dashboard (Looker Studio)" },
       metrics: ["Real‑time map", "Ranked disruptions", "Trend lines & filters"],
       roleTools: "PM/Builder — NewsAPI, n8n, Google Sheets, Gemini, Looker Studio",
       screenshots: [
@@ -235,24 +235,24 @@ const data = {
         { src: "/images/risk-radar-workflow.png", alt: "n8n pipeline" },
       ],
       problem:
-        "Global supply chain disruptions—whether physical, cyber, trade, or infrastructure—are reported across fragmented sources with inconsistent severity metrics. Decision‑makers lack a single real‑time, geospatial view that scores and ranks these disruptions for rapid situational awareness.",
+        "Disruptions (physical, cyber, trade, infrastructure) are reported across fragmented sources with no consistent measure of severity or impact, making it hard to prioritize response. Decision‑makers lack a single real‑time, geospatial view that scores and ranks these disruptions for rapid situational awareness.",
       prdLink: "/PRDs/Product Requirements Document - Risk Radar.pdf",
       approach: [
-        "Ingested global news feeds via NewsAPI → n8n → Google Sheets with deduplication and enrichment.",
-        "Built a strict LLM classification schema (Gemini) to extract disruption type, impacted nodes, and sub‑scores for severity factors.",
-        "Normalised and scored events using a Supply Chain Severity Index (SCSI) in Google Sheets with caps, decay, and bonuses.",
-        "Developed an interactive Looker Studio dashboard with a world map, ranked disruption table, trend analysis, and dynamic filters.",
-        "Implemented a revised scoring rubric to fully utilise the 0–10 severity range.",
+        "Ingestion & enrichment: NewsAPI → n8n → Google Sheets with deduplication.",
+        "Classification: Gemini schema extracts type, nodes, geography, and factor sub-scores.",
+        "Scoring: Supply Chain Severity Index (SCSI) with caps, decay, and bonuses to fully utilize 0–10.",
+        "Visualization: Looker Studio world map, ranked table, trend lines, and dynamic filters.",
       ],
       outcome: [
-        "Live, interactive dashboard flags/ranks disruptions by severity with geospatial mapping and filters.",
-        "Low‑cost deployment (NewsAPI free, lightweight Gemini usage, Sheets/Looker free).",
+        "One “screen of truth” to triage disruptions by severity and location.",
+        "Low-cost deployment (free/low-tier APIs + Sheets/Looker).",
+        "Iterated rubric to achieve meaningful spread across 0–10 (reduces “all medium” scores).",
       ],
       learnings: [
-        "End‑to‑end shipping: from scoping to launch.",
+        "Ship end-to-end: scope → schema → rubric → dashboard → SLOs.",
         "Iterative development with mock data → stable, impactful final product.",
-        "Dashboard storytelling: reduce to one clear screen of truth.",
-        "Severity scoring design: weights/caps/minima must be tuned for meaningful spread.",
+        "Scoring matters: weights/caps/minima are the difference between noise and signal.",
+        "Ops thinking (SLOs, runbook, cost) makes side-projects feel production-ready.",
       ],
     demoLink: "https://lookerstudio.google.com/s/oGJoVNj7tdw",
        // <— add
@@ -270,9 +270,9 @@ const data = {
     ],
       summary:
         "Zero-cost n8n + Gemini pipeline that lands a Monday-morning email distilling EPC wins, setbacks & macro trends in 7 min, saving 3 hrs each week.",
-      cover: { src: "/images/industry-digest-outer.png", alt: "Industry Digest" },
+      cover: { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
       screenshots: [
-        { src: "/images/industry-digest-outer.png", alt: "Industry Digest" },
+        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
         { src: "/images/industry-digest-workflow.png", alt: "Industry Digest — n8n workflow" },
       ],
       problem:
