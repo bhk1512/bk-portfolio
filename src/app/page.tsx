@@ -270,7 +270,7 @@ const data = {
     ],
       summary:
         "Zero-cost n8n + Gemini pipeline that lands a Monday-morning email distilling EPC wins, setbacks & macro trends in 7 min, saving 3 hrs each week.",
-      cover: { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
+      cover: { src: "/images/industry-digest-banner.png", alt: "Industry Digest" },
       screenshots: [
         { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
         //{ src: "/samples/indigo-s-greatest-gamble-flying-international.pdf" },
