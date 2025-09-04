@@ -1373,6 +1373,66 @@ function Timeline() {
   ];
   const [hover, setHover] = useState<string | null>(null);
 
+  // Keep tooltip inside viewport while arrow stays over the circle
+  function TooltipBox({
+    id,
+    label,
+    year,
+    details,
+    active,
+  }: {
+    id: string;
+    label: string;
+    year: string;
+    details: string;
+    active: boolean;
+  }) {
+    const ref = useRef<HTMLDivElement | null>(null);
+    const [shift, setShift] = useState(0);
+
+    useEffect(() => {
+      if (!active) { setShift(0); return; }
+      const pad = 12; // padding from viewport edge
+      const recalc = () => {
+        const el = ref.current;
+        if (!el) return;
+        // reset to centered, then measure overflow and compute correction
+        el.style.transform = 'translateX(-50%)';
+        const rect = el.getBoundingClientRect();
+        const vw = window.innerWidth;
+        let delta = 0;
+        if (rect.left < pad) delta = pad - rect.left; // move right
+        else if (rect.right > vw - pad) delta = (vw - pad) - rect.right; // move left
+        setShift(delta);
+      };
+      recalc();
+      window.addEventListener('resize', recalc);
+      return () => window.removeEventListener('resize', recalc);
+    }, [active]);
+
+    if (!active) return null;
+    return (
+      <div
+        id={id}
+        role="tooltip"
+        ref={ref}
+        className="absolute z-20 w-56 max-w-[90vw] rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
+        style={{
+          left: '50%',
+          bottom: 'calc(100% + 10px)',
+          transform: `translateX(calc(-50% + ${shift}px))`,
+        }}
+      >
+        <div className="text-zinc-100 text-sm font-medium">{label} · {year}</div>
+        <div className="text-zinc-400 text-xs mt-1 leading-relaxed">{details}</div>
+        <div
+          className="absolute -bottom-2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800"
+          style={{ left: `calc(50% - ${shift}px)` }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="mt-10 select-none">
       <div className="relative">
@@ -1417,7 +1477,7 @@ function Timeline() {
                   </button>
 
                   {/* tooltip */}
-                  {active && (
+                  {false && (
   <div
     id={tooltipId}
     role="tooltip"
@@ -1437,6 +1497,13 @@ function Timeline() {
     />
   </div>
 )}
+                  <TooltipBox
+                    id={tooltipId}
+                    label={it.label}
+                    year={it.year}
+                    details={it.details}
+                    active={active}
+                  />
                 </div>
               );
             })}
