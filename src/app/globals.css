@@ -29,3 +29,6 @@ body {
 @tailwind components;
 @tailwind utilities;
 html { scroll-behavior: smooth; }
+
+/* Hide main nav when any modal is open */
+body[data-modal-open="1"] #main-nav { display: none !important; }

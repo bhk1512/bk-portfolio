@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 //import ProfileAvatar from "\src\app\ProfileAvatar.tsx";
 import type { Metadata } from 'next';
 import Image from "next/image";
@@ -127,6 +128,20 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
     </div>
   );
 }
+// ---- Portal helper for modals ----
+function Portal({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  const elRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = document.createElement("div");
+    elRef.current = el;
+    document.body.appendChild(el);
+    setMounted(true);
+    return () => { if (elRef.current) document.body.removeChild(elRef.current); };
+  }, []);
+  if (!mounted || !elRef.current) return null;
+  return createPortal(children, elRef.current);
+}
 
 // ---- Section with anchorable header ----
 function Section({ id, title, children }: { id: string; title?: string; children: React.ReactNode }) {
@@ -135,7 +150,7 @@ function Section({ id, title, children }: { id: string; title?: string; children
     catch { /* ignore */ }
   };
   return (
-    <section id={id} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16" style={{ contentVisibility: "auto" }}>
+    <section id={id} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10" style={{ contentVisibility: "auto" }}>
       {title && (
         <div className="group flex items-center gap-2 mb-6">
           <h2 className="text-[clamp(22px,3.6vw,30px)] font-semibold tracking-tight text-zinc-100">{title}</h2>
@@ -525,6 +540,7 @@ function Certifications() {
 // ---- Nav ----
 function Nav() {
   const active = useActiveSection(SECTION_IDS as unknown as SectionId[]);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const items: { href: `#${SectionId}`; label: string; id: SectionId }[] = [
     { href: "#home", label: "Home", id: "home" },
     { href: "#work", label: "Work", id: "work" },
@@ -533,30 +549,74 @@ function Nav() {
     { href: "#writing", label: "Writing", id: "writing" },
     { href: "#contact", label: "Contact", id: "contact" },
   ];
-  return (
-    <header className="sticky top-0 z-50">
-      {/* subtle brand accent line under nav */}
-      <div className="h-0.5 bg-gradient-to-r from-zinc-800 via-zinc-600/60 to-zinc-800" />
-      <div className="backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60 border-b border-zinc-900">
-        <nav className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-          <a href="#home" className="font-medium text-zinc-100">BK</a>
-          <ul className="flex gap-3 sm:gap-4 text-[13px] sm:text-sm flex-wrap justify-center sm:justify-start pr-2">
 
+  return (
+    <header id="main-nav" className="fixed inset-x-0 top-3 z-[90]">
+      <nav className="max-w-6xl mx-auto px-3">
+        <div className="flex items-center justify-between rounded-full border border-zinc-900 bg-black/90 backdrop-blur px-3 sm:px-4 h-12 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.8)]">
+          {/* Left: Brand */}
+          <a href="#home" className="flex items-center gap-2 text-zinc-100 font-medium">BK</a>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center gap-5">
             {items.map((it) => (
-              <li key={it.id}>
+              <a
+                key={it.id}
+                href={it.href}
+                className={`text-sm transition hover:text-white ${
+                  active === it.id ? "text-white" : "text-zinc-200"
+                }`}
+              >
+                {it.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right: hamburger for mobile */}
+          <div className="flex items-center gap-2">
+            <button
+              className="md:hidden inline-flex h-8 w-8 items-center justify-center rounded-full border border-zinc-700 bg-zinc-900 text-zinc-200"
+              aria-label="Open menu"
+              onClick={() => setMobileOpen(true)}
+            >
+              ☰
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile overlay menu */}
+      {mobileOpen ? (
+        <div
+          className="fixed inset-0 z-[60] bg-black/70"
+          onClick={(e) => { if (e.target === e.currentTarget) setMobileOpen(false); }}
+        >
+          <div className="absolute right-3 left-3 top-3 rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-zinc-100 font-medium">Menu</span>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="h-8 w-8 rounded-full border border-zinc-700 text-zinc-200"
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="mt-3 grid gap-1">
+              {items.map((it) => (
                 <a
+                  key={it.id}
                   href={it.href}
-                  className={`px-1 py-0.5 transition hover:text-zinc-100 ${
-                    active === it.id ? "text-zinc-100 border-b border-zinc-400" : "text-zinc-300"
-                  }`}
+                  className="rounded-lg px-3 py-2 text-zinc-200 hover:bg-zinc-900"
+                  onClick={() => setMobileOpen(false)}
                 >
                   {it.label}
                 </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }
@@ -763,15 +823,35 @@ function Projects() {
   const active = useMemo(() => data.projects.find((p) => p.id === activeId) || null, [activeId]);
 
   useEffect(() => {
-    if (active) { document.body.style.overflow = "hidden"; } else { document.body.style.overflow = ""; }
+    if (active) {
+      document.body.style.overflow = "hidden";
+      document.body.setAttribute("data-modal-open", "1");
+    } else {
+      document.body.style.overflow = "";
+      document.body.removeAttribute("data-modal-open");
+    }
     return () => { document.body.style.overflow = ""; };
   }, [active]);
+
+  // Push a history state so phone Back closes the modal instead of exiting
+  useEffect(() => {
+    if (!active) return;
+    const handlePop = () => {
+      setActiveId(null);
+      window.scrollTo(0, savedScrollY);
+    };
+    const state = { ...(history.state || {}), modal: true };
+    history.pushState(state, "");
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, [active, savedScrollY]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
   const scrollInModal = (targetId: string) => {
   const el = modalRef.current?.querySelector<HTMLElement>(`#${targetId}`);
   if (!el || !modalRef.current) return;
-  const stickyHeader = 48; // px, adjust if you tweak the sticky nav height
+  const sticky = modalRef.current.querySelector<HTMLElement>('[data-sticky-nav]');
+  const stickyHeader = sticky ? sticky.getBoundingClientRect().height + 16 : 64;
   const top = el.offsetTop - stickyHeader;
   modalRef.current.scrollTo({ top, behavior: "smooth" });
 };
@@ -790,7 +870,7 @@ useEffect(() => {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
-      if (e.key === "Escape") { setActiveId(null); window.scrollTo(0, savedScrollY); }
+      if (e.key === "Escape") { history.back(); }
       if (e.key === "Tab" && modalRef.current) {
         const focusable = modalRef.current.querySelectorAll<HTMLElement>(
           'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -869,21 +949,22 @@ useEffect(() => {
       </div>
 
       {active && (
-  <div
-    className="fixed inset-0 z-50 bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="case-title"
-    onClick={(e) => {
-      if (e.target === e.currentTarget) { setActiveId(null); window.scrollTo(0, savedScrollY); }
-    }}
-  >
+  <Portal>
     <div
-  ref={modalRef}
-  tabIndex={-1}
-  className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
-  style={{ scrollbarGutter: "stable both-edges" }}
->
+      className="fixed inset-0 z-[100] bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="case-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) { history.back(); }
+      }}
+    >
+      <div
+        ref={modalRef}
+        tabIndex={-1}
+        className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
+        style={{ scrollbarGutter: "stable both-edges" }}
+      >
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 id="case-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
@@ -892,21 +973,23 @@ useEffect(() => {
           </div>
         </div>
         <button
-          onClick={() => { setActiveId(null); window.scrollTo(0, savedScrollY); }}
+          onClick={() => { history.back(); }}
           className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
           aria-label="Close"
         >✕</button>
       </div>
 
-      <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
-  <nav className="text-xs text-zinc-400 flex gap-4">
-    <button onClick={() => scrollInModal("p-summary")}  className="hover:text-zinc-100">Summary</button>
-    <button onClick={() => scrollInModal("p-problem")}  className="hover:text-zinc-100">Problem</button>
-    <button onClick={() => scrollInModal("p-approach")} className="hover:text-zinc-100">Action</button>
-    <button onClick={() => scrollInModal("p-outcome")}  className="hover:text-zinc-100">Result</button>
-    <button onClick={() => scrollInModal("p-learnings")} className="hover:text-zinc-100">Learnings</button>
-  </nav>
-</div>
+      <div className="sticky top-0 z-10 pt-2" data-sticky-nav>
+        <div className="mx-auto flex items-center justify-center rounded-full border border-zinc-800 bg-black/80 backdrop-blur px-3 h-10">
+          <nav className="flex items-center gap-4 text-[13px] text-zinc-300">
+            <button onClick={() => scrollInModal("p-summary")}  className="hover:text-white">Summary</button>
+            <button onClick={() => scrollInModal("p-problem")}  className="hover:text-white">Problem</button>
+            <button onClick={() => scrollInModal("p-approach")} className="hover:text-white">Action</button>
+            <button onClick={() => scrollInModal("p-outcome")}  className="hover:text-white">Result</button>
+            <button onClick={() => scrollInModal("p-learnings")} className="hover:text-white">Learnings</button>
+          </nav>
+        </div>
+      </div>
 
       <div id="p-summary" className="mt-4">
         {active.screenshots?.[0]?.src ? (
@@ -953,8 +1036,9 @@ useEffect(() => {
           {Array.isArray(active.learnings) ? active.learnings.map((l: string, i: number) => (<li key={i}>{l}</li>)) : <li>{active.learnings}</li>}
         </ul>
       </div>
+      </div>
     </div>
-  </div>
+  </Portal>
 )}
 
     </Section>
@@ -1097,15 +1181,34 @@ function Impact() {
 
   useEffect(() => {
     document.body.style.overflow = active ? "hidden" : "";
+    if (active) {
+      document.body.setAttribute("data-modal-open", "1");
+    } else {
+      document.body.removeAttribute("data-modal-open");
+    }
     return () => { document.body.style.overflow = ""; };
   }, [active]);
+
+  // Push a history state so phone Back closes the modal instead of exiting
+  useEffect(() => {
+    if (!active) return;
+    const handlePop = () => {
+      setActiveId(null);
+      window.scrollTo(0, savedScrollY);
+    };
+    const state = { ...(history.state || {}), modal: true };
+    history.pushState(state, "");
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, [active, savedScrollY]);
 
   const modalRef = useRef<HTMLDivElement | null>(null);
   // right after: const modalRef = useRef<HTMLDivElement | null>(null);
 const scrollInModal = (targetId: string) => {
   const el = modalRef.current?.querySelector<HTMLElement>(`#${targetId}`);
   if (!el || !modalRef.current) return;
-  const stickyHeader = 48; // height of the sticky in-modal nav
+  const sticky = modalRef.current.querySelector<HTMLElement>('[data-sticky-nav]');
+  const stickyHeader = sticky ? sticky.getBoundingClientRect().height + 16 : 64;
   modalRef.current.scrollTo({ top: el.offsetTop - stickyHeader, behavior: "smooth" });
 };
 
@@ -1124,7 +1227,7 @@ useEffect(() => {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (!active) return;
-      if (e.key === "Escape") { setActiveId(null); window.scrollTo(0, savedScrollY); }
+      if (e.key === "Escape") { history.back(); }
       if (e.key === "Tab" && modalRef.current) {
         const focusable = modalRef.current.querySelectorAll<HTMLElement>(
           'a, button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
@@ -1181,21 +1284,22 @@ useEffect(() => {
       </div>
 
       {active && (
-  <div
-    className="fixed inset-0 z-50 bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="impact-title"
-    onClick={(e) => {
-      if (e.target === e.currentTarget) { setActiveId(null); window.scrollTo(0, savedScrollY); }
-    }}
-  >
+  <Portal>
     <div
-  ref={modalRef}
-  tabIndex={-1}
-  className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
-  style={{ scrollbarGutter: "stable both-edges" }}
->
+      className="fixed inset-0 z-[100] bg-black/70 flex items-start sm:items-center justify-center p-0 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="impact-title"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) { history.back(); }
+      }}
+    >
+      <div
+        ref={modalRef}
+        tabIndex={-1}
+        className="w-full h-[100dvh] sm:h-auto sm:max-h-[90vh] sm:max-w-3xl rounded-none sm:rounded-2xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 overflow-y-auto overscroll-contain scroll-smooth"
+        style={{ scrollbarGutter: "stable both-edges" }}
+      >
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 id="impact-title" className="text-xl text-zinc-100 font-semibold">{active.title}</h3>
@@ -1204,20 +1308,22 @@ useEffect(() => {
           )}
         </div>
         <button
-          onClick={() => { setActiveId(null); window.scrollTo(0, savedScrollY); }}
+          onClick={() => { history.back(); }}
           className="text-zinc-400 hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded"
           aria-label="Close"
         >✕</button>
       </div>
 
-      <div className="sticky top-0 bg-zinc-950/90 backdrop-blur mt-2 pt-2 pb-2 z-10 border-b border-zinc-900">
-  <nav className="text-xs text-zinc-400 flex gap-4">
-    <button onClick={() => scrollInModal("i-problem")}   className="hover:text-zinc-100">Problem</button>
-    <button onClick={() => scrollInModal("i-action")}    className="hover:text-zinc-100">Action</button>
-    <button onClick={() => scrollInModal("i-result")}    className="hover:text-zinc-100">Result</button>
-    <button onClick={() => scrollInModal("i-learnings")} className="hover:text-zinc-100">Learnings</button>
-  </nav>
-</div>
+      <div className="sticky top-0 z-10 pt-2" data-sticky-nav>
+        <div className="mx-auto flex items-center justify-center rounded-full border border-zinc-800 bg-black/80 backdrop-blur px-3 h-10">
+          <nav className="flex items-center gap-4 text-[13px] text-zinc-300">
+            <button onClick={() => scrollInModal("i-problem")}   className="hover:text-white">Problem</button>
+            <button onClick={() => scrollInModal("i-action")}    className="hover:text-white">Action</button>
+            <button onClick={() => scrollInModal("i-result")}    className="hover:text-white">Result</button>
+            <button onClick={() => scrollInModal("i-learnings")} className="hover:text-white">Learnings</button>
+          </nav>
+        </div>
+      </div>
 
       <div id="i-problem" className="mt-4">
         <h4 className="text-zinc-200 font-medium mb-2">Problem</h4>
@@ -1246,8 +1352,9 @@ useEffect(() => {
           {active.learnings?.map((l, i) => <li key={i}>{l}</li>)}
         </ul>
       </div>
+      </div>
     </div>
-  </div>
+  </Portal>
 )}
 
           
@@ -1500,10 +1607,10 @@ function Footer() {
 
 export default function PortfolioApp() {
   return (
-      <div className="bg-[#121212] min-h-screen text-[#E0E0E0] scroll-smooth overflow-x-hidden">
+      <div className="bg-[#0b0b0b] min-h-screen text-[#E0E0E0] scroll-smooth overflow-x-hidden">
       <ScrollProgress />
       <Nav />
-      <main>
+      <main className="pt-10">
         <Hero />
         <Projects />
          <Skills />          {/* new */}
