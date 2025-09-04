@@ -1421,11 +1421,11 @@ function Timeline() {
   <div
     id={tooltipId}
     role="tooltip"
-    className="absolute -top-28 z-20 w-56 max-w-[90vw] rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
+    className="absolute z-20 w-56 max-w-[90vw] rounded-xl border border-zinc-800 bg-zinc-950 p-3 shadow-xl animate-[fadeIn_.15s_ease-out]"
     style={{
-      left: it.key === items[0].key ? 0 : it.key === items[items.length - 1].key ? 'auto' : '50%',
-      right: it.key === items[items.length - 1].key ? 0 : 'auto',
-      transform: it.key === items[0].key || it.key === items[items.length - 1].key ? 'none' : 'translateX(-50%)',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      bottom: 'calc(100% + 10px)',
     }}
   >
     <div className="text-zinc-100 text-sm font-medium">{it.label} · {it.year}</div>
@@ -1433,14 +1433,7 @@ function Timeline() {
 
     {/* arrow – centers normally; snaps near the dot at edges */}
     <div
-      className={[
-        "absolute -bottom-2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800",
-        it.key === items[0].key
-          ? "left-[18px]"          // roughly over the first dot
-          : it.key === items[items.length - 1].key
-            ? "right-[18px]"       // roughly over the last dot
-            : "left-1/2 -translate-x-1/2", // centered
-      ].join(" ")}
+      className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-zinc-950 border-r border-b border-zinc-800"
     />
   </div>
 )}
@@ -1470,8 +1463,8 @@ function About() {
   <Reveal>
     {/* ...your previous content inside the section... */}
 
-    {/* Text block */}
-    <div className="mt-12 max-w-3xl space-y-6">
+    {/* Text block (centered within section width) */}
+    <div className="mt-12 max-w-3xl mx-auto space-y-6">
       <p className="text-zinc-300 leading-relaxed text-justify">
         Every day, I connect the dots: bridging teams, streamlining workflows, and translating analytics into smarter operations.
       </p>
