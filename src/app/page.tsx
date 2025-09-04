@@ -707,7 +707,7 @@ function Hero() {
 
               {/* badges */}
               <div className="mt-3 mb-4 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
-                <Badge>Program Manager · Tech→Ops</Badge>
+                <Badge>Strategy & Ops Professional</Badge>
                 <Badge className="hidden sm:inline">IIMA MBA</Badge>
               </div>
 
