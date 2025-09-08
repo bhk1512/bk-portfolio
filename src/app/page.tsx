@@ -202,7 +202,7 @@ function Card({ children }: { children: React.ReactNode }) {
 const data = {
   hero: {
     name: "Bharat Kaushik",
-    title: "Tech‑to‑Ops builder with IIMA MBA", // tagline
+    //title: "Tech‑to‑Ops builder with IIMA MBA", // tagline
     subhead: "Aligning people, processes, and tech to remove uncertainty from execution",
     photo: { src: "/images/avatar.jpg", alt: "Bharat Kaushik" }, // put your image at /images/public/avatar.jpg
     ctas: [
