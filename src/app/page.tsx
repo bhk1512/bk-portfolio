@@ -713,7 +713,7 @@ function Hero() {
 
               {/* tagline + subhead (keep only one copy) */}
               <p className="text-zinc-300 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base">
-                {data.hero.title}
+                {/*data.hero.title*/}
               </p>
               <p className="text-zinc-400 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 mt-2 text-sm sm:text-base">
                 {data.hero.subhead}
