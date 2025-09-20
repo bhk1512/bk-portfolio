@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 //import ProfileAvatar from "\src\app\ProfileAvatar.tsx";
-import type { Metadata } from 'next';
 import Image from "next/image";
 
 // =============================
@@ -39,8 +38,20 @@ type Project = {
 type ImpactItem = {
   id: string;
   title: string;
+  subtitle?: string;
   summary?: string;
-  // add other fields used by the Impact section
+  problem?: string[];
+  action?: string[];
+  outcome?: string[];
+  learnings?: string[];
+};
+
+type Certification = {
+  title: string;
+  issuer?: string;
+  year?: string;
+  url?: string;
+  logo?: string;
 };
 
 type TeardownStat = {
@@ -809,7 +820,7 @@ function AffiliationBar() {
   );
 }
 function Certifications() {
-  const certs = data.certs ?? [];
+  const certs: Certification[] = data.certs ?? [];
 
   return (
     <Section id="certs" title="Certifications">
@@ -828,11 +839,12 @@ function Certifications() {
                   <div className="flex items-start gap-3">
                     {c.logo ? (
                       <div className="relative w-10 h-10 shrink-0 rounded-lg overflow-hidden ring-1 ring-zinc-800 bg-zinc-900">
-                        <img
+                        <Image
                           src={c.logo}
                           alt={`${c.issuer || "Issuer"} logo`}
-                          className="w-full h-full object-contain p-1.5"
-                          loading="lazy"
+                          fill
+                          sizes="40px"
+                          className="object-contain p-1.5"
                         />
                       </div>
                     ) : null}
@@ -1127,12 +1139,13 @@ function DefaultProjectContent({ project }: { project: Project }) {
   return (
     <Card>
       {project.cover?.src ? (
-        <div className="mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
-          <img
-            loading="lazy"
+        <div className="group relative mb-3 h-40 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
+          <Image
             src={project.cover.src}
             alt={project.cover.alt || `${project.title} cover`}
-            className="w-full h-40 object-cover hover:scale-[1.02] transition"
+            fill
+            className="object-cover transition duration-300 group-hover:scale-[1.02]"
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
           />
         </div>
       ) : null}
@@ -1165,12 +1178,13 @@ function TeardownProjectContent({ project, onOpen }: { project: Project; onOpen:
   return (
     <Card>
       {project.cover?.src ? (
-        <div className="mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
-          <img
-            loading="lazy"
+        <div className="group relative mb-3 h-40 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
+          <Image
             src={project.cover.src}
             alt={project.cover.alt || `${project.title} cover`}
-            className="w-full h-40 object-cover hover:scale-[1.02] transition"
+            fill
+            className="object-cover transition duration-300 group-hover:scale-[1.02]"
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
           />
         </div>
       ) : null}
@@ -1244,6 +1258,8 @@ function StandardProjectModalContent({ project, onClose, modalRef, scrollTo }: {
     "border border-zinc-700 text-zinc-100 hover:bg-zinc-900";
   const primary =
     "bg-zinc-100 text-zinc-900 hover:bg-white";
+  const primaryScreenshot = project.screenshots?.[0];
+  const secondaryScreenshot = project.screenshots?.[1];
 
   return (
     <div
@@ -1299,9 +1315,15 @@ function StandardProjectModalContent({ project, onClose, modalRef, scrollTo }: {
       </div>
 
       <div id="p-summary" className="mt-4">
-        {project.screenshots?.[0]?.src ? (
-          <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
-            <img loading="lazy" src={project.screenshots[0].src} alt={project.screenshots[0].alt} className="w-full h-auto object-cover" />
+        {primaryScreenshot?.src ? (
+          <div className="relative mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60" style={{ aspectRatio: "16 / 9" }}>
+            <Image
+              src={primaryScreenshot.src}
+              alt={primaryScreenshot.alt ?? `${project.title} screenshot`}
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 720px, 100vw"
+            />
           </div>
         ) : null}
         {project.summary ? <p className="text-zinc-300">{project.summary}</p> : null}
@@ -1320,9 +1342,15 @@ function StandardProjectModalContent({ project, onClose, modalRef, scrollTo }: {
 
       <div id="p-approach" className="mt-6">
         <h4 className="text-zinc-200 font-medium mb-2">Action</h4>
-        {project.screenshots?.[1]?.src ? (
-          <div className="overflow-hidden rounded-xl ring-1 ring-zinc-800/60 mb-3">
-            <img loading="lazy" src={project.screenshots[1].src} alt={project.screenshots[1].alt} className="w-full h-auto object-cover" />
+        {secondaryScreenshot?.src ? (
+          <div className="relative mb-3 overflow-hidden rounded-xl ring-1 ring-zinc-800/60" style={{ aspectRatio: "16 / 9" }}>
+            <Image
+              src={secondaryScreenshot.src}
+              alt={secondaryScreenshot.alt ?? `${project.title} detail`}
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 720px, 100vw"
+            />
           </div>
         ) : null}
         {project.approach ? (
@@ -1359,8 +1387,7 @@ function StandardProjectModalContent({ project, onClose, modalRef, scrollTo }: {
 
 
 function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { project: Project; onClose: () => void; modalRef: React.MutableRefObject<HTMLDivElement | null>; scrollTo: (id: string) => void; }) {
-  const teardown = project.teardown;
-  if (!teardown) return null;
+  const teardown = project.teardown!;
   const navItems = teardown.nav ?? [
     { id: "td-overview", label: "Overview" },
     { id: "td-market", label: "Market" },
@@ -1371,11 +1398,11 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
   ];
   const baseCard = "rounded-2xl border border-zinc-800/70 bg-zinc-950/60 p-4";
   const statCard = "group rounded-2xl border border-zinc-800/70 bg-zinc-950/60 p-4 transition hover:border-emerald-400/60 hover:shadow-[0_0_32px_-16px_rgba(16,185,129,0.7)]";
-  const phases = teardown.uxJourney?.phases ?? [];
+  const phases = useMemo(() => teardown.uxJourney?.phases ?? [], [teardown]);
   const [activeStage, setActiveStage] = useState(phases[0]?.id ?? "");
   useEffect(() => {
     setActiveStage(phases[0]?.id ?? "");
-  }, [project.id]);
+  }, [project.id, phases]);
   const activePhase = useMemo(
     () => phases.find((phase) => phase.id === activeStage) ?? phases[0],
     [phases, activeStage]
@@ -1585,15 +1612,21 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
               ))}
             </div>
             <div className="grid gap-4 lg:grid-cols-[minmax(0,220px)_1fr]">
-              <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-3 flex items-center justify-center text-xs text-zinc-400">
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-3">
                 {activePhase?.screenshot?.src ? (
-                  <img
-                    src={activePhase.screenshot.src}
-                    alt={activePhase.screenshot.alt}
-                    className="w-full h-full object-cover rounded-xl"
-                  />
+                  <div className="relative h-44 w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={activePhase.screenshot.src}
+                      alt={activePhase.screenshot.alt ?? `${activePhase.title} stage`}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 220px, 100vw"
+                    />
+                  </div>
                 ) : (
-                  <span>Add a journey screenshot</span>
+                  <div className="flex min-h-[120px] items-center justify-center text-xs text-zinc-400">
+                    <span>Add a journey screenshot</span>
+                  </div>
                 )}
               </div>
               <ul className="space-y-2">
@@ -1700,7 +1733,7 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
         ) : null}
         {teardown.nextActionsDetailed?.length ? (
           <div className={baseCard}>
-            <h4 className="text-sm font-semibold text-zinc-200 mb-2">What I'd do next</h4>
+            <h4 className="text-sm font-semibold text-zinc-200 mb-2">What I&apos;d do next</h4>
             <ul className="text-sm text-zinc-300 space-y-1 list-disc list-inside">
               {teardown.nextActionsDetailed.map((item) => (<li key={item}>{item}</li>))}
             </ul>
@@ -1741,7 +1774,7 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
 function Projects() {
   const [savedScrollY, setSavedScrollY] = useState(0);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const active = useMemo(() => data.projects.find((p) => p.id === activeId) || null, [activeId]);
+  const active = projects.find((p) => p.id === activeId) ?? null;
 
   useEffect(() => {
     if (active) {
@@ -1882,7 +1915,7 @@ useEffect(() => {
 // ---- Impact (Premium: 6 items + modal) ----
 function Impact() {
   const [savedScrollY, setSavedScrollY] = useState(0);
-  const impacts = [
+  const impacts: ImpactItem[] = [
     {
       id: "eoffice-2023",
       title: "e-Office rollout (2023)",
@@ -2011,7 +2044,7 @@ function Impact() {
   ];
 
   const [activeId, setActiveId] = useState<string | null>(null);
-  const active = useMemo(() => impacts.find((i) => i.id === activeId) || null, [activeId]);
+  const active = impacts.find((i) => i.id === activeId) ?? null;
 
   useEffect(() => {
     document.body.style.overflow = active ? "hidden" : "";
@@ -2371,7 +2404,7 @@ function About() {
       </p>
 
       <p className="text-zinc-300 leading-relaxed text-justify">
-        From laying the analytics foundation at ZS to integrating solutions across operations, I've learned one truth: clarity, collaboration, and tech are what make execution thrive.
+        From laying the analytics foundation at ZS to integrating solutions across operations, I&apos;ve learned one truth: clarity, collaboration, and tech are what make execution thrive.
         <br />
         Now, I help cut through uncertainty so we can move faster, smarter and build a future rooted in confident, clear execution.
       </p>
