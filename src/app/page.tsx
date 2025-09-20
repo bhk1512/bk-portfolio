@@ -1631,7 +1631,7 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
   const maxReview = reviewSummary.reduce((max, item) => Math.max(max, item.value), 0);
   const market = teardown.marketSnapshot;
 
-  const recommendationAccent = (accent?: "emerald" | "teal" | "violet" | "amber") => {
+  const recommendationAccent = (accent?: string) => {
     switch (accent) {
       case "emerald":
         return "border-emerald-500/40 bg-emerald-500/10 text-emerald-200";
