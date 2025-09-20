@@ -79,7 +79,7 @@ type TeardownJourneyPhase = {
 type TeardownReviewStat = {
   label: string;
   value: number;
-  tone?: "positive" | "negative";
+  tone?: string;
   note?: string;
 };
 
