@@ -87,7 +87,7 @@ type TeardownRecommendationSet = {
   id: string;
   title: string;
   icon?: string;
-  accent?: "emerald" | "teal" | "violet" | "amber";
+  accent?: string;
   bullets: string[];
   metric: string;
 };
