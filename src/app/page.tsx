@@ -65,7 +65,7 @@ type TeardownHighlight = {
 };
 
 type TeardownJourneyAnnotation = {
-  tone: "positive" | "negative";
+  tone: string;
   text: string;
 };
 
