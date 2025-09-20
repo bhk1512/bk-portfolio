@@ -370,7 +370,7 @@ const data = {
         leakMap: {
           stages: ["Awareness", "Trial", "First Listen", "Credit Exhaustion", "Retention"],
           issues: ["Credit gating", "Weak discovery", "Offline fails"],
-          caption: "Churn spikes right after the first credit when content should be easiest to find.",
+          caption: "Churn spikes right when content should be easiest to find.",
         },
         marketSnapshot: {
           leader: { label: "Audible", value: 60 },
@@ -980,7 +980,7 @@ function ProfileAvatar({
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      el.style.transform = `translateY(-2px) rotateY(${x / 28}deg) rotateX(${-y / 28}deg)`;
+      el.style.transform = `translateY(-2px) rotateY(${x / 28}deg) rotateX(${-y / 28}deg`;
     };
     const onLeave = () => { el.style.transform = ""; };
 
@@ -1386,6 +1386,226 @@ function StandardProjectModalContent({ project, onClose, modalRef, scrollTo }: {
 }
 
 
+
+
+
+
+
+function RetentionFlow({ stages = [], issues = [] }: { stages?: string[]; issues?: string[] }) {
+  const defaultStages = [
+    "Awareness",
+    "Trial",
+    "First Listen",
+    "Credit Exhaustion",
+    "Retention",
+  ];
+
+  const labels = stages.length >= 5
+    ? stages.slice(0, 5)
+    : defaultStages;
+
+  const points = [
+    { x: 70, y: 120 },
+    { x: 260, y: 120 },
+    { x: 500, y: 120 },
+    { x: 760, y: 165 },
+    { x: 950, y: 205 },
+  ].map((pt, index) => ({ ...pt, label: labels[index] ?? defaultStages[index] }));
+
+  const retentionIssues = issues.length ? issues : [
+    "Credit gating",
+    "Weak discovery",
+    "Offline fails",
+  ];
+
+  return (
+    <div className="w-full overflow-hidden py-4">
+      <div className="relative mx-auto h-[320px] w-full max-w-[1200px] rounded-2xl bg-neutral-900 p-6 ring-1 ring-white/10">
+        <div className="mb-2 flex items-center justify-start text-sm text-neutral-300">
+          <span className="font-medium tracking-wide">User Journey</span>
+        </div>
+        <svg className="h-[240px] w-full" viewBox="0 0 1020 260" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="rf-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.10" />
+              <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.00" />
+            </linearGradient>
+            <filter id="rf-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <radialGradient id="rf-blob" cx="50%" cy="20%" r="80%">
+              <stop offset="0%" stopColor="#22c55e" stopOpacity="0.25" />
+              <stop offset="60%" stopColor="#a3e635" stopOpacity="0.18" />
+              <stop offset="100%" stopColor="#eab308" stopOpacity="0.08" />
+            </radialGradient>
+            <filter id="rf-softBlur" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="18" />
+            </filter>
+          </defs>
+          <rect x="160" y="56" width="560" height="190" rx="95" fill="url(#rf-blob)" filter="url(#rf-softBlur)" />
+          <path d="M 70 126 C 300 126, 460 126, 560 126 C 660 126, 700 146, 740 171 C 780 191, 820 204, 950 211" fill="none" stroke="#000" strokeOpacity="0.18" strokeWidth="14" />
+          <path d="M 70 120 C 300 120, 460 120, 560 120 C 660 120, 700 140, 740 165 C 780 185, 820 198, 950 205" fill="none" stroke="#a3a3a3" strokeWidth="8" strokeLinecap="round" />
+          <path d="M 760 165 C 800 185, 840 198, 920 204" fill="none" stroke="#fb7185" strokeWidth="10" strokeLinecap="round" filter="url(#rf-glow)" />
+          <g>
+            <line x1={70} y1={120} x2={70} y2={210} stroke="#38bdf8" strokeWidth={4} strokeLinecap="round" />
+            <polygon points="60,210 80,210 70,222" fill="#38bdf8" />
+          </g>
+          <g>
+            <line x1={260} y1={120} x2={260} y2={210} stroke="#c084fc" strokeWidth={4} strokeLinecap="round" />
+            <polygon points="250,210 270,210 260,222" fill="#c084fc" />
+          </g>
+          <text x={200} y={245} textAnchor="middle" className="fill-rose-400 text-[13px] font-semibold">
+            Strong thanks to Amazon SSO and generous trials.
+          </text>
+          {points.map((pt, index) => (
+            <g key={pt.label + index}>
+              <circle cx={pt.x} cy={pt.y} r={10} fill="#e5e7eb" stroke="#0a0a0a" strokeWidth="2" />
+              <text x={pt.x} y={pt.y - 20} textAnchor="middle" className="fill-white text-[12px] font-medium">
+                {pt.label}
+              </text>
+            </g>
+          ))}
+          <g>
+            <circle cx={760} cy={165} r={12} fill="#fecdd3" stroke="#9f1239" strokeWidth="2" />
+            <line x1={760} y1={165} x2={760} y2={220} stroke="#ef4444" strokeWidth="4" />
+            <polygon points="750,220 770,220 760,232" fill="#ef4444" />
+            <text x={760} y={245} textAnchor="middle" className="fill-rose-400 text-[13px] font-semibold">
+              Drop-off after first credit
+            </text>
+            <text x={760} y={261} textAnchor="middle" className="fill-rose-200 text-[12px]">
+              Churn spikes right after the first credit when content should be easiest to find.
+            </text>
+            </g>
+        </svg>
+        <div className="pointer-events-none absolute right-6 bottom-6 -translate-y-[150px] w-[300px] rounded-xl bg-rose-500/15 p-4 text-sm text-rose-100 ring-1 ring-rose-300/30 shadow-2xl sm:right-10">
+          <div className="absolute -left-2 top-10 h-4 w-4 rotate-45 bg-rose-500/15 ring-1 ring-rose-300/30" />
+          <div className="mb-1 text-[11px] font-semibold tracking-wide text-rose-200">RETENTION ISSUES</div>
+          <ul className="list-disc pl-5 leading-6">
+            {retentionIssues.map((issue) => (
+              <li key={issue}>{issue}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MarketShareRadial({ leader, competitors }: { leader: { label: string; value: number }; competitors: { label: string; value: number }[] }) {
+  const segments = useMemo(() => {
+    if (!leader) return [] as Array<{ label: string; value: number; color: string; textColor: string }>;
+    const palette = [
+      { bg: "#22c55e", text: "#bbf7d0" },
+      { bg: "#38bdf8", text: "#bae6fd" },
+      { bg: "#f97316", text: "#fed7aa" },
+      { bg: "#c084fc", text: "#e9d5ff" },
+      { bg: "#facc15", text: "#fef08a" },
+    ];
+    const data = [leader, ...(competitors ?? [])]
+      .filter(Boolean)
+      .map((segment) => ({
+        label: segment.label,
+        value: Math.max(0, segment.value ?? 0),
+      }));
+    return data.map((segment, index) => ({
+      ...segment,
+      color: palette[index % palette.length].bg,
+      textColor: palette[index % palette.length].text,
+    }));
+  }, [leader, competitors]);
+
+  const total = segments.reduce((sum, segment) => sum + segment.value, 0);
+  if (!total || !segments.length) {
+    return (
+      <div className="relative h-56 w-56 sm:h-60 sm:w-60">
+        <div className="absolute inset-0 rounded-full border border-zinc-800/60 bg-zinc-900" />
+        <div className="absolute inset-12 flex items-center justify-center rounded-full bg-black/70 text-xs text-zinc-400">
+          No market data
+        </div>
+      </div>
+    );
+  }
+
+  let cumulative = 0;
+  const gradientStops: string[] = [];
+  const labelRadius = 56;
+  const pointerRadius = 47;
+  const labeledSegments = segments.map((segment) => {
+    const start = (cumulative / total) * 100;
+    cumulative += segment.value;
+    const end = (cumulative / total) * 100;
+    gradientStops.push(segment.color + ' ' + start + '% ' + end + '%');
+    const midpoint = (start + end) / 2;
+    const angle = (midpoint / 100) * Math.PI * 2 - Math.PI / 2;
+    const pointerX = 50 + Math.cos(angle) * pointerRadius;
+    const pointerY = 50 + Math.sin(angle) * pointerRadius;
+    const labelX = 50 + Math.cos(angle) * labelRadius;
+    const labelY = 50 + Math.sin(angle) * labelRadius;
+    const alignRight = labelX >= 50;
+    return {
+      ...segment,
+      pointerX,
+      pointerY,
+      labelX,
+      labelY,
+      alignRight,
+      translateX: alignRight ? '0%' : '-100%',
+      justify: alignRight ? 'flex-start' : 'flex-end',
+    };
+  });
+
+  const gradient = 'conic-gradient(' + gradientStops.join(', ') + ')';
+  const leaderSegment = segments[0];
+
+  return (
+    <div className="relative mx-auto h-56 w-56 sm:h-60 sm:w-60">
+      <div className="absolute inset-0 rounded-full border border-zinc-800/60 bg-zinc-900" />
+      <div className="absolute inset-3 rounded-full" style={{ background: gradient }} />
+      <div className="absolute inset-3 rounded-full border border-black/20" />
+      <div className="absolute inset-12 flex flex-col items-center justify-center rounded-full bg-black/80 text-center">
+        <div className="text-3xl font-semibold text-zinc-100">{Math.round(leaderSegment?.value ?? 0)}%</div>
+        <div className="text-xs text-zinc-400">{leaderSegment?.label ?? 'Leader share'}</div>
+      </div>{labeledSegments.map((segment) => (
+        <React.Fragment key={segment.label}>
+          <span
+            className="absolute h-2 w-2 rounded-full border border-black/40"
+            style={{
+              left: segment.pointerX + '%',
+              top: segment.pointerY + '%',
+              backgroundColor: segment.color,
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+          <div
+            className="absolute min-w-[80px] text-xs font-medium text-zinc-100"
+            style={{
+              left: segment.labelX + '%',
+              top: segment.labelY + '%',
+              transform: 'translate(' + segment.translateX + ', -50%)',
+              textAlign: segment.alignRight ? 'left' : 'right',
+            }}
+          >
+            <div className="flex items-center gap-1" style={{ justifyContent: segment.justify }}>
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ backgroundColor: segment.color }}
+              />
+              <span>{segment.label}</span>
+            </div>
+            <div className="text-[11px] font-normal text-zinc-400">{Math.round(segment.value)}%</div>
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+
+
 function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { project: Project; onClose: () => void; modalRef: React.MutableRefObject<HTMLDivElement | null>; scrollTo: (id: string) => void; }) {
   const teardown = project.teardown!;
   const navItems = teardown.nav ?? [
@@ -1410,11 +1630,7 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
   const reviewSummary = teardown.uxJourney?.reviewSummary ?? [];
   const maxReview = reviewSummary.reduce((max, item) => Math.max(max, item.value), 0);
   const market = teardown.marketSnapshot;
-  const totalMarket = market ? market.leader.value + market.competitors.reduce((sum, comp) => sum + comp.value, 0) : 0;
-  const leaderPercent = market && totalMarket ? Math.round((market.leader.value / totalMarket) * 100) : 0;
-  const marketChartStyle = market
-    ? { backgroundImage: `conic-gradient(#22c55e ${leaderPercent}%, rgba(161,161,170,0.35) ${leaderPercent}% 100%)` }
-    : undefined;
+
   const recommendationAccent = (accent?: "emerald" | "teal" | "violet" | "amber") => {
     switch (accent) {
       case "emerald":
@@ -1495,26 +1711,29 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
             ))}
           </div>
         ) : null}
-        {teardown.leakMap ? (
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-zinc-300">
-              {teardown.leakMap.stages.map((stage, index) => (
-                <React.Fragment key={stage}>
-                  <div className="rounded-full border border-zinc-700/60 bg-zinc-900/60 px-3 py-1">{stage}</div>
-                  {index < teardown.leakMap.stages.length - 1 ? <span className="text-zinc-500">→</span> : null}
-                </React.Fragment>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {teardown.leakMap.issues.map((issue) => (
-                <span key={issue} className="inline-flex items-center rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs text-amber-200">
-                  {issue}
-                </span>
-              ))}
-            </div>
-            <p className="text-sm text-zinc-400">{teardown.leakMap.caption}</p>
-          </div>
-        ) : null}
+
+
+
+        
+
+
+
+
+{teardown.leakMap ? (
+  <div className="space-y-4">
+    <RetentionFlow stages={teardown.leakMap.stages} issues={teardown.leakMap.issues} />
+  </div>
+) : null}
+
+
+
+
+
+
+
+
+
+
         {teardown.execSummary ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className={baseCard}>
@@ -1555,26 +1774,9 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
 
       <section id="td-market" className="mt-10 space-y-6">
         {market ? (
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,220px)_1fr]">
-            <div className="flex flex-col items-center gap-4">
-              <div className="relative h-40 w-40 rounded-full border border-zinc-800 bg-zinc-950/60 shadow-inner" style={marketChartStyle}>
-                <div className="absolute inset-6 flex flex-col items-center justify-center rounded-full bg-black/85">
-                  <div className="text-2xl font-semibold text-zinc-50">{leaderPercent}%</div>
-                  <div className="text-xs text-zinc-400">Audible share</div>
-                </div>
-              </div>
-              <div className="w-full space-y-2 text-xs text-zinc-400">
-                <div className="flex items-center justify-between">
-                  <span>Audible</span>
-                  <span className="text-zinc-200">{leaderPercent}%</span>
-                </div>
-                {market.competitors.map((comp) => (
-                  <div key={comp.label} className="flex items-center justify-between">
-                    <span>{comp.label}</span>
-                    <span className="text-zinc-300">{comp.value}%</span>
-                  </div>
-                ))}
-              </div>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,280px)_1fr]">
+            <div className="flex items-center justify-center">
+              <MarketShareRadial leader={market.leader} competitors={market.competitors} />
             </div>
             <div className={baseCard}>
               <h4 className="text-sm font-semibold text-zinc-200 mb-2">Market snapshot</h4>
@@ -1595,9 +1797,6 @@ function TeardownModalContent({ project, onClose, modalRef, scrollTo }: { projec
       </section>
 
       <section id="td-ux" className="mt-10 space-y-6">
-        {teardown.uxJourney?.intro?.map((line) => (
-          <p key={line} className="text-sm text-zinc-300 leading-6">{line}</p>
-        ))}
         {phases.length ? (
           <div className="space-y-4">
             <div className="flex flex-wrap gap-2">
@@ -2551,4 +2750,14 @@ export default function PortfolioApp() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
 
