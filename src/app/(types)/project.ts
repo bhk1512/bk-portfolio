@@ -10,6 +10,7 @@ export type Project = {
   prdLink?: string;
   cover?: { src: string; alt: string };
   metrics?: string[];
+  roleTools?: string;
   screenshots?: { src: string; alt: string }[];
   problem?: string | string[];
   approach?: string[];
