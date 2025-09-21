@@ -29,11 +29,11 @@ export default function RetentionFlow({ stages = [], issues = [] }: RetentionFlo
 
   return (
     <div className="w-full overflow-hidden py-4">
-      <div className="relative mx-auto h-[320px] w-full max-w-[1200px] rounded-2xl bg-neutral-900 p-6 ring-1 ring-white/10">
+      <div className="relative mx-auto w-full max-w-[1200px] rounded-2xl bg-neutral-900 p-4 sm:p-6 ring-1 ring-white/10 md:h-[320px]">
         <div className="mb-2 flex items-center justify-start text-sm text-neutral-300">
           <span className="font-medium tracking-wide">User Journey</span>
         </div>
-        <svg className="h-[240px] w-full" viewBox="0 0 1020 260" preserveAspectRatio="xMidYMid meet">
+        <svg className="h-[220px] w-full md:h-[240px]" viewBox="0 0 1020 260" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="rf-fade" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.10" />
@@ -90,14 +90,16 @@ export default function RetentionFlow({ stages = [], issues = [] }: RetentionFlo
             </text>
             </g>
         </svg>
-        <div className="pointer-events-none absolute right-6 bottom-6 -translate-y-[150px] w-[300px] rounded-xl bg-rose-500/15 p-4 text-sm text-rose-100 ring-1 ring-rose-300/30 shadow-2xl sm:right-10">
-          <div className="absolute -left-2 top-10 h-4 w-4 rotate-45 bg-rose-500/15 ring-1 ring-rose-300/30" />
-          <div className="mb-1 text-[11px] font-semibold tracking-wide text-rose-200">RETENTION ISSUES</div>
-          <ul className="list-disc pl-5 leading-6">
-            {retentionIssues.map((issue) => (
-              <li key={issue}>{issue}</li>
-            ))}
-          </ul>
+        <div className="mt-6 flex justify-center md:absolute md:right-6 md:bottom-6 md:mt-0 md:block md:-translate-y-[150px] md:w-[300px] sm:right-10">
+          <div className="relative w-full max-w-[320px] rounded-xl bg-rose-500/15 p-4 text-sm text-rose-100 ring-1 ring-rose-300/30 shadow-2xl md:pointer-events-none">
+            <div className="hidden md:block absolute -left-2 top-10 h-4 w-4 rotate-45 bg-rose-500/15 ring-1 ring-rose-300/30" />
+            <div className="mb-1 text-[11px] font-semibold tracking-wide text-rose-200">RETENTION ISSUES</div>
+            <ul className="list-disc pl-4 leading-6 sm:pl-5">
+              {retentionIssues.map((issue) => (
+                <li key={issue}>{issue}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
