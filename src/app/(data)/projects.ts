@@ -5,7 +5,7 @@ export const projects: Project[] = [
       id: "audible-product-teardown",
       title: "Audible Product Teardown",
       year: "2025",
-      stack: "Product Strategy | Growth",
+      stack: "Product Strategy",
       summary:
         "Deep dive into Audible's product experience, retention mechanics, and growth plays backed by 30K+ review signals.",
       cover: { src: "/images/Audible.png", alt: "Audible product teardown" },
@@ -13,7 +13,7 @@ export const projects: Project[] = [
       teardown: {
         badge: "Product Teardown",
         heading: "Audible Product Teardown",
-        subheading: "2025 - Strategic Analysis | Growth Opportunities",
+        subheading: "Strategic Analysis • Growth",
         description:
           "Audible, backed by Amazon, is the global leader in audiobooks. I unpacked the product, user journey, and business model to see where it wins, where it struggles, and how it can grow.",
         stats: [
@@ -61,6 +61,7 @@ export const projects: Project[] = [
             {
               id: "ux-onboarding",
               title: "Onboarding",
+              screenshot: { src: "/images/onboarding.png", alt: "Audible onboarding flow" },
               annotations: [
                 { tone: "positive", text: "Amazon login plus free trial equals a 60-second start." },
                 { tone: "positive", text: "Value prop is clear with Originals and deals up front." },
@@ -70,6 +71,7 @@ export const projects: Project[] = [
             {
               id: "ux-discovery",
               title: "Discovery",
+              screenshot: { src: "/images/discovery.png", alt: "Audible discovery experience" },
               annotations: [
                 { tone: "negative", text: "Filters for Included / Free / Language are hidden three taps deep." },
                 { tone: "negative", text: "Recommendations repeat the last purchase instead of widening the catalog." },
@@ -79,6 +81,7 @@ export const projects: Project[] = [
             {
               id: "ux-listening",
               title: "Listening",
+              screenshot: { src: "/images/listening.png", alt: "Audible listening controls" },
               annotations: [
                 { tone: "positive", text: "Whispersync and speed controls feel polished." },
                 { tone: "negative", text: "Offline downloads fail silently; users lose spot mid-commute." },
@@ -87,6 +90,7 @@ export const projects: Project[] = [
             {
               id: "ux-retention",
               title: "Retention",
+              screenshot: { src: "/images/retention.png", alt: "Audible retention touchpoints" },
               annotations: [
                 { tone: "negative", text: "Credit exhaustion causes a hard paywall with little guidance." },
                 { tone: "negative", text: "Library view mixes owned, trial, and included items with no clear labels." },
@@ -123,7 +127,7 @@ export const projects: Project[] = [
           {
             id: "discovery",
             title: "Fix Discovery & Retention",
-            icon: "??",
+            icon: "🔍",
             accent: "emerald",
             bullets: [
               "Give Included / Credit-Free / Language filters a single-tap surface.",
@@ -135,7 +139,7 @@ export const projects: Project[] = [
           {
             id: "plans",
             title: "Rethink Subscription",
-            icon: "??",
+            icon: "💳",
             accent: "teal",
             bullets: [
               "Offer 6- and 12-month bundles for commitment without monthly churn.",
@@ -147,7 +151,7 @@ export const projects: Project[] = [
           {
             id: "core",
             title: "Stabilise Core Experience",
-            icon: "??",
+            icon: "⚙️",
             accent: "violet",
             bullets: [
               "Drive crash-free sessions and faster cold-start times.",
@@ -355,4 +359,3 @@ export const projects: Project[] = [
       prdLink: "/PRDs/Product Requirements Document - Content-to-Insights Pipeline.pdf",
     },
 ];
-

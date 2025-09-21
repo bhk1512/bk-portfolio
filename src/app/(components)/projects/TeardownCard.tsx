@@ -67,9 +67,6 @@ export default function TeardownCard({ project, onOpen }: TeardownCardProps) {
               {action.label}
             </a>
           ))}
-          <button type="button" onClick={handleOpen} className={`${base} ${ghost}`}>
-            View Breakdown
-          </button>
         </div>
       ) : (
         <div className="mt-4">

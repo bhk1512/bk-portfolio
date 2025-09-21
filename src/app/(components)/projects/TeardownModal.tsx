@@ -38,6 +38,7 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
   );
   const reviewSummary = teardown.uxJourney?.reviewSummary ?? [];
   const maxReview = reviewSummary.reduce((max, item) => Math.max(max, item.value), 0);
+  const reviewScale = Math.max(100, maxReview);
   const market = teardown.marketSnapshot;
 
   const recommendationAccent = (accent?: string) => {
@@ -222,13 +223,14 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
             <div className="grid gap-4 lg:grid-cols-[minmax(0,220px)_1fr]">
               <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-3">
                 {activePhase?.screenshot?.src ? (
-                  <div className="relative h-44 w-full overflow-hidden rounded-xl">
+                  <div className="flex justify-center">
                     <Image
                       src={activePhase.screenshot.src}
                       alt={activePhase.screenshot.alt ?? `${activePhase.title} stage`}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1024px) 220px, 100vw"
+                      width={640}
+                      height={1280}
+                      className="w-full max-w-[240px] rounded-2xl border border-emerald-400/40 object-contain shadow-[0_0_32px_-12px_rgba(34,197,94,0.45)] transition-shadow duration-300"
+                      sizes="(min-width: 1024px) 220px, 60vw"
                     />
                   </div>
                 ) : (
@@ -265,7 +267,7 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
                   <div className="relative mt-1 h-2 overflow-hidden rounded-full bg-zinc-800">
                     <div
                       className={`absolute inset-y-0 left-0 ${item.tone === 'negative' ? 'bg-rose-500/70' : 'bg-emerald-500/70'}`}
-                      style={{ width: `${maxReview ? Math.max(10, Math.round((item.value / maxReview) * 100)) : 0}%` }}
+                      style={{ width: `${reviewScale ? Math.max(8, Math.round((item.value / reviewScale) * 100)) : 0}%` }}
                     />
                   </div>
                   {item.note ? <div className="mt-1 text-xs text-zinc-500">{item.note}</div> : null}
@@ -313,20 +315,44 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
 
       <section id="td-recs" className="mt-10 space-y-6">
         {teardown.recommendationSets?.length ? (
-          <div className="grid gap-4 md:grid-cols-3">
-            {teardown.recommendationSets.map((set) => (
-              <div key={set.id} className={`rounded-2xl border p-4 space-y-3 ${recommendationAccent(set.accent)}`}>
-                <div className="flex items-center gap-2 text-sm font-semibold">
-                  <span>{set.icon}</span>
-                  <span>{set.title}</span>
+          <>
+            <div className="grid gap-4 md:grid-cols-3">
+              {teardown.recommendationSets.map((set) => (
+                <div key={set.id} className={`rounded-2xl border p-4 space-y-3 ${recommendationAccent(set.accent)}`}>
+                  <div className="flex items-center gap-2 text-sm font-semibold">
+                    <span>{set.icon}</span>
+                    <span>{set.title}</span>
+                  </div>
+                  <ul className="text-sm text-zinc-200 space-y-1 list-disc list-inside">
+                    {set.bullets.map((item) => (<li key={item}>{item}</li>))}
+                  </ul>
+                  <div className="text-xs text-zinc-100/80">{set.metric}</div>
                 </div>
-                <ul className="text-sm text-zinc-200 space-y-1 list-disc list-inside">
-                  {set.bullets.map((item) => (<li key={item}>{item}</li>))}
-                </ul>
-                <div className="text-xs text-zinc-100/80">{set.metric}</div>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
+              <div className="rounded-3xl border border-zinc-800 bg-zinc-950/60 p-3 shadow-[0_0_40px_-18px_rgba(34,197,94,0.45)]">
+                <Image
+                  src="/images/review-insights.png"
+                  alt="Review insights dashboard"
+                  width={720}
+                  height={480}
+                  className="w-full max-w-[360px] rounded-2xl object-contain"
+                  sizes="(min-width: 1024px) 320px, 80vw"
+                />
               </div>
-            ))}
-          </div>
+              <div className="rounded-3xl border border-zinc-800 bg-zinc-950/60 p-3 shadow-[0_0_40px_-18px_rgba(34,197,94,0.45)]">
+                <Image
+                  src="/images/credit-gating.png"
+                  alt="Credit gating journey"
+                  width={720}
+                  height={480}
+                  className="w-full max-w-[360px] rounded-2xl object-contain"
+                  sizes="(min-width: 1024px) 320px, 80vw"
+                />
+              </div>
+            </div>
+          </>
         ) : null}
       </section>
 
@@ -345,18 +371,6 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
             <ul className="text-sm text-zinc-300 space-y-1 list-disc list-inside">
               {teardown.nextActionsDetailed.map((item) => (<li key={item}>{item}</li>))}
             </ul>
-          </div>
-        ) : null}
-        {teardown.visuals?.length ? (
-          <div className={baseCard}>
-            <h4 className="text-sm font-semibold text-zinc-200 mb-2">Visuals to drop in</h4>
-            <div className="flex flex-wrap gap-2 text-xs text-zinc-300">
-              {teardown.visuals.map((asset) => (
-                <span key={asset.label} className="inline-flex items-center rounded-full border border-zinc-700/60 bg-zinc-900/60 px-3 py-1">
-                  {asset.label}
-                </span>
-              ))}
-            </div>
           </div>
         ) : null}
         {teardown.explore?.length ? (
