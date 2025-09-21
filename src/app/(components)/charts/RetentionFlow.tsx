@@ -30,8 +30,9 @@ export default function RetentionFlow({ stages = [], issues = [] }: RetentionFlo
   return (
     <div className="w-full overflow-hidden py-4">
       <div className="relative mx-auto w-full max-w-[1200px] rounded-2xl bg-neutral-900 p-4 sm:p-6 ring-1 ring-white/10 md:h-[320px]">
-        <div className="mb-2 flex items-center justify-start text-sm text-neutral-300">
-          <span className="font-medium tracking-wide">User Journey</span>
+        <div className="mb-3 space-y-1 text-neutral-300">
+          <div className="text-sm font-medium tracking-wide">User Journey</div>
+          <p className="text-xs text-neutral-400 sm:text-sm">Top-of-funnel is healthy -- the next job is to harden habit.</p>
         </div>
         <svg className="h-[220px] w-full md:h-[240px]" viewBox="0 0 1020 260" preserveAspectRatio="xMidYMid meet">
           <defs>

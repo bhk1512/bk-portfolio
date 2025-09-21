@@ -1,4 +1,4 @@
-import type { Project } from "../(types)/project";
+﻿import type { Project } from "../(types)/project";
 
 export const projects: Project[] = [
     {
@@ -13,7 +13,7 @@ export const projects: Project[] = [
       teardown: {
         badge: "Product Teardown",
         heading: "Audible Product Teardown",
-        subheading: "Strategic Analysis • Growth",
+        subheading: "Strategic Analysis â€¢ Growth",
         description:
           "Audible, backed by Amazon, is the global leader in audiobooks. I unpacked the product, user journey, and business model to see where it wins, where it struggles, and how it can grow.",
         stats: [
@@ -114,20 +114,11 @@ export const projects: Project[] = [
           "Recommendations loop; regional depth is shallow outside EN/US catalog.",
           "Offline mode and download reliability continue to break trust.",
         ],
-        growthSummary: {
-          headline: "Top-of-funnel is healthy -- the next job is to harden habit.",
-          tiles: [
-            "Prime / Kindle halo",
-            "PayTM / GPay / CRED trials",
-            "App store ads and influencer reviews",
-          ],
-          retentionNote: "Retention drops sharply once trials or monthly credits end -- usage bends down the moment a credit is used.",
-        },
         recommendationSets: [
           {
             id: "discovery",
             title: "Fix Discovery & Retention",
-            icon: "🔍",
+            icon: "\uD83D\uDD0D",
             accent: "emerald",
             bullets: [
               "Give Included / Credit-Free / Language filters a single-tap surface.",
@@ -139,8 +130,8 @@ export const projects: Project[] = [
           {
             id: "plans",
             title: "Rethink Subscription",
-            icon: "💳",
-            accent: "teal",
+            icon: "\uD83D\uDCB3",
+            accent: "amber",
             bullets: [
               "Offer 6- and 12-month bundles for commitment without monthly churn.",
               "Sell 2- and 5-credit packs for binge listeners.",
@@ -151,7 +142,7 @@ export const projects: Project[] = [
           {
             id: "core",
             title: "Stabilise Core Experience",
-            icon: "⚙️",
+            icon: "\u2699\uFE0F",
             accent: "violet",
             bullets: [
               "Drive crash-free sessions and faster cold-start times.",

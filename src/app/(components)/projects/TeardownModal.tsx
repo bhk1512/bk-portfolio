@@ -358,10 +358,11 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
 
       <section id="td-next" className="mt-10 space-y-6">
         {teardown.conclusion ? (
-          <div className={baseCard}>
-            <div className="text-sm font-semibold text-zinc-200 mb-2">{teardown.conclusion.headline}</div>
-            <blockquote className="border-l-2 border-zinc-600 pl-3 text-lg text-zinc-100 leading-7">
-              {teardown.conclusion.quote}
+          <div className={`${baseCard} relative overflow-hidden`}> 
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.18),transparent_60%)]" aria-hidden />
+            <blockquote className="relative border-l-4 border-emerald-400/70 pl-4 sm:pl-6 text-xl sm:text-2xl leading-relaxed text-zinc-50">
+              <span className="block font-semibold tracking-tight">{teardown.conclusion.headline}</span>
+              <span className="mt-3 block text-base sm:text-lg font-normal text-zinc-300">{teardown.conclusion.quote}</span>
             </blockquote>
           </div>
         ) : null}
@@ -392,3 +393,6 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
     </div>
   );
 }
+
+
+
