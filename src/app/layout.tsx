@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // Shows "Bharat Kaushik" by default; subpages can set their own titles and will render as "<Page> — Bharat Kaushik"
-  title: { default: "Bharat Kaushik", template: "%s — Bharat Kaushik" },
+  // Shows "Bharat Kaushik" by default; subpages can set their own titles and will render as "<Page> - Bharat Kaushik"
+  title: { default: "Bharat Kaushik", template: "%s - Bharat Kaushik" },
   description:
     "Program & Operations leader blending strategy, tech, and execution to deliver measurable outcomes. IIMA MBA with cross-sector experience.",
   icons: { icon: "/favicon.svg" }, // put your icon at /public/favicon.svg
@@ -37,3 +37,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+
