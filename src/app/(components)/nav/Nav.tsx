@@ -10,7 +10,6 @@ const NAV_ITEMS: { href: `#${SectionId}`; label: string; id: SectionId }[] = [
   { href: "#work", label: "Work", id: "work" },
   { href: "#impact", label: "Impact", id: "impact" },
   { href: "#about", label: "About", id: "about" },
-  { href: "#writing", label: "Writing", id: "writing" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 

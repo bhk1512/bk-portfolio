@@ -2,6 +2,165 @@
 
 export const projects: Project[] = [
     {
+      id: "kec-execution-dashboard",
+      title: "Execution & Productivity Dashboard (Enterprise)",
+      year: "2025",
+      stack: "Power BI | Python | SharePoint/Excel | Automation",
+      summary:
+        "Shipped an execution decision system that ingests structured Excel reports from 25+ projects and converts them into leadership-ready signals on plan vs actual progress, productivity trends, and exceptions. Built Excel-first for adoption, with validation and governance so the numbers stay trusted.",
+      cardSummary:
+        "Consolidates Excel reporting from 25+ projects into a single view of plan vs actual, productivity, and exceptions.",
+      proof: "25+ projects | ~80% manual effort reduced | ~98% accuracy",
+      context:
+        "Context: Excel-first field reporting across 25+ projects; leadership needed same-day execution visibility without changing site workflows.",
+      metrics: [
+        "25+ projects consolidated",
+        "Plan vs actual + productivity",
+        "Validation + exception logs",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
+      ],
+      flagship: true,
+      flagshipLabel: "Delivered (Industry)",
+      archetype: "Decision System",
+      problem: [
+        "Execution data arrived in Excel via email/SharePoint and formats drifted across teams.",
+        "Consolidation was manual, slow, and error-prone -- making reviews reactive.",
+        "Leaders needed a reliable view of what is off-plan and why without increasing reporting effort at sites.",
+      ],
+      approach: [
+        "Standardised a strict reporting template (sheet name, headers, no merges, file naming) so ingestion stays automated.",
+        "Built an ingestion + validation layer (rule checks, missing fields, anomalies) with exception logs before Power BI refresh.",
+        "Designed dashboards for different decision levels: leadership summary -> project drill-down -> activity/period trends.",
+        "Created lightweight onboarding and governance so new projects could be added without rework.",
+      ],
+      outcome: [
+        "~80% reduction in manual consolidation effort; leadership got same-day visibility.",
+        "Data accuracy improved to ~98% via validation + exception tracking.",
+        "Enabled faster weekly/monthly reviews with a consistent source of truth across projects.",
+      ],
+      learnings: [
+        "Templates are a product: adoption is easier when teams do not change tools, only structure.",
+        "Exceptions build trust faster than additional charts.",
+        "Good enough and consistent beats perfect but fragile at scale.",
+      ],
+      maskedScreens: {
+        title: "Masked Screens (Representative)",
+        note: "Screens are masked to protect confidentiality; structure and logic are representative.",
+        items: [
+          {
+            src: "/masked-1.png",
+            alt: "Masked dashboard overview",
+            callouts: ["Plan vs Actual (MTD/WTD)", "Productivity trend", "Top slippages"],
+          },
+          {
+            src: "/masked-2.png",
+            alt: "Masked project drill-down",
+            callouts: ["Project drill-down", "Activity-level view", "Weekly variance"],
+          },
+          {
+            src: "/masked-3.png",
+            alt: "Masked validation view",
+            callouts: ["Validation flags", "Exception log", "Data quality status"],
+          },
+        ],
+      },
+      artifacts: [
+        "Masked dashboard screenshots (values + identifiers blurred)",
+        "Template screenshot + rules (what not to change)",
+        "Simple architecture diagram (Excel -> validation -> model -> Power BI)",
+      ],
+    },
+    {
+      id: "defence-expo-pmo",
+      title: "Defence Expo PMO (2022)",
+      year: "2022",
+      stack: "8 workstreams | Multi-agency | Zero-failure delivery",
+      summary:
+        "Directed 8 workstreams and ran a tight governance cadence (RAID logs, daily standups, escalations) to deliver a zero-incident event for 250k+ visitors and 75+ foreign delegations under a 20-day deadline.",
+      cardSummary:
+        "Ran 8 workstreams and multi-agency governance to deliver a zero-incident event at national scale.",
+      proof: "250k+ visitors | 75+ delegations | 100% SLA / zero incidents",
+      context:
+        "Context: Multi-agency program with a fixed date, public scrutiny, and zero-failure tolerance.",
+      metrics: [
+        "8 workstreams",
+        "600+ personnel coordination",
+        "100% SLA / zero incidents",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "Operating Model", kind: "modal", scrollTo: "p-approach" },
+      ],
+      flagship: true,
+      flagshipLabel: "Delivered (Industry)",
+      archetype: "Execution at Scale",
+      problem: [
+        "250k+ visitors, 75+ foreign delegations, zero-failure tolerance.",
+        "20 days to build security and logistics while leading 600+ personnel.",
+      ],
+      approach: [
+        "Directed 8 workstreams and integrated 2k+ CCTV streams into a multi-agency control room.",
+        "Ran daily standups and RAID reviews with multi-agency stakeholders to unblock quickly.",
+      ],
+      outcome: [
+        "Hit 100% SLA with zero incidents.",
+        "Recommended for DG Commendation Roll.",
+      ],
+      learnings: [
+        "RAID-log governance keeps workstreams aligned under hard deadlines.",
+        "Diplomacy and escalation align tactical actions with strategic goals.",
+      ],
+    },
+    {
+      id: "industry-digest",
+      title: "Industry Digest (Exploration)",
+      year: "2025",
+      stack: "n8n | SQL | REST API | Automation",
+      metrics: [
+        "Automated crawl (30+ sources)",
+        "Wins / Setbacks / Moves / Macro",
+        "Monday 09:00 email digest",
+      ],
+      summary:
+        "A weekly decision-support digest that categorises EPC wins, setbacks, strategy moves, and macro shifts -- delivered as a Monday 9 AM email in under 10 minutes.",
+      cardSummary:
+        "Weekly Monday 9 AM digest that converts 30+ sources into EPC wins, setbacks, moves & macro signals.",
+      proof: "3 hrs -> <10 min weekly | 30+ sources | weekly cadence",
+      context:
+        "Context: Personal prototype to test whether decision makers prefer email-first signals over dashboards.",
+      cover: { src: "/images/industry-digest-banner.png", alt: "Industry Digest" },
+      screenshots: [
+        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
+      ],
+      problem:
+        "New to the EPC sector, I burned 3 hrs every Sunday scanning 30+ sources for contract wins, policy shifts and interview fodder-still missed early signals.",
+      approach: [
+        "n8n workflow (self-host) schedules Mon 09:00 IST -> crawls News, press pages, exchange filings.",
+        "Boolean + regex filter -> Gemini clusters into Wins / Setbacks / Strategy Moves / Macro; pulls deal value, geography, keywords.",
+        "Builds comparative table + bullet insights, wraps in branded HTML, and ships via SMTP to my inbox (and any CCs).",
+      ],
+      outcome: [
+        "3 hrs -> 7 min (-96% effort); weekly snapshot delivered before coffee.",
+        "Shared selectively as a briefing aid.",
+      ],
+      learnings: [
+        "Scheduling workflows without babysitting.",
+        "Run frequency vs cloud costs: balancing speed with budget.",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "PRD", href: "/PRDs/Product Requirements Document - Industry Digest.pdf", kind: "link" },
+      ],
+      demoLink: "/samples/Industry-Digest-Sample.jpg",
+      prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
+      flagship: true,
+      flagshipLabel: "Exploration",
+      archetype: "Decision Support",
+    },
+    {
       id: "audible-product-teardown",
       title: "Audible Product Teardown",
       year: "2025",
@@ -10,6 +169,7 @@ export const projects: Project[] = [
         "Deep dive into Audible's product experience, retention mechanics, and growth plays backed by 30K+ review signals.",
       cover: { src: "/images/Audible.png", alt: "Audible product teardown" },
       metrics: ["60% global share", "30K+ reviews analyzed", "SWOT + JTBD lens"],
+      archetype: "Product & Strategy",
       teardown: {
         badge: "Product Teardown",
         heading: "Audible Product Teardown",
@@ -247,6 +407,7 @@ export const projects: Project[] = [
       cover: { src: "/images/risk-radar-outer.png", alt: "Risk Radar dashboard (Looker Studio)" },
       metrics: ["Real time map", "Ranked disruptions", "Trend lines & filters"],
       roleTools: "PM/Builder - NewsAPI, n8n, Google Sheets, Gemini, Looker Studio",
+      archetype: "Decision Systems",
       screenshots: [
         { src: "/images/risk-radar-inner.png", alt: "Dashboard overview" },
         { src: "/images/risk-radar-workflow.png", alt: "n8n pipeline" },
@@ -274,42 +435,6 @@ export const projects: Project[] = [
     demoLink: "https://lookerstudio.google.com/s/oGJoVNj7tdw",
        // <- add
     },
-    // 2) Industry Digest
-    {
-      id: "industry-digest",
-      title: "Industry Digest",
-      year: "2025",
-      stack: "n8n | SQL | REST API | Automation",
-       metrics: [
-      "Automated crawl (30+ sources)",
-      "LLM clustered insights",
-      "Mon 09:00 email digest",
-    ],
-      summary:
-        "Zero-cost n8n + Gemini pipeline that lands a Monday-morning email distilling EPC wins, setbacks & macro trends in 7 min, saving 3 hrs each week.",
-      cover: { src: "/images/industry-digest-banner.png", alt: "Industry Digest" },
-      screenshots: [
-        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
-        //{ src: "/samples/indigo-s-greatest-gamble-flying-international.pdf" },
-      ],
-      problem:
-        "New to the EPC sector, I burned 3 hrs every Sunday scanning 30+ sources for contract wins, policy shifts and interview fodder-still missed early signals.",
-      approach: [
-        "n8n workflow (self-host) schedules Mon 09:00 IST -> crawls News, press pages, exchange filings.",
-        "Boolean + regex filter -> Gemini clusters into Wins / Setbacks / Strategy Moves / Macro; pulls deal value, geography, keywords.",
-        "Builds comparative table + bullet insights, wraps in branded HTML, and ships via SMTP to my inbox (and any CCs).",
-      ],
-      outcome: [
-        "3 hrs -> 7 min (-96% effort); weekly snapshot delivered before coffee.",
-        "Now being used to send industry digest to senior leadership as well.",
-      ],
-      learnings: [
-        "Scheduling workflows without babysitting.",
-        "Run frequency vs cloud costs: balancing speed with budget.",
-      ],
-      demoLink: "/samples/Industry-Digest-Sample.jpg",          // <- add (or Streamlit)
-      prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
-    },
     // 3) Content"???to"???Insights Pipeline
     {
       id: "content-to-insights",
@@ -323,6 +448,7 @@ export const projects: Project[] = [
     ],
       summary:
         "Auto-summarises YouTube talks into a searchable Notion hub in 5 min, slashing research time 30x.",
+      archetype: "Decision Systems",
       cover: { src: "/images/content-to-insights-card-cover.png", alt: "Content to Insights - card cover" },
       screenshots: [
         { src: "/images/content-to-insights-workflow.png", alt: "Content to Insights - card cover" },
@@ -348,5 +474,83 @@ export const projects: Project[] = [
       ],
       demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",    // <- add
       prdLink: "/PRDs/Product Requirements Document - Content-to-Insights Pipeline.pdf",
+    },
+    {
+      id: "planning-traceability-system",
+      title: "Planning Traceability System (Enterprise)",
+      year: "2025",
+      stack: "Excel-first | Governance | Audit trail | Automation",
+      summary:
+        "Built an Excel-first planning governance system that preserves how teams work while making revisions visible and auditable. It creates a frozen baseline, logs changes, and keeps month-to-month roll-forward clean.",
+      cardSummary:
+        "Locks rolling plans with snapshots and revision trails so changes are visible, auditable, and low-friction for teams working in Excel.",
+      archetype: "Governance",
+      context:
+        "Context: Rolling plans were edited mid-month; leadership needed accountability without forcing teams off Excel.",
+      metrics: ["Freeze + snapshot", "Change log / audit trail", "Exceptions & validation"],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "How it works", kind: "modal", scrollTo: "p-approach" },
+      ],
+      problem: [
+        "Plans were updated silently after submission, breaking accountability.",
+        "No reliable baseline existed for what was committed vs what changed.",
+        "Site teams needed minimal process change; Excel-first was non-negotiable.",
+      ],
+      approach: [
+        "Defined a standard template as a data contract (sheet names/headers/rules) so automation stays stable.",
+        "Implemented a monthly Freeze that locks plan columns and creates an immutable snapshot.",
+        "Captured revisions via timestamped versions and a simple change log (what changed, when).",
+        "Added validation + exception outputs so incorrect formats are caught early.",
+      ],
+      outcome: [
+        "Created a trustworthy baseline for reviews and prevented version disputes.",
+        "Improved governance with minimal additional effort for teams.",
+        "Made mid-month changes explicit and traceable instead of informal.",
+      ],
+      learnings: [
+        "Governance wins when it is lighter than the workaround.",
+        "Auditability comes from disciplined templates + snapshots, not complex tooling.",
+        "Exception-handling is what makes systems reliable in the real world.",
+      ],
+    },
+    {
+      id: "bg-surety-risk-control",
+      title: "BG & Surety Risk Control System (Enterprise)",
+      year: "2025",
+      stack: "Power BI | Risk tracking | Alerts | Standardisation",
+      summary:
+        "Designed an end-to-end risk visibility and governance system for guarantees/sureties -- standardised tracking, surfaced exposure/expiry risks, and enabled proactive alerts for better cash-flow risk preparedness.",
+      cardSummary:
+        "Standardised exposure and expiry tracking for guarantees/sureties, with dashboards and proactive alerts to reduce financial blind spots.",
+      archetype: "Governance",
+      context:
+        "Context: Risk was distributed across files/owners; leadership needed one view of exposure and upcoming expiries.",
+      metrics: ["Exposure + expiry tracking", "Expiry buckets & alerts", "Leadership risk view"],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "What's tracked", kind: "modal", scrollTo: "p-approach" },
+      ],
+      problem: [
+        "Exposure and expiry data lived across fragmented files and inconsistent formats.",
+        "Upcoming expiries were tracked reactively, increasing operational and cash-flow risk.",
+        "Leaders lacked a single source of truth for risk posture and prioritisation.",
+      ],
+      approach: [
+        "Standardised the data model (types, expiry buckets, owners, projects) to enforce consistency.",
+        "Built a leadership dashboard that surfaces exposure, expiries by bucket, and key drivers.",
+        "Embedded proactive alerting logic for approaching expiries and exceptions (missing fields/invalid entries).",
+        "Defined clear ownership and a light SOP to keep data reliable over time.",
+      ],
+      outcome: [
+        "Improved financial visibility and risk preparedness via proactive tracking.",
+        "Reduced reliance on manual follow-ups for expiry monitoring.",
+        "Created a repeatable governance layer that stays usable as volume grows.",
+      ],
+      learnings: [
+        "Risk control systems need owners and cadence as much as dashboards.",
+        "Expiry buckets and exception handling create real actionability.",
+        "Standardisation beats complexity, especially when multiple stakeholders contribute data.",
+      ],
     },
 ];

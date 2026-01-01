@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import type { MutableRefObject } from "react";
 
 import type { Project } from "../../(types)/project";
@@ -11,16 +14,27 @@ type StandardProjectModalProps = {
 };
 
 export default function StandardProjectModal({ project, onClose, modalRef, scrollTo }: StandardProjectModalProps) {
-  const actions = [
-    project.demoLink ? { href: project.demoLink, label: "View Demo" } : null,
-    project.prdLink ? { href: project.prdLink, label: "Full PRD" } : null,
-  ].filter(Boolean) as { href: string; label: string }[];
+  const actionLinks = (project.actions?.length
+    ? project.actions.filter((action) => action.kind !== "modal" && action.href)
+    : [
+        project.demoLink ? { href: project.demoLink, label: "View Demo" } : null,
+        project.prdLink ? { href: project.prdLink, label: "Full PRD" } : null,
+      ].filter(Boolean)) as { href: string; label: string }[];
   const base =
     "inline-flex items-center justify-center rounded-xl px-3.5 py-2 text-xs sm:text-sm transition focus:outline-none focus:ring-2 focus:ring-zinc-600";
   const ghost = "border border-zinc-700 text-zinc-100 hover:bg-zinc-900";
   const primary = "bg-zinc-100 text-zinc-900 hover:bg-white";
   const primaryScreenshot = project.screenshots?.[0];
   const secondaryScreenshot = project.screenshots?.[1];
+  const navItems = [
+    { id: "p-summary", label: "Summary" },
+    { id: "p-problem", label: "Problem" },
+    { id: "p-approach", label: "Action" },
+    { id: "p-outcome", label: "Result" },
+    { id: "p-learnings", label: "Learnings" },
+    ...(project.maskedScreens?.items?.length ? [{ id: "p-masked", label: "Masked Screens" }] : []),
+    ...(project.artifacts?.length ? [{ id: "p-artifacts", label: "Artifacts" }] : []),
+  ];
 
   return (
     <div
@@ -40,17 +54,17 @@ export default function StandardProjectModal({ project, onClose, modalRef, scrol
           </div>
         </div>
         <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-3">
-          {actions.length ? (
+          {actionLinks.length ? (
             <div className="flex flex-wrap justify-end gap-2">
-              {actions.map((action, index) => (
+              {actionLinks.map((action, index) => (
                 <a
-                  key={action.label}
-                  href={action.href}
+                  key={action?.label}
+                  href={action?.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`${base} ${index === 0 ? primary : ghost}`}
                 >
-                  {action.label}
+                  {action?.label}
                 </a>
               ))}
             </div>
@@ -68,21 +82,11 @@ export default function StandardProjectModal({ project, onClose, modalRef, scrol
       <div className="sticky top-0 z-10 pt-2" data-sticky-nav>
         <div className="mx-auto flex items-center justify-center rounded-full border border-zinc-800 bg-black/80 backdrop-blur px-3 h-10">
           <nav className="flex items-center gap-4 text-[13px] text-zinc-300">
-            <button onClick={() => scrollTo("p-summary")} className="hover:text-white">
-              Summary
-            </button>
-            <button onClick={() => scrollTo("p-problem")} className="hover:text-white">
-              Problem
-            </button>
-            <button onClick={() => scrollTo("p-approach")} className="hover:text-white">
-              Action
-            </button>
-            <button onClick={() => scrollTo("p-outcome")} className="hover:text-white">
-              Result
-            </button>
-            <button onClick={() => scrollTo("p-learnings")} className="hover:text-white">
-              Learnings
-            </button>
+            {navItems.map((item) => (
+              <button key={item.id} onClick={() => scrollTo(item.id)} className="hover:text-white">
+                {item.label}
+              </button>
+            ))}
           </nav>
         </div>
       </div>
@@ -100,6 +104,9 @@ export default function StandardProjectModal({ project, onClose, modalRef, scrol
           </div>
         ) : null}
         {project.summary ? <p className="text-zinc-300">{project.summary}</p> : null}
+        {project.context ? (
+          <p className="mt-3 text-sm text-zinc-400 italic">{project.context}</p>
+        ) : null}
       </div>
 
       <div id="p-problem" className="mt-6">
@@ -162,6 +169,60 @@ export default function StandardProjectModal({ project, onClose, modalRef, scrol
           </ul>
         ) : null}
       </div>
+      {project.maskedScreens?.items?.length ? (
+        <div id="p-masked" className="mt-6">
+          <h4 className="text-zinc-200 font-medium mb-2">{project.maskedScreens.title}</h4>
+          <p className="text-sm text-zinc-400 mb-4">{project.maskedScreens.note}</p>
+          <div className="grid gap-5">
+            {project.maskedScreens.items.map((item) => (
+              <MaskedScreenItem key={item.src} item={item} />
+            ))}
+          </div>
+        </div>
+      ) : null}
+      {project.artifacts?.length ? (
+        <div id="p-artifacts" className="mt-6">
+          <h4 className="text-zinc-200 font-medium mb-2">Artifacts</h4>
+          <ul className="list-disc list-inside text-sm text-zinc-300 space-y-1">
+            {project.artifacts.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+type MaskedScreenItemProps = {
+  item: { src: string; alt: string; callouts: string[] };
+};
+
+function MaskedScreenItem({ item }: MaskedScreenItemProps) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/60 p-4 sm:p-5">
+      <div className="relative overflow-hidden rounded-xl border border-zinc-800/70 bg-zinc-900/40">
+        {failed ? (
+          <div className="flex min-h-[180px] items-center justify-center text-xs text-zinc-500">
+            {item.src}
+          </div>
+        ) : (
+          <img
+            src={item.src}
+            alt={item.alt}
+            className="h-auto w-full object-cover"
+            onError={() => setFailed(true)}
+            loading="lazy"
+          />
+        )}
+      </div>
+      <ul className="mt-3 list-disc list-inside text-sm text-zinc-300 space-y-1">
+        {item.callouts.map((callout) => (
+          <li key={callout}>{callout}</li>
+        ))}
+      </ul>
     </div>
   );
 }

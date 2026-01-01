@@ -116,6 +116,9 @@ export default function Hero() {
               <p className="text-zinc-400 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 mt-2 text-sm sm:text-base">
                 {heroData.subhead}
               </p>
+              <p className="text-zinc-400 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 mt-2 text-sm sm:text-base">
+                I design low-friction systems that turn messy, human processes into auditable, decision-ready workflows.
+              </p>
 
               <AffiliationBar />
 

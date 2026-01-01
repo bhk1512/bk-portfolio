@@ -1,12 +1,13 @@
 import ScrollProgress from "./(components)/ui/ScrollProgress";
 import Nav from "./(components)/nav/Nav";
 import Hero from "./(sections)/Hero";
+import WorkPatterns from "./(sections)/WorkPatterns";
 import Projects from "./(sections)/Projects";
+import DesignPhilosophy from "./(sections)/DesignPhilosophy";
 import Impact from "./(sections)/Impact";
 import Skills from "./(sections)/Skills";
 import Certifications from "./(sections)/Certifications";
 import About from "./(sections)/About";
-import Writing from "./(sections)/Writing";
 import Contact from "./(sections)/Contact";
 
 export default function PortfolioApp() {
@@ -16,12 +17,13 @@ export default function PortfolioApp() {
       <Nav />
       <main className="pt-10">
         <Hero />
+        <WorkPatterns />
         <Projects />
+        <DesignPhilosophy />
         <Impact />
         <Skills />
         <Certifications />
         <About />
-        <Writing />
         <Contact />
       </main>
     </div>

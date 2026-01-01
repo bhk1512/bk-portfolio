@@ -27,6 +27,13 @@ export default function TeardownCard({ project, onOpen }: TeardownCardProps) {
 
   return (
     <Card>
+      {project.archetype ? (
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span className="rounded-full border border-zinc-800/70 bg-zinc-950/50 px-2.5 py-1 text-[11px] text-zinc-400">
+            {project.archetype}
+          </span>
+        </div>
+      ) : null}
       {project.cover?.src ? (
         <div className="group relative mb-3 h-40 overflow-hidden rounded-xl ring-1 ring-zinc-800/60">
           <Image

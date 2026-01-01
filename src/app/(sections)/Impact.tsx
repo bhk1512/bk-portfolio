@@ -127,6 +127,9 @@ export default function Impact() {
 
   return (
     <Section id="impact" title="Impact">
+      <p className="text-sm text-zinc-400 mb-4">
+        Proof of scale and outcomes across roles and environments
+      </p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {impacts.map((item, index) => (
           <Reveal key={item.id} delay={index * 60}>

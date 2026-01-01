@@ -5,7 +5,6 @@ export const SECTION_IDS = [
   "certs",
   "impact",
   "about",
-  "writing",
   "contact",
 ] as const;
 

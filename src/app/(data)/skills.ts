@@ -3,24 +3,33 @@ import type { SkillsData } from "../(types)/common";
 export const skillsData: SkillsData = {
     categories: [
       {
-        name: "Technical",
+        name: "Program & Ops",
         items: [
-          "Python",
-          "SQL",
-          "AWS",
-          "Excel",
-          "Looker Studio",
-          "Power BI",
-          "No Code / Low Code",
+          "Program governance (RAID, cadence)",
+          "Stakeholder management",
+          "Process design & SOPs",
+          "Risk & escalation",
+          "Change management",
         ],
       },
       {
-        name: "Professional",
+        name: "Analytics & Decision Systems",
         items: [
-          "Program Leadership",
-          "Dashboarding",
-          "Process Improvement",
-          "Stakeholder Management",
+          "KPI design",
+          "Data modelling & validation",
+          "Power BI / Looker / dashboards",
+          "Excel/SharePoint ingestion",
+          "Executive storytelling",
+        ],
+      },
+      {
+        name: "Automation & AI Tools",
+        items: [
+          "Workflow automation (n8n / Power Automate)",
+          "Python (automation + data)",
+          "LLM-assisted workflows",
+          "REST APIs",
+          "SQL",
         ],
       },
     ],
