@@ -1,18 +1,18 @@
-﻿import type { Project } from "../(types)/project";
+import type { Project } from "../(types)/project";
 
 export const projects: Project[] = [
     {
       id: "kec-execution-dashboard",
-      title: "Execution & Productivity Dashboard (Enterprise)",
+      title: "Execution & Productivity Dashboard",
       year: "2025",
       stack: "Power BI | Python | SharePoint/Excel | Automation",
       summary:
-        "Shipped an execution decision system that ingests structured Excel reports from 25+ projects and converts them into leadership-ready signals on plan vs actual progress, productivity trends, and exceptions. Built Excel-first for adoption, with validation and governance so the numbers stay trusted.",
+        "Built a custom, server-hosted execution decision system that ingests structured Excel reports from 25+ projects and converts them into leadership-ready signals on plan vs actual progress, productivity trends, and execution exceptions -- without increasing reporting effort at sites. Developed end-to-end in Python with AI-assisted coding (Codex), designed explicitly for adoption in a field-heavy environment.",
       cardSummary:
-        "Consolidates Excel reporting from 25+ projects into a single view of plan vs actual, productivity, and exceptions.",
+        "Excel-first execution system that turns 25+ project reports into leadership-ready signals on plan vs actual, productivity, and exceptions.",
       proof: "25+ projects | ~80% manual effort reduced | ~98% accuracy",
       context:
-        "Context: Excel-first field reporting across 25+ projects; leadership needed same-day execution visibility without changing site workflows.",
+        "Context: Field teams across 25+ projects reported execution data in Excel via email and SharePoint. Leadership needed same-day visibility into what was off-plan and why, but any solution that increased site-level effort risked low adoption. Rather than forcing new tools or workflows, I kept the system Excel-first and absorbed complexity on the backend.",
       metrics: [
         "25+ projects consolidated",
         "Plan vs actual + productivity",
@@ -23,28 +23,31 @@ export const projects: Project[] = [
         { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
       ],
       flagship: true,
-      flagshipLabel: "Delivered (Industry)",
+      flagshipLabel: "",
       archetype: "Decision System",
       problem: [
-        "Execution data arrived in Excel via email/SharePoint and formats drifted across teams.",
-        "Consolidation was manual, slow, and error-prone -- making reviews reactive.",
-        "Leaders needed a reliable view of what is off-plan and why without increasing reporting effort at sites.",
+        "Execution data arrived in Excel, but formats drifted across projects over time.",
+        "Manual consolidation was slow, error-prone, and reactive.",
+        "Leaders lacked a trusted, current view of execution status and exceptions.",
+        "Increasing reporting burden at sites would have reduced compliance and data quality.",
       ],
       approach: [
-        "Standardised a strict reporting template (sheet name, headers, no merges, file naming) so ingestion stays automated.",
-        "Built an ingestion + validation layer (rule checks, missing fields, anomalies) with exception logs before Power BI refresh.",
-        "Designed dashboards for different decision levels: leadership summary -> project drill-down -> activity/period trends.",
-        "Created lightweight onboarding and governance so new projects could be added without rework.",
+        "Designed a strict reporting contract (fixed sheet names, headers, no merges, file naming rules) so Excel inputs remained machine-readable.",
+        "Built a Python-based ingestion and validation layer, with rule checks, missing-data detection, anomaly flags, and exception logs.",
+        "Developed a server-hosted web dashboard that renders leadership summaries, project-level drill-downs, and activity/period-wise productivity trends.",
+        "Used AI-assisted coding (Codex) to accelerate end-to-end development while retaining architectural control.",
+        "Created lightweight onboarding and governance so new projects could be added without rework or manual intervention.",
       ],
       outcome: [
-        "~80% reduction in manual consolidation effort; leadership got same-day visibility.",
-        "Data accuracy improved to ~98% via validation + exception tracking.",
-        "Enabled faster weekly/monthly reviews with a consistent source of truth across projects.",
+        "~80% reduction in manual consolidation effort.",
+        "Same-day execution visibility for leadership.",
+        "Data accuracy improved to ~98% through validation and exception tracking.",
+        "Enabled faster, more focused weekly and monthly reviews using a single, trusted source of truth.",
       ],
       learnings: [
-        "Templates are a product: adoption is easier when teams do not change tools, only structure.",
-        "Exceptions build trust faster than additional charts.",
-        "Good enough and consistent beats perfect but fragile at scale.",
+        "Adoption is a design choice: keeping field workflows unchanged matters more than tool sophistication.",
+        "Exceptions build trust faster than dashboards.",
+        "At scale, consistent and auditable beats perfect but fragile.",
       ],
       maskedScreens: {
         title: "Masked Screens (Representative)",
@@ -95,7 +98,7 @@ export const projects: Project[] = [
         { label: "Operating Model", kind: "modal", scrollTo: "p-approach" },
       ],
       flagship: true,
-      flagshipLabel: "Delivered (Industry)",
+      flagshipLabel: "",
       archetype: "Execution at Scale",
       problem: [
         "250k+ visitors, 75+ foreign delegations, zero-failure tolerance.",
@@ -116,7 +119,7 @@ export const projects: Project[] = [
     },
     {
       id: "industry-digest",
-      title: "Industry Digest (Exploration)",
+      title: "Industry Digest",
       year: "2025",
       stack: "n8n | SQL | REST API | Automation",
       metrics: [
@@ -157,8 +160,91 @@ export const projects: Project[] = [
       demoLink: "/samples/Industry-Digest-Sample.jpg",
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
       flagship: true,
-      flagshipLabel: "Exploration",
+      flagshipLabel: "",
       archetype: "Decision Support",
+    },
+    {
+      id: "planning-traceability-system",
+      title: "Planning Traceability System",
+      year: "2025",
+      stack: "Excel-first | Governance | Audit trail | Automation",
+      summary:
+        "Built an Excel-first planning governance system that preserves how teams work while making revisions explicit, traceable, and auditable for leadership. The system creates a frozen monthly baseline, tracks changes over time, and supports clean roll-forward -- with fully automated ingestion, validation, and alerts, requiring no additional effort from site teams.",
+      cardSummary:
+        "Excel-first governance that freezes baselines, tracks revisions, and keeps roll-forward clean without adding site effort.",
+      archetype: "Governance",
+      context:
+        "Context: Leadership highlighted a recurring issue: rolling plans were being edited mid-month, making reviews subjective and accountability unclear. Rather than forcing teams onto new tools, I made a deliberate design choice to keep the system Excel-first and absorb all complexity through Power Automate and Microsoft Scripts, given that the end users were not tech-savvy and adoption risk was high.",
+      metrics: ["Freeze + snapshot", "Change log / audit trail", "Exceptions & validation"],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "How it works", kind: "modal", scrollTo: "p-approach" },
+      ],
+      problem: [
+        "Plans were edited silently after submission, breaking accountability.",
+        "No reliable baseline existed for what was originally committed vs what changed.",
+        "Leadership needed traceability and auditability for reviews.",
+        "Any increase in process or tooling burden at sites would reduce compliance.",
+      ],
+      approach: [
+        "Defined a strict Excel template as a data contract (sheet names, headers, rules) so automation remained stable.",
+        "Implemented a monthly Freeze mechanism that locks planning columns and creates an immutable snapshot.",
+        "Automated versioning and change capture, generating a simple, timestamped log of what changed and when.",
+        "Built the system entirely using Power Automate and Office Scripts, so no manual steps or technical knowledge were required from teams.",
+        "Integrated automated alerts for projects that did not submit plans on time or violated format rules.",
+        "Added validation and exception outputs so issues were surfaced early, not during reviews.",
+      ],
+      outcome: [
+        "Established a trustworthy baseline for monthly and rolling reviews.",
+        "Eliminated disputes over what was committed vs what changed later.",
+        "Improved planning governance without changing how teams worked.",
+        "Made mid-month changes explicit and reviewable, rather than informal and opaque.",
+      ],
+      learnings: [
+        "Governance works only when it is lighter than the workaround.",
+        "Auditability comes from disciplined templates and snapshots, not heavy tools.",
+        "Automation must compensate for user constraints, not expose them.",
+        "Exception-handling is what makes planning systems usable in the real world.",
+      ],
+    },
+    {
+      id: "bg-surety-risk-control",
+      title: "BG & Surety Risk Control System",
+      year: "2025",
+      stack: "Power BI | Risk tracking | Alerts | Standardisation",
+      summary:
+        "Designed an end-to-end risk visibility and governance system for guarantees/sureties -- standardised tracking, surfaced exposure/expiry risks, and enabled proactive alerts for better cash-flow risk preparedness.",
+      cardSummary:
+        "Standardised exposure and expiry tracking for guarantees/sureties, with dashboards and proactive alerts to reduce financial blind spots.",
+      archetype: "Governance",
+      context:
+        "Context: Risk was distributed across files/owners; leadership needed one view of exposure and upcoming expiries.",
+      metrics: ["Exposure + expiry tracking", "Expiry buckets & alerts", "Leadership risk view"],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+        { label: "What's tracked", kind: "modal", scrollTo: "p-approach" },
+      ],
+      problem: [
+        "Exposure and expiry data lived across fragmented files and inconsistent formats.",
+        "Upcoming expiries were tracked reactively, increasing operational and cash-flow risk.",
+        "Leaders lacked a single source of truth for risk posture and prioritisation.",
+      ],
+      approach: [
+        "Standardised the data model (types, expiry buckets, owners, projects) to enforce consistency.",
+        "Built a leadership dashboard that surfaces exposure, expiries by bucket, and key drivers.",
+        "Embedded proactive alerting logic for approaching expiries and exceptions (missing fields/invalid entries).",
+        "Defined clear ownership and a light SOP to keep data reliable over time.",
+      ],
+      outcome: [
+        "Improved financial visibility and risk preparedness via proactive tracking.",
+        "Reduced reliance on manual follow-ups for expiry monitoring.",
+        "Created a repeatable governance layer that stays usable as volume grows.",
+      ],
+      learnings: [
+        "Risk control systems need owners and cadence as much as dashboards.",
+        "Expiry buckets and exception handling create real actionability.",
+        "Standardisation beats complexity, especially when multiple stakeholders contribute data.",
+      ],
     },
     {
       id: "audible-product-teardown",
@@ -173,7 +259,7 @@ export const projects: Project[] = [
       teardown: {
         badge: "Product Teardown",
         heading: "Audible Product Teardown",
-        subheading: "Strategic Analysis â€¢ Growth",
+        subheading: "Strategic Analysis • Growth",
         description:
           "Audible, backed by Amazon, is the global leader in audiobooks. I unpacked the product, user journey, and business model to see where it wins, where it struggles, and how it can grow.",
         stats: [
@@ -474,83 +560,5 @@ export const projects: Project[] = [
       ],
       demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",    // <- add
       prdLink: "/PRDs/Product Requirements Document - Content-to-Insights Pipeline.pdf",
-    },
-    {
-      id: "planning-traceability-system",
-      title: "Planning Traceability System (Enterprise)",
-      year: "2025",
-      stack: "Excel-first | Governance | Audit trail | Automation",
-      summary:
-        "Built an Excel-first planning governance system that preserves how teams work while making revisions visible and auditable. It creates a frozen baseline, logs changes, and keeps month-to-month roll-forward clean.",
-      cardSummary:
-        "Locks rolling plans with snapshots and revision trails so changes are visible, auditable, and low-friction for teams working in Excel.",
-      archetype: "Governance",
-      context:
-        "Context: Rolling plans were edited mid-month; leadership needed accountability without forcing teams off Excel.",
-      metrics: ["Freeze + snapshot", "Change log / audit trail", "Exceptions & validation"],
-      actions: [
-        { label: "Open Case Study", kind: "modal" },
-        { label: "How it works", kind: "modal", scrollTo: "p-approach" },
-      ],
-      problem: [
-        "Plans were updated silently after submission, breaking accountability.",
-        "No reliable baseline existed for what was committed vs what changed.",
-        "Site teams needed minimal process change; Excel-first was non-negotiable.",
-      ],
-      approach: [
-        "Defined a standard template as a data contract (sheet names/headers/rules) so automation stays stable.",
-        "Implemented a monthly Freeze that locks plan columns and creates an immutable snapshot.",
-        "Captured revisions via timestamped versions and a simple change log (what changed, when).",
-        "Added validation + exception outputs so incorrect formats are caught early.",
-      ],
-      outcome: [
-        "Created a trustworthy baseline for reviews and prevented version disputes.",
-        "Improved governance with minimal additional effort for teams.",
-        "Made mid-month changes explicit and traceable instead of informal.",
-      ],
-      learnings: [
-        "Governance wins when it is lighter than the workaround.",
-        "Auditability comes from disciplined templates + snapshots, not complex tooling.",
-        "Exception-handling is what makes systems reliable in the real world.",
-      ],
-    },
-    {
-      id: "bg-surety-risk-control",
-      title: "BG & Surety Risk Control System (Enterprise)",
-      year: "2025",
-      stack: "Power BI | Risk tracking | Alerts | Standardisation",
-      summary:
-        "Designed an end-to-end risk visibility and governance system for guarantees/sureties -- standardised tracking, surfaced exposure/expiry risks, and enabled proactive alerts for better cash-flow risk preparedness.",
-      cardSummary:
-        "Standardised exposure and expiry tracking for guarantees/sureties, with dashboards and proactive alerts to reduce financial blind spots.",
-      archetype: "Governance",
-      context:
-        "Context: Risk was distributed across files/owners; leadership needed one view of exposure and upcoming expiries.",
-      metrics: ["Exposure + expiry tracking", "Expiry buckets & alerts", "Leadership risk view"],
-      actions: [
-        { label: "Open Case Study", kind: "modal" },
-        { label: "What's tracked", kind: "modal", scrollTo: "p-approach" },
-      ],
-      problem: [
-        "Exposure and expiry data lived across fragmented files and inconsistent formats.",
-        "Upcoming expiries were tracked reactively, increasing operational and cash-flow risk.",
-        "Leaders lacked a single source of truth for risk posture and prioritisation.",
-      ],
-      approach: [
-        "Standardised the data model (types, expiry buckets, owners, projects) to enforce consistency.",
-        "Built a leadership dashboard that surfaces exposure, expiries by bucket, and key drivers.",
-        "Embedded proactive alerting logic for approaching expiries and exceptions (missing fields/invalid entries).",
-        "Defined clear ownership and a light SOP to keep data reliable over time.",
-      ],
-      outcome: [
-        "Improved financial visibility and risk preparedness via proactive tracking.",
-        "Reduced reliance on manual follow-ups for expiry monitoring.",
-        "Created a repeatable governance layer that stays usable as volume grows.",
-      ],
-      learnings: [
-        "Risk control systems need owners and cadence as much as dashboards.",
-        "Expiry buckets and exception handling create real actionability.",
-        "Standardisation beats complexity, especially when multiple stakeholders contribute data.",
-      ],
-    },
-];
+    },];
+
