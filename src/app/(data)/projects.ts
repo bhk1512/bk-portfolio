@@ -54,17 +54,17 @@ export const projects: Project[] = [
         note: "Screens are masked to protect confidentiality; structure and logic are representative.",
         items: [
           {
-            src: "/masked-1.png",
+            src: "/images/Productivity Dashboard/Masked-1.png",
             alt: "Masked dashboard overview",
             callouts: ["Plan vs Actual (MTD/WTD)", "Productivity trend", "Top slippages"],
           },
           {
-            src: "/masked-2.png",
+            src: "/images/Productivity Dashboard/Masked-2.png",
             alt: "Masked project drill-down",
             callouts: ["Project drill-down", "Activity-level view", "Weekly variance"],
           },
           {
-            src: "/masked-3.png",
+            src: "/images/Productivity Dashboard/Masked-3.png",
             alt: "Masked validation view",
             callouts: ["Validation flags", "Exception log", "Data quality status"],
           },
@@ -134,9 +134,9 @@ export const projects: Project[] = [
       proof: "3 hrs -> <10 min weekly | 30+ sources | weekly cadence",
       context:
         "Context: Personal prototype to test whether decision makers prefer email-first signals over dashboards.",
-      cover: { src: "/images/industry-digest-banner.png", alt: "Industry Digest" },
+      cover: { src: "/images/Industry Digest/industry-digest-banner.png", alt: "Industry Digest" },
       screenshots: [
-        { src: "/images/industry-digest-workflow.png", alt: "Industry Digest" },
+        { src: "/images/Industry Digest/industry-digest-workflow.png", alt: "Industry Digest" },
       ],
       problem:
         "New to the EPC sector, I burned 3 hrs every Sunday scanning 30+ sources for contract wins, policy shifts and interview fodder-still missed early signals.",
@@ -253,7 +253,7 @@ export const projects: Project[] = [
       stack: "Product Strategy",
       summary:
         "Deep dive into Audible's product experience, retention mechanics, and growth plays backed by 30K+ review signals.",
-      cover: { src: "/images/Audible.png", alt: "Audible product teardown" },
+      cover: { src: "/images/Audible/Audible.png", alt: "Audible product teardown" },
       metrics: ["60% global share", "30K+ reviews analyzed", "SWOT + JTBD lens"],
       archetype: "Product & Strategy",
       teardown: {
@@ -307,7 +307,7 @@ export const projects: Project[] = [
             {
               id: "ux-onboarding",
               title: "Onboarding",
-              screenshot: { src: "/images/onboarding.png", alt: "Audible onboarding flow" },
+              screenshot: { src: "/images/Audible/onboarding.png", alt: "Audible onboarding flow" },
               annotations: [
                 { tone: "positive", text: "Amazon login plus free trial equals a 60-second start." },
                 { tone: "positive", text: "Value prop is clear with Originals and deals up front." },
@@ -317,7 +317,7 @@ export const projects: Project[] = [
             {
               id: "ux-discovery",
               title: "Discovery",
-              screenshot: { src: "/images/discovery.png", alt: "Audible discovery experience" },
+              screenshot: { src: "/images/Audible/discovery.png", alt: "Audible discovery experience" },
               annotations: [
                 { tone: "negative", text: "Filters for Included / Free / Language are hidden three taps deep." },
                 { tone: "negative", text: "Recommendations repeat the last purchase instead of widening the catalog." },
@@ -327,7 +327,7 @@ export const projects: Project[] = [
             {
               id: "ux-listening",
               title: "Listening",
-              screenshot: { src: "/images/listening.png", alt: "Audible listening controls" },
+              screenshot: { src: "/images/Audible/listening.png", alt: "Audible listening controls" },
               annotations: [
                 { tone: "positive", text: "Whispersync and speed controls feel polished." },
                 { tone: "negative", text: "Offline downloads fail silently; users lose spot mid-commute." },
@@ -336,7 +336,7 @@ export const projects: Project[] = [
             {
               id: "ux-retention",
               title: "Retention",
-              screenshot: { src: "/images/retention.png", alt: "Audible retention touchpoints" },
+              screenshot: { src: "/images/Audible/retention.png", alt: "Audible retention touchpoints" },
               annotations: [
                 { tone: "negative", text: "Credit exhaustion causes a hard paywall with little guidance." },
                 { tone: "negative", text: "Library view mixes owned, trial, and included items with no clear labels." },
@@ -490,13 +490,13 @@ export const projects: Project[] = [
       stack: "Looker Studio | n8n",
       summary:
         "Real-time dashboard that ingests global news, classifies disruption events, and scores severity on a 0-10 index; visualized on an interactive world map with trends and filters.",
-      cover: { src: "/images/risk-radar-outer.png", alt: "Risk Radar dashboard (Looker Studio)" },
+      cover: { src: "/images/Risk Radar/risk-radar-outer.png", alt: "Risk Radar dashboard (Looker Studio)" },
       metrics: ["Real time map", "Ranked disruptions", "Trend lines & filters"],
       roleTools: "PM/Builder - NewsAPI, n8n, Google Sheets, Gemini, Looker Studio",
       archetype: "Decision Systems",
       screenshots: [
-        { src: "/images/risk-radar-inner.png", alt: "Dashboard overview" },
-        { src: "/images/risk-radar-workflow.png", alt: "n8n pipeline" },
+        { src: "/images/Risk Radar/risk-radar-inner.png", alt: "Dashboard overview" },
+        { src: "/images/Risk Radar/risk-radar-workflow.png", alt: "n8n pipeline" },
       ],
       problem:
         "Disruptions (physical, cyber, trade, infrastructure) are reported across fragmented sources with no consistent measure of severity or impact, making it hard to prioritize response. Decision makers lack a single real time, geospatial view that scores and ranks these disruptions for rapid situational awareness.",
@@ -535,9 +535,9 @@ export const projects: Project[] = [
       summary:
         "Auto-summarises YouTube talks into a searchable Notion hub in 5 min, slashing research time 30x.",
       archetype: "Decision Systems",
-      cover: { src: "/images/content-to-insights-card-cover.png", alt: "Content to Insights - card cover" },
+      cover: { src: "/images/Content-to-insights/content-to-insights-card-cover.png", alt: "Content to Insights - card cover" },
       screenshots: [
-        { src: "/images/content-to-insights-workflow.png", alt: "Content to Insights - card cover" },
+        { src: "/images/Content-to-insights/content-to-insights-workflow.png", alt: "Content to Insights - card cover" },
         //{ src: "/images/content-to-insights-workflow.png", alt: "Content"???to"???Insights - workflow" },
       ],
       problem: [

@@ -333,7 +333,7 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-6">
               <div className="rounded-3xl border border-zinc-800 bg-zinc-950/60 p-3 shadow-[0_0_40px_-18px_rgba(34,197,94,0.45)]">
                 <Image
-                  src="/images/review-insights.png"
+                  src="/images/Audible/review-insights.png"
                   alt="Review insights dashboard"
                   width={720}
                   height={480}
@@ -343,7 +343,7 @@ export default function TeardownModal({ project, onClose, modalRef, scrollTo }: 
               </div>
               <div className="rounded-3xl border border-zinc-800 bg-zinc-950/60 p-3 shadow-[0_0_40px_-18px_rgba(34,197,94,0.45)]">
                 <Image
-                  src="/images/credit-gating.png"
+                  src="/images/Audible/credit-gating.png"
                   alt="Credit gating journey"
                   width={720}
                   height={480}
