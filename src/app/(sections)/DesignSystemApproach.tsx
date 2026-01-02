@@ -14,7 +14,7 @@ export default function DesignSystemApproach() {
     <Section id="approach" title="How I design systems">
       <Reveal>
         <div className="max-w-3xl space-y-4 text-sm sm:text-base text-zinc-300 leading-relaxed">
-          <p>I don't build &quot;perfect&quot; systems. I build systems that survive contact with reality.</p>
+          <p>I don&apos;t build &quot;perfect&quot; systems. I build systems that survive contact with reality.</p>
           <ul className="mt-4 space-y-2 list-disc list-inside">
             {principles.map((item) => (
               <li key={item} className="text-zinc-300">

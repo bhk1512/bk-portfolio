@@ -209,6 +209,7 @@ function MaskedScreenItem({ item }: MaskedScreenItemProps) {
             {item.src}
           </div>
         ) : (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={item.src}
             alt={item.alt}
