@@ -175,10 +175,12 @@ export const projects: Project[] = [
       archetype: "Governance",
       context:
         "Context: Leadership highlighted a recurring issue: rolling plans were being edited mid-month, making reviews subjective and accountability unclear. Rather than forcing teams onto new tools, I made a deliberate design choice to keep the system Excel-first and absorb all complexity through Power Automate and Microsoft Scripts, given that the end users were not tech-savvy and adoption risk was high.",
+      cover: { src: "/images/Planning System/Planning System.png", alt: "Planning Traceability System" },
       metrics: ["Freeze + snapshot", "Change log / audit trail", "Exceptions & validation"],
       actions: [
         { label: "Open Case Study", kind: "modal" },
         { label: "How it works", kind: "modal", scrollTo: "p-approach" },
+        { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
       ],
       problem: [
         "Plans were edited silently after submission, breaking accountability.",
@@ -206,6 +208,17 @@ export const projects: Project[] = [
         "Automation must compensate for user constraints, not expose them.",
         "Exception-handling is what makes planning systems usable in the real world.",
       ],
+      maskedScreens: {
+        title: "Masked Screens (Representative)",
+        note: "Screens are masked to protect confidentiality; structure and logic are representative.",
+        items: [
+          {
+            src: "/images/Planning System/Planning System.png",
+            alt: "Planning traceability dashboard (masked)",
+            callouts: ["Baseline freeze status", "Revision log with timestamps", "Exceptions and compliance flags"],
+          },
+        ],
+      },
     },
     {
       id: "bg-surety-risk-control",
@@ -219,10 +232,12 @@ export const projects: Project[] = [
       archetype: "Governance",
       context:
         "Context: Risk was distributed across files/owners; leadership needed one view of exposure and upcoming expiries.",
+      cover: { src: "/images/BG & Surety Risk Control System/BG Dashboard - Masked.png", alt: "BG & Surety Risk Control System" },
       metrics: ["Exposure + expiry tracking", "Expiry buckets & alerts", "Leadership risk view"],
       actions: [
         { label: "Open Case Study", kind: "modal" },
         { label: "What's tracked", kind: "modal", scrollTo: "p-approach" },
+        { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
       ],
       problem: [
         "Exposure and expiry data lived across fragmented files and inconsistent formats.",
@@ -245,6 +260,17 @@ export const projects: Project[] = [
         "Expiry buckets and exception handling create real actionability.",
         "Standardisation beats complexity, especially when multiple stakeholders contribute data.",
       ],
+      maskedScreens: {
+        title: "Masked Screens (Representative)",
+        note: "Screens are masked to protect confidentiality; structure and logic are representative.",
+        items: [
+          {
+            src: "/images/BG & Surety Risk Control System/BG Dashboard - Masked.png",
+            alt: "BG & Surety risk dashboard (masked)",
+            callouts: ["Exposure by category and owner", "Expiry buckets with alert flags", "Top risk drivers and exceptions"],
+          },
+        ],
+      },
     },
     {
       id: "audible-product-teardown",

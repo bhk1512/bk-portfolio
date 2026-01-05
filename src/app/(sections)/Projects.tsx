@@ -156,7 +156,7 @@ export default function Projects() {
                   {project.teardown ? (
                     <TeardownCard project={project} onOpen={openProject} />
                   ) : (
-                    <ProjectCard project={project} />
+                    <ProjectCard project={project} onOpen={openProject} />
                   )}
                 </div>
               </Reveal>
