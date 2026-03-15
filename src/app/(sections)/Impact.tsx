@@ -143,7 +143,7 @@ export default function Impact() {
                   handleOpen(item.id);
                 }
               }}
-              className="text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl cursor-pointer"
+              className="group text-left w-full focus:outline-none focus:ring-2 focus:ring-zinc-600 rounded-2xl cursor-pointer"
               aria-haspopup="dialog"
               aria-expanded={activeId === item.id}
             >
@@ -157,6 +157,12 @@ export default function Impact() {
                     ))}
                   </ul>
                 ) : null}
+                <div className="mt-4 flex items-center gap-1 text-[11px] text-zinc-600 group-hover:text-zinc-400 transition-colors">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M1 3.5L5 7.5L9 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  <span>View detail</span>
+                </div>
               </Card>
             </div>
           </Reveal>

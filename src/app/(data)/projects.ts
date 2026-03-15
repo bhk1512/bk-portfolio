@@ -95,26 +95,120 @@ export const projects: Project[] = [
       ],
       actions: [
         { label: "Open Case Study", kind: "modal" },
-        { label: "Operating Model", kind: "modal", scrollTo: "p-approach" },
+        { label: "How We Ran It", kind: "modal", scrollTo: "p-approach" },
       ],
       flagship: true,
       flagshipLabel: "",
       archetype: "Execution at Scale",
       problem: [
-        "250k+ visitors, 75+ foreign delegations, zero-failure tolerance.",
-        "20 days to build security and logistics while leading 600+ personnel.",
+        "India's largest defence exhibition: 250K+ visitors and 75+ international " +
+          "delegations across 5 days — zero-failure tolerance, nationally visible.",
+        "20-day build window to design and deploy full security and logistics " +
+          "architecture from scratch, leading 600+ personnel across 6 agencies.",
+        "No existing operational playbook — the scale, profile, and multi-agency " +
+          "complexity made this a first-of-kind program for the unit.",
+        "Public-day surge risk: projected attendance could exceed planned capacity, " +
+          "requiring contingency architecture to be pre-built and deployable fast.",
       ],
       approach: [
-        "Directed 8 workstreams and integrated 2k+ CCTV streams into a multi-agency control room.",
-        "Ran daily standups and RAID reviews with multi-agency stakeholders to unblock quickly.",
+        "Structured the program into 8 workstreams: access control, perimeter " +
+          "security, VIP and delegation protocol, logistics, communications, CCTV " +
+          "operations, contingency planning, and media coordination.",
+        "Integrated 2,000+ CCTV feeds into a single multi-agency control room — " +
+          "giving real-time situational awareness to CISF, police, intelligence, " +
+          "and event management teams simultaneously.",
+        "Ran daily standup cadence with all 6 agency leads and weekly RAID-log " +
+          "reviews — any blocker unresolved for 24 hours was escalated same day.",
+        "When public-day attendance surged beyond planned capacity, restructured " +
+          "the entire access and crowd-flow architecture within 12 hours — " +
+          "redeploying personnel, adjusting entry sequencing, and reorienting the " +
+          "control room to the revised model without event disruption.",
+        "Coordinated movement and protocol for 75+ international delegations, " +
+          "including heads of state-adjacent delegations — zero protocol breaches.",
+        "Managed parallel escalation tracks: operational decisions stayed at " +
+          "field level; strategic conflicts and inter-agency disputes escalated " +
+          "to principals within the same working day.",
       ],
       outcome: [
-        "Hit 100% SLA with zero incidents.",
-        "Recommended for DG Commendation Roll.",
+        "100% SLA across all 8 workstreams. Zero incidents across the full event — " +
+          "no security breach, no protocol failure, no SLA miss.",
+        "Public-day surge absorbed: architecture redesign executed and fully " +
+          "redeployed within 12 hours, with no service interruption.",
+        "250K+ visitors and 75+ international delegations processed without a " +
+          "single reportable incident.",
+        "Recommended for Director General's Commendation Roll — the unit's " +
+          "highest program leadership recognition.",
       ],
       learnings: [
-        "RAID-log governance keeps workstreams aligned under hard deadlines.",
-        "Diplomacy and escalation align tactical actions with strategic goals.",
+        "RAID-log governance under hard deadlines: keeping 8 workstreams on the " +
+          "critical path requires structured escalation, not just daily check-ins.",
+        "Contingency architecture is a first-order deliverable, not an afterthought — " +
+          "the 12-hour surge response was only possible because the fallback " +
+          "model had been pre-designed.",
+        "Cross-agency alignment requires both formal governance (standups, RAID) " +
+          "and interpersonal diplomacy — neither alone works at this scale.",
+        "Operational flexibility under a fixed, public deadline is a distinct " +
+          "skill from project management — decisions have no room for iteration.",
+      ],
+    },
+    {
+      id: "defence-expo-selected",
+      title: "Defence Expo PMO (2022)",
+      year: "2022",
+      stack: "Multi-agency · 8 Workstreams · Zero-failure delivery",
+      summary:
+        "Directed PMO for India's largest defence exhibition — 600+ personnel, " +
+        "6 agencies, 250K+ visitors, 75+ international delegations. " +
+        "Restructured operational architecture within 12 hours for public-day " +
+        "surge. Zero incidents. Zero SLA breaches.",
+      cardSummary:
+        "Multi-agency PMO at national scale — 600+ personnel, zero incidents, " +
+        "DG Commendation Roll.",
+      proof: "250K+ visitors | 75+ delegations | 100% SLA",
+      context:
+        "Context: Fixed date, public scrutiny, and zero-failure tolerance across " +
+        "a 20-day build window with no prior template.",
+      metrics: [
+        "8 workstreams coordinated",
+        "600+ personnel across 6 agencies",
+        "100% SLA / zero incidents",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+      ],
+      flagship: false,
+      archetype: "Program Execution",
+      problem: [
+        "250K+ visitors, 75+ foreign delegations, zero-failure tolerance.",
+        "20 days to design and deploy security + logistics architecture " +
+          "while leading 600+ personnel across 6 agencies.",
+        "No existing playbook — operational model had to be built from scratch.",
+      ],
+      approach: [
+        "Directed 8 workstreams (access control, perimeter, protocol, logistics, " +
+          "VIP movement, communications, contingency, and media management).",
+        "Integrated 2,000+ CCTV streams into a unified multi-agency control room " +
+          "for real-time situational awareness.",
+        "Ran daily standups and RAID-log reviews with 6-agency stakeholders — " +
+          "surfacing blockers within 24 hours of identification.",
+        "Restructured the entire public-day operational architecture within " +
+          "12 hours when projected visitor surge exceeded planned capacity.",
+        "Coordinated VIP and international delegation movement across 75+ delegations " +
+          "with zero protocol incidents.",
+      ],
+      outcome: [
+        "100% SLA across all 8 workstreams. Zero incidents across the full event.",
+        "Public-day surge absorbed without service disruption — architecture " +
+          "redesign executed and redeployed within 12 hours.",
+        "Recommended for Director General's Commendation Roll.",
+      ],
+      learnings: [
+        "RAID-log governance is the difference between controlled escalation " +
+          "and firefighting at scale.",
+        "Operational flexibility under a fixed deadline requires pre-built " +
+          "contingency architecture, not reactive workarounds.",
+        "Cross-agency alignment needs both formal governance and interpersonal " +
+          "diplomacy — neither alone is sufficient.",
       ],
     },
     {
@@ -179,7 +273,7 @@ export const projects: Project[] = [
       metrics: ["Freeze + snapshot", "Change log / audit trail", "Exceptions & validation"],
       actions: [
         { label: "Open Case Study", kind: "modal" },
-        { label: "How it works", kind: "modal", scrollTo: "p-approach" },
+        { label: "See Approach", kind: "modal", scrollTo: "p-approach" },
         { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
       ],
       problem: [
@@ -236,7 +330,7 @@ export const projects: Project[] = [
       metrics: ["Exposure + expiry tracking", "Expiry buckets & alerts", "Leadership risk view"],
       actions: [
         { label: "Open Case Study", kind: "modal" },
-        { label: "What's tracked", kind: "modal", scrollTo: "p-approach" },
+        { label: "See Approach", kind: "modal", scrollTo: "p-approach" },
         { label: "Masked Screens", kind: "modal", scrollTo: "p-masked" },
       ],
       problem: [
@@ -296,7 +390,7 @@ export const projects: Project[] = [
         ],
         actions: [
           { label: "View Slides", href: "/Product Teardowns/Audible_Product_Teardown.pdf" },
-          { label: "Download Report", href: "/Product Teardowns/Audible Product Teardow Report.pdf" },
+          { label: "Download Report", href: "/Product Teardowns/Audible Product Teardowm Report.pdf" },
         ],
         nav: [
           { id: "td-overview", label: "Overview" },
@@ -504,7 +598,7 @@ export const projects: Project[] = [
         ],
         explore: [
           { label: "View Slide Deck", href: "/Product Teardowns/Audible_Product_Teardown.pdf" },
-          { label: "Download Detailed PDF Report", href: "/Product Teardowns/Audible Product Teardow Report.pdf" },
+          { label: "Download Detailed PDF Report", href: "/Product Teardowns/Audible Product Teardown Report.pdf" },
         ],
       },
     },

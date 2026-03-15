@@ -17,7 +17,7 @@ export default function StandardProjectModal({ project, onClose, modalRef, scrol
   const actionLinks = (project.actions?.length
     ? project.actions.filter((action) => action.kind !== "modal" && action.href)
     : [
-        project.demoLink ? { href: project.demoLink, label: "View Demo" } : null,
+        project.demoLink ? { href: project.demoLink, label: "Sample Output" } : null,
         project.prdLink ? { href: project.prdLink, label: "Full PRD" } : null,
       ].filter(Boolean)) as { href: string; label: string }[];
   const base =

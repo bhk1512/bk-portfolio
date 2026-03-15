@@ -12,7 +12,7 @@ export default function ActionButtons({ demoHref, prdHref, onClick }: ActionButt
   const ghost = "border border-zinc-700 text-zinc-100 hover:bg-zinc-900";
   const primary = "bg-zinc-100 text-zinc-900 hover:bg-white";
   const links = [
-    demoHref ? { href: demoHref, label: "View Demo" } : null,
+    demoHref ? { href: demoHref, label: "Sample Output" } : null,
     prdHref ? { href: prdHref, label: "Full PRD" } : null,
   ].filter(Boolean) as { href: string; label: string }[];
 

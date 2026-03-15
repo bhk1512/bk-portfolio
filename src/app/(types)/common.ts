@@ -1,5 +1,6 @@
 export const SECTION_IDS = [
   "home",
+  "flagship",
   "work",
   "skills",
   "certs",

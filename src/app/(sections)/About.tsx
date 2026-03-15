@@ -67,11 +67,44 @@ function TooltipBox({ id, label, year, details, active }: TooltipBoxProps) {
 
 function Timeline() {
   const items: TimelineItem[] = [
-    { key: "zs", label: "ZS", year: "2016", details: "Analytics & consulting foundation; ops + data basics." },
-    { key: "mha", label: "MHA", year: "2018", details: "Blending tech with risk ops for smarter decisions." },
-    { key: "cisf", label: "CISF", year: "2020", details: "Orchestrating people, tech and security under one roof." },
-    { key: "iima", label: "IIMA", year: "2024", details: "Strategy & ops deep dive; honed change-management & commercial lens" },
-    { key: "kec", label: "KEC", year: "2025", details: "Ongoing..." },
+    {
+      key: "zs",
+      label: "ZS",
+      year: "2016",
+      details:
+        "Technology Analyst · ETL pipelines & data engineering · " +
+        "Global pharma client · 5 months",
+    },
+    {
+      key: "mha",
+      label: "IB / MHA",
+      year: "2018",
+      details:
+        "Manager, Risk Intelligence · Built NLP triage pipeline · " +
+        "Field ops during COVID-19 · 2 years",
+    },
+    {
+      key: "cisf",
+      label: "CISF",
+      year: "2020",
+      details:
+        "Program Manager, Strategy & Ops · Defence Expo PMO · " +
+        "Digital transformation · 3.5 years",
+    },
+    {
+      key: "iima",
+      label: "IIMA",
+      year: "2024",
+      details:
+        "PGPX MBA · IIM Ahmedabad · Entry-level scholarship · 2024–25",
+    },
+    {
+      key: "kec",
+      label: "KEC",
+      year: "2025",
+      details:
+        "Digital Strategy & Operations · KEC International · Present",
+    },
   ];
   const [hover, setHover] = useState<string | null>(null);
 

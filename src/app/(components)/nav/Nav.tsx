@@ -7,7 +7,7 @@ import type { SectionId } from "../../(types)/common";
 
 const NAV_ITEMS: { href: `#${SectionId}`; label: string; id: SectionId }[] = [
   { href: "#home", label: "Home", id: "home" },
-  { href: "#work", label: "Work", id: "work" },
+  { href: "#flagship", label: "Work", id: "flagship" },
   { href: "#impact", label: "Impact", id: "impact" },
   { href: "#about", label: "About", id: "about" },
   { href: "#contact", label: "Contact", id: "contact" },
