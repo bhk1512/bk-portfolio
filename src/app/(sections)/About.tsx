@@ -179,14 +179,30 @@ export default function About() {
 
       <Reveal>
         <section>
-          <div className="mt-12 max-w-3xl mx-auto space-y-6">
+          <div className="mt-12 max-w-3xl mx-auto space-y-5">
             <p className="text-zinc-300 leading-relaxed text-justify">
-              Every day, I connect the dots: bridging teams, streamlining workflows, and translating analytics into smarter operations.
+              I&apos;ve spent 7 years in environments where failure has real 
+              consequences — intelligence operations, national-scale events, and 
+              infrastructure transformation for a ₹20,000Cr+ enterprise. That 
+              shapes how I work: build systems that survive contact with reality, 
+              not just look good in decks.
             </p>
             <p className="text-zinc-300 leading-relaxed text-justify">
-              From laying the analytics foundation at ZS to integrating solutions across operations, I&apos;ve learned one truth: clarity, collaboration, and tech are what make execution thrive.
-              <br />
-              Now, I help cut through uncertainty so we can move faster, smarter and build a future rooted in confident, clear execution.
+              I started in analytics (ZS), moved into government intelligence and 
+              field operations (IB/MHA, CISF), and now drive digital transformation 
+              at KEC International. The thread across all of it: turning ambiguous, 
+              high-stakes situations into governed, decision-ready workflows — with 
+              or without a playbook.
+            </p>
+            <p className="text-zinc-300 leading-relaxed text-justify">
+              IIMA PGPX was a deliberate pivot — to bring that operational and 
+              analytical lens into corporate strategy and sharpen the commercial 
+              judgment to go with it.
+            </p>
+            <p className="text-zinc-400 text-sm leading-relaxed text-justify">
+              Outside work: I read obsessively across domains, build small 
+              automation tools to scratch my own itches, and believe that most 
+              execution problems are really communication problems in disguise.
             </p>
           </div>
         </section>

@@ -16,7 +16,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const showArchetype = Boolean(project.archetype);
 
   return (
-    <Card>
+    <Card hoverable={true}>
       {showFlagship || showArchetype ? (
         <div className="mb-3 flex flex-wrap gap-2">
           {showFlagship && project.flagshipLabel ? (

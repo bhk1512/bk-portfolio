@@ -680,5 +680,138 @@ export const projects: Project[] = [
       ],
       demoLink: "/samples/indigo-s-greatest-gamble-flying-international.pdf",    // <- add
       prdLink: "/PRDs/Product Requirements Document - Content-to-Insights Pipeline.pdf",
-    },];
+    },
+    {
+      id: "ib-nlp-intelligence",
+      title: "NLP Triage Engine & Field Intelligence",
+      year: "2019–2020",
+      stack: "Python · NLP · Random Forest · AWS",
+      summary:
+        "Built and deployed an NLP classification pipeline from scratch to " +
+        "auto-prioritise high-signal entities from open-source data — no prior " +
+        "infrastructure, no team, no playbook. Reduced analyst processing time " +
+        "by ~85%. Separately deployed as field intelligence advisor during " +
+        "COVID-19 to a remote tribal district: mapped supply chain failures, " +
+        "designed a zone-based delivery model, and kept essential supply " +
+        "uninterrupted for 90+ days with no failures.",
+      cardSummary:
+        "0→1 NLP pipeline cutting analyst time 85% + field deployment keeping " +
+        "essential supply uninterrupted for 90 days in a remote district.",
+      proof: "~85% analyst time saved | 90+ days zero supply failure | built solo",
+      context:
+        "Context: Organisation and domain details withheld. Scope, approach, " +
+        "and outcomes are real. Both workstreams were self-initiated with no " +
+        "prior template.",
+      metrics: [
+        "NLP pipeline: ~85% cycle-time reduction",
+        "COVID deployment: 90+ days, zero failures",
+        "Both built independently, no prior infrastructure",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+      ],
+      flagship: false,
+      archetype: "Decision Systems",
+      problem: [
+        "Manual profiling of high-impact entities from open-source data was " +
+          "draining analyst hours and missing early signals — no automated " +
+          "triage existed.",
+        "During COVID-19 lockdown, a remote tribal district faced supply chain " +
+          "collapse: no visibility into blockages, no delivery model, and no " +
+          "coordination mechanism across agencies.",
+      ],
+      approach: [
+        "Designed and built an NLP classification pipeline (Python, Random " +
+          "Forest) with nightly AWS crawlers to ingest, score, and prioritise " +
+          "entities from open-source data — entirely self-initiated and " +
+          "self-built.",
+        "Tuned keyword and classification logic for domain-specific threat " +
+          "signals; balanced precision vs. speed given the sensitivity of outputs.",
+        "For the COVID deployment: mapped district-level supply chain blockages " +
+          "end-to-end, identified failure nodes, and designed a zone-based " +
+          "delivery model.",
+        "Coordinated logistics across multiple agencies with no formal authority " +
+          "— alignment achieved through daily briefings and shared tracking.",
+      ],
+      outcome: [
+        "NLP pipeline reduced analyst cycle-time by ~85%, freeing over 1 FTE " +
+          "per day for higher-order work.",
+        "Zone-based delivery model kept essential supply distribution " +
+          "uninterrupted for 90+ days across the district with zero failures.",
+      ],
+      learnings: [
+        "0→1 builds under operational pressure require extreme constraint on " +
+          "scope — ship the 80% solution that works over the perfect system " +
+          "that doesn't.",
+        "Coordination without authority is a distinct skill: shared tracking " +
+          "and daily cadence substitute for formal control.",
+        "Precision vs. speed trade-offs in NLP are real — especially when " +
+          "false negatives have operational consequences.",
+      ],
+    },
+    {
+      id: "ai-tendering-engine",
+      title: "AI Tendering & Pricing Engine",
+      year: "2025",
+      stack: "LLM · ML Pricing · Knowledge Repository · Power Automate",
+      summary:
+        "Productised the tendering process end-to-end: built a structured " +
+        "knowledge repository, integrated live market indices, and layered an " +
+        "ML pricing engine with low/base/high scenario outputs. Eliminated the " +
+        "estimation bottleneck on high-value bids and standardised pricing " +
+        "confidence across the team.",
+      cardSummary:
+        "0→1 internal product: AI-assisted tendering tool with ML pricing " +
+        "engine, live market indices, and scenario outputs for high-value bids.",
+      proof: "Estimation bottleneck eliminated | Pricing standardised | 0→1 build",
+      context:
+        "Context: Built at KEC International. Client and bid details withheld; " +
+        "scope, architecture, and outcomes are real.",
+      metrics: [
+        "0→1 internal product build",
+        "Low / base / high pricing scenarios",
+        "Live market index integration",
+      ],
+      actions: [
+        { label: "Open Case Study", kind: "modal" },
+      ],
+      flagship: false,
+      archetype: "Product & Strategy",
+      problem: [
+        "Tendering estimation relied on individual expertise — no structured " +
+          "knowledge base, no consistent pricing method across the team.",
+        "High-value bids had long estimation cycles and inconsistent confidence " +
+          "levels, creating bottlenecks before submission.",
+        "Market index data was manually pulled each time, introducing lag and " +
+          "error into pricing inputs.",
+      ],
+      approach: [
+        "Built a structured tender knowledge repository: codified past bid data, " +
+          "cost breakdowns, and scope patterns into a queryable format.",
+        "Integrated live market indices (material costs, labour benchmarks) as " +
+          "real-time inputs to the pricing model.",
+        "Layered an ML pricing engine that generates low/base/high scenario " +
+          "outputs, calibrated against historical bid outcomes.",
+        "Used LLM-assisted tooling to accelerate development and enable " +
+          "non-technical stakeholders to interact with the knowledge repository.",
+        "Designed for adoption: kept the interface familiar and the output " +
+          "format compatible with existing review workflows.",
+      ],
+      outcome: [
+        "Eliminated the estimation bottleneck for high-value bids — turnaround " +
+          "time cut significantly.",
+        "Standardised pricing confidence across the team with consistent " +
+          "scenario framing (low/base/high).",
+        "First internal AI product of its kind at the business unit.",
+      ],
+      learnings: [
+        "Internal products live or die on adoption — output format must match " +
+          "existing workflows, not force new ones.",
+        "LLM-assisted development accelerates 0→1 builds, but architectural " +
+          "control and domain knowledge still determine quality.",
+        "Pricing tools must encode human judgment (risk appetite, market " +
+          "context), not just historical averages.",
+      ],
+    },
+];
 

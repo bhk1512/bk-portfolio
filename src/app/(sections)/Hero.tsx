@@ -109,7 +109,8 @@ export default function Hero() {
               </h1>
 
               <div className="mt-3 mb-4 flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
-                <Badge>Strategy & Ops Professional</Badge>
+                <Badge>Execution Operator</Badge>
+                <Badge className="hidden sm:inline">Systems Builder</Badge>
                 <Badge className="hidden sm:inline">IIMA MBA</Badge>
               </div>
 
@@ -119,6 +120,12 @@ export default function Hero() {
               <p className="text-zinc-400 leading-relaxed max-w-xl lg:max-w-2xl mx-auto lg:mx-0 mt-2 text-sm sm:text-base">
                 I design low-friction systems that turn messy, human processes into auditable, decision-ready workflows.
               </p>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900/60 px-3 py-1.5">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_5px_2px_rgba(52,211,153,0.35)]" />
+                <span className="text-xs text-zinc-300">
+                  Open to Senior Program · Product Ops · Founder&apos;s Office roles
+                </span>
+              </div>
 
               <AffiliationBar />
 

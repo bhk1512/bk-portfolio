@@ -3,11 +3,11 @@ import type { HeroData } from "../(types)/common";
 export const heroData: HeroData = {
   name: "Bharat Kaushik",
   subhead: "Aligning people, processes, and tech to remove uncertainty from execution",
+  availability: "Exploring Senior Program, Product Ops & Founder's Office roles",
   photo: { src: "/images/avatar.jpg", alt: "Bharat Kaushik" },
   ctas: [
     { label: "Download CV", href: "/Bharat_Kaushik_IIMA.pdf", type: "primary" },
     { label: "Email", href: "mailto:bharat.15dck@gmail.com", type: "ghost" },
-    { label: "Call", href: "tel:+919953779868", type: "ghost" },
   ],
   affiliations: [
     {

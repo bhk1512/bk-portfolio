@@ -150,6 +150,11 @@ export default function Impact() {
               <Card>
                 <div className="text-zinc-100 font-medium">{item.title}</div>
                 {item.subtitle ? <div className="text-zinc-400 text-sm">{item.subtitle}</div> : null}
+                {item.context ? (
+                  <div className="text-zinc-500 text-xs mt-0.5 italic">
+                    {item.context}
+                  </div>
+                ) : null}
                 {item.outcome?.length ? (
                   <ul className="mt-3 text-xs text-zinc-400 list-disc list-inside space-y-1">
                     {item.outcome.slice(0, 2).map((value, outcomeIndex) => (

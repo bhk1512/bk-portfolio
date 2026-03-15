@@ -5,6 +5,7 @@ import WorkPatterns from "./(sections)/WorkPatterns";
 import Projects from "./(sections)/Projects";
 import DesignPhilosophy from "./(sections)/DesignPhilosophy";
 import Impact from "./(sections)/Impact";
+import SocialProof from "./(components)/ui/SocialProof";
 import Skills from "./(sections)/Skills";
 import Certifications from "./(sections)/Certifications";
 import About from "./(sections)/About";
@@ -21,6 +22,7 @@ export default function PortfolioApp() {
         <Projects />
         <DesignPhilosophy />
         <Impact />
+        <SocialProof />
         <Skills />
         <Certifications />
         <About />

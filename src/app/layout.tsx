@@ -13,13 +13,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // Shows "Bharat Kaushik" by default; subpages can set their own titles and will render as "<Page> - Bharat Kaushik"
-  title: { default: "Bharat Kaushik", template: "%s - Bharat Kaushik" },
+  title: "Bharat Kaushik · Program & Ops · IIMA",
   description:
-    "Program & Operations leader blending strategy, tech, and execution to deliver measurable outcomes. IIMA MBA with cross-sector experience.",
-  icons: { icon: "/favicon.svg" }, // put your icon at /public/favicon.svg
-  themeColor: "#121212",
-  metadataBase: new URL("https://your-domain.com"), // optional: update when you have a domain
+    "Execution operator and systems builder with 7 years across " +
+    "intelligence, national-scale operations, and enterprise digital " +
+    "transformation. IIMA PGPX. Currently exploring Senior Program, " +
+    "Product Ops, and Founder's Office roles.",
+  openGraph: {
+    title: "Bharat Kaushik · Program & Ops · IIMA",
+    description:
+      "Execution operator building low-friction systems that turn " +
+      "messy, human processes into auditable, decision-ready workflows.",
+    url: "https://www.bharatkaushik.com",
+    siteName: "Bharat Kaushik",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Bharat Kaushik — Program & Ops · IIMA",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bharat Kaushik · Program & Ops · IIMA",
+    description:
+      "Execution operator. Systems builder. IIMA MBA. " +
+      "7 years across intelligence, national ops, and enterprise " +
+      "transformation.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

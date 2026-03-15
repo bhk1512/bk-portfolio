@@ -21,6 +21,7 @@ export type ImpactItem = {
   id: string;
   title: string;
   subtitle?: string;
+  context?: string;
   summary?: string;
   problem?: string[];
   action?: string[];
@@ -51,6 +52,7 @@ export type HeroCta = {
 export type HeroData = {
   name: string;
   subhead?: string;
+  availability?: string;
   photo?: { src: string; alt: string };
   ctas: HeroCta[];
   affiliations?: Affiliation[];

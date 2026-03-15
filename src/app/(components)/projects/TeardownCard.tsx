@@ -26,7 +26,7 @@ export default function TeardownCard({ project, onOpen }: TeardownCardProps) {
   };
 
   return (
-    <Card>
+    <Card hoverable={true}>
       {project.archetype ? (
         <div className="mb-3 flex flex-wrap gap-2">
           <span className="rounded-full border border-zinc-800/70 bg-zinc-950/50 px-2.5 py-1 text-[11px] text-zinc-400">

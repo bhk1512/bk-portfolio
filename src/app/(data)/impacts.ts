@@ -5,6 +5,7 @@ export const impacts: ImpactItem[] = [
       id: "eoffice-2023",
       title: "e-Office rollout (2023)",
       subtitle: "Paperless HQ, -90 % TAT",
+      context: "CISF HQ · 200 paper files/day · 14-week rollout",
       problem: [
         "Paper files (~200/day) trapped officers at desks and buried approvals.",
       ],
@@ -24,6 +25,7 @@ export const impacts: ImpactItem[] = [
       id: "py-triage-2019",
       title: "Python triage Engine (2019)",
       subtitle: "NLP | Random Forest | AWS",
+      context: "Intelligence Bureau · self-built · AWS + Python",
       problem: [
         "Remote area - improper network coverage",
         "Manual profiling of high-impact entities drained analyst hours and missed signals.",
@@ -43,6 +45,7 @@ export const impacts: ImpactItem[] = [
       id: "defexpo-pmo-2022",
       title: "Defence Expo PMO (2022)",
       subtitle: "8 work-streams | Multi-agency",
+      context: "Defence Expo · 600+ personnel · 6 agencies · 20-day build",
       problem: [
         "250k+ visitors, 75+ foreign delegations, zero-failure tolerance",
         "20 days to build security & logistics, leading over 600 personnel",
@@ -64,6 +67,7 @@ export const impacts: ImpactItem[] = [
       id: "sales-boost-2023",
       title: "Sales Analytics Boost (2023)",
       subtitle: "2x inventory turn | +20 % sales",
+      context: "Retail ops · cash-heavy · SKU analytics",
       problem: [
         "Cash-heavy ops",
         "Slow stock turns",
@@ -87,6 +91,7 @@ export const impacts: ImpactItem[] = [
       id: "access-redesign-2022",
       title: "Access-Control Redesign (2022)",
       subtitle: "40% capex saved",
+      context: "Critical infrastructure wing · new build · multi-stakeholder",
       problem: [
         "Client's draft blueprint called for dozens of badge readers and turnstiles",
         "Over-engineered flow for a new critical-infrastructure wing",
@@ -110,6 +115,7 @@ export const impacts: ImpactItem[] = [
       id: "currency-press-2022",
       title: "Currency-Press Consulting (2022)",
       subtitle: "20% opex saved",
+      context: "National currency facility · security + ops redesign",
       problem: [
         "The client demanded a sharp cut in CISF deployment costs",
       ],
