@@ -47,7 +47,14 @@ function ProfileAvatar({ src = "/avatar.jpg", alt = "Profile photo" }: ProfileAv
       style={{ perspective: 600 }}
     >
       <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6),0_0_0_8px_rgba(224,224,224,0.06)] group-hover:shadow-[0_12px_38px_-12px_rgba(0,0,0,0.7),0_0_0_10px_rgba(224,224,224,0.08)] transition-shadow duration-300" />
-      <Image src={src} alt={alt} fill className="object-cover" priority />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        style={{ objectPosition: "center 15%" }}
+        priority
+      />
       <div className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.08),transparent_40%)]" />
     </div>
   );

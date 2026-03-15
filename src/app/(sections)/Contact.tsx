@@ -1,100 +1,82 @@
 "use client";
 
-import { useCallback } from "react";
-import type { FormEvent } from "react";
-
-import { contactInfo } from "../(data)/contact";
 import Card from "../(components)/ui/Card";
 import Reveal from "../(components)/ui/Reveal";
 import Section from "../(components)/ui/Section";
 
 export default function Contact() {
-  const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    alert("Thanks! I will get back to you.");
-    form.reset();
-  }, []);
-
   return (
     <>
       <Section id="contact" title="Get in touch">
+        <p className="text-sm text-zinc-400 mb-6">
+          The best way to reach me is email or LinkedIn — 
+          I check both daily.
+        </p>
         <Reveal>
           <div className="grid md:grid-cols-2 gap-6">
             <Card>
-              <form className="space-y-3" onSubmit={handleSubmit}>
+              <div className="space-y-5">
                 <div>
-                  <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-name">
-                    Name
-                  </label>
-                  <input
-                    id="ct-name"
-                    name="name"
-                    required
-                    autoComplete="name"
-                    placeholder="Your name"
-                    className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                  />
+                  <div className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Preferred</div>
+                  <a
+                    href="mailto:bharat.15dck@gmail.com"
+                    className="text-zinc-100 text-sm font-medium hover:underline underline-offset-4 decoration-zinc-600 flex items-center gap-2"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M2 8l10 7 10-7" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                    bharat.15dck@gmail.com
+                  </a>
                 </div>
-
                 <div>
-                  <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-email">
-                    Email
-                  </label>
-                  <input
-                    id="ct-email"
-                    type="email"
-                    name="email"
-                    required
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                    className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                  />
+                  <div className="text-xs text-zinc-500 uppercase tracking-wider mb-1">LinkedIn</div>
+                  <a
+                    href="https://www.linkedin.com/in/bharatk1512"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-zinc-100 text-sm font-medium hover:underline underline-offset-4 decoration-zinc-600 flex items-center gap-2"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    linkedin.com/in/bharatk1512
+                  </a>
                 </div>
-
                 <div>
-                  <label className="block text-sm text-zinc-300 mb-1" htmlFor="ct-message">
-                    Message
-                  </label>
-                  <textarea
-                    id="ct-message"
-                    name="message"
-                    required
-                    minLength={10}
-                    rows={4}
-                    placeholder="How can I help?"
-                    className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                  />
+                  <div className="text-xs text-zinc-500 uppercase tracking-wider mb-1">Phone</div>
+                  <a
+                    href="tel:+919953779868"
+                    className="text-zinc-100 text-sm font-medium hover:underline underline-offset-4 decoration-zinc-600 flex items-center gap-2"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    +91 99537 79868
+                  </a>
                 </div>
-
-                <button
-                  type="submit"
-                  className="rounded-xl bg-zinc-100 text-zinc-900 px-4 py-2 text-sm font-medium hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-600"
-                >
-                  Send
-                </button>
-              </form>
+              </div>
             </Card>
 
             <Card>
-              <div className="space-y-2 text-sm">
-                <div className="text-zinc-400">Email</div>
-                <a className="text-zinc-100 hover:underline" href={`mailto:${contactInfo.email}`}>
-                  {contactInfo.email}
-                </a>
-
-                <div className="text-zinc-400 mt-3">Phone</div>
-                <a className="text-zinc-100 hover:underline" href={`tel:${contactInfo.phone}`}>
-                  {contactInfo.phone}
-                </a>
-
-                <div className="text-zinc-400 mt-3">LinkedIn</div>
-                <a className="text-zinc-100 hover:underline" href={contactInfo.linkedin}>
-                  {contactInfo.linkedin}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_2px_rgba(52,211,153,0.4)]" />
+                  <span className="text-zinc-100 text-sm font-medium">
+                    Open to opportunities
+                  </span>
+                </div>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  Exploring Senior Program, Product Ops, and 
+                  Founder&apos;s Office roles. Response within 24 hours.
+                </p>
+                <a
+                  href="/Bharat_Kaushik_IIMA.pdf"
+                  className="inline-flex items-center gap-2 mt-2 rounded-xl bg-zinc-100 text-zinc-900 px-4 py-2 text-sm font-medium hover:bg-white transition"
+                >
+                  Download CV
                 </a>
               </div>
             </Card>
