@@ -24,7 +24,7 @@ export default function Contact() {
                 alt="Bharat Kaushik"
                 fill
                 sizes="190px"
-                className="object-cover"
+                className="object-cover object-[50%_12%]"
               />
             </div>
 

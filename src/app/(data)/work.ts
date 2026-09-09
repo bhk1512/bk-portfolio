@@ -182,7 +182,7 @@ export const workRows: WorkRow[] = [
       "0→1 internal product: AI-assisted tendering tool with ML pricing engine, " +
       "live market indices, and scenario outputs for high-value bids.",
     figures: "Estimation bottleneck eliminated | Pricing standardised | 0→1 build",
-    then: null,
+    then: "Handed over.",
   },
   {
     slug: "industry-digest",
@@ -193,7 +193,7 @@ export const workRows: WorkRow[] = [
       "Weekly Monday 9 AM digest that converts 30+ sources into EPC wins, " +
       "setbacks, moves & macro signals.",
     figures: "3 hrs -> <10 min weekly | 30+ sources | weekly cadence",
-    then: null,
+    then: "Still running.",
   },
   {
     slug: "ib-nlp-intelligence",
@@ -204,29 +204,7 @@ export const workRows: WorkRow[] = [
       "0→1 NLP pipeline cutting analyst time 85% + field deployment keeping " +
       "essential supply uninterrupted for 90 days in a remote district.",
     figures: "~85% analyst time saved | 90+ days zero supply failure | built solo",
-    then: null,
-  },
-  {
-    slug: "audible-product-teardown",
-    title: "Audible Product Teardown",
-    org: "Personal",
-    year: "2025",
-    body:
-      "Deep dive into Audible's product experience, retention mechanics, and " +
-      "growth plays backed by 30K+ review signals.",
-    figures: "60% global share",
-    then: null,
-  },
-  {
-    slug: "defence-expo-pmo",
-    title: "Defence Expo PMO",
-    org: "National",
-    year: "2022",
-    body:
-      "Ran 8 workstreams and multi-agency governance to deliver a zero-incident " +
-      "event at national scale.",
-    figures: "250k+ visitors | 75+ delegations | 100% SLA / zero incidents",
-    then: null,
+    then: "Handed over.",
   },
 ];
 

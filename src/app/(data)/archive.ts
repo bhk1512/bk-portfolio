@@ -7,7 +7,7 @@ export type ArchiveRow = {
   outcome: string;
 };
 
-// The nine homepage Work rows, carried into the archive automatically so
+// The homepage Work rows, carried into the archive automatically so
 // the two lists can't drift out of sync.
 const homepageRows: ArchiveRow[] = workRows.map((row) => ({
   year: row.year,
