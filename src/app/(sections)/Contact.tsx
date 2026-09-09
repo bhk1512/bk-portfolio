@@ -33,8 +33,7 @@ export default function Contact() {
                 Looking for someone who builds systems that last?
               </p>
               <p className="font-serif text-lg text-body-quiet leading-relaxed mb-5">
-                The best way to reach me is email or LinkedIn — I check both
-                daily.
+                Email or LinkedIn. I check both daily.
               </p>
               <a
                 href={`mailto:${contactInfo.email}`}

@@ -117,7 +117,7 @@ export const workRows: WorkRow[] = [
   },
   {
     slug: "execution-productivity-platform",
-    title: "Execution & Productivity — standalone to platform",
+    title: "From dashboard to platform",
     org: "KEC",
     year: "2025-2026",
     body:
@@ -187,8 +187,10 @@ export const workRows: WorkRow[] = [
     org: "KEC",
     year: "2025",
     body:
-      "0→1 internal product: AI-assisted tendering tool with ML pricing engine, " +
-      "live market indices, and scenario outputs for high-value bids.",
+      "Pricing a bid ran on individual expertise. No shared knowledge base, no " +
+      "consistent method across the team. I built a pricing engine on a " +
+      "structured repository and live market indices. High-value bids come " +
+      "back with low, base and high scenarios.",
     figures: "Estimation bottleneck eliminated | Pricing standardised | 0→1 build",
     then: "Handed over.",
   },
@@ -220,8 +222,8 @@ export const workRows: WorkRow[] = [
     org: "Personal",
     year: "2025",
     body:
-      "Deep dive into Audible's product experience, retention mechanics, and " +
-      "growth plays backed by 30K+ review signals.",
+      "Audible holds about 60% of the audiobook market. I read 30,000 reviews " +
+      "to see where the product wins and where it struggles.",
     figures: "60% global share",
     // Personal teardown, not a deployed system -- "still running / handed
     // over" doesn't apply. Empty string hides the status line entirely.
@@ -233,8 +235,9 @@ export const workRows: WorkRow[] = [
     org: "National",
     year: "2022",
     body:
-      "Ran 8 workstreams and multi-agency governance to deliver a zero-incident " +
-      "event at national scale.",
+      "India's largest defence exhibition, with a 20-day build window and no " +
+      "playbook. I ran 8 workstreams and 600+ personnel across 6 agencies. " +
+      "Five days, zero incidents.",
     figures: "250k+ visitors | 75+ delegations | 100% SLA / zero incidents",
     // The event concluded in 2022 -- "still running / handed over" doesn't
     // apply. Empty string hides the status line entirely.

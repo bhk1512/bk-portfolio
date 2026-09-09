@@ -21,8 +21,76 @@ export function caseStudyDescription(slug: string): string | undefined {
 }
 
 // Prose measure. Wider than this hurts reading, and the empty space to its
-// right is correct -- images are what use the rest of the column.
-const TEXT_COLUMN = "max-w-[640px]";
+// right is correct -- the rail is what uses the rest of the column.
+const TEXT_COLUMN = "max-w-[620px]";
+
+// Text column plus rail, the same shape the homepage Work section uses for
+// its rows and operating-rules rail.
+const ROW_GRID =
+  "grid lg:grid-cols-[minmax(0,620px)_minmax(0,500px)] gap-8 lg:gap-16 items-start";
+
+// The header band mirrors the hero: eyebrow line, display headline at the
+// hero's own scale, standfirst. Nothing here is sized for this page alone.
+function HeaderBand({
+  eyebrow,
+  title,
+  standfirst,
+}: {
+  eyebrow: string;
+  title: string;
+  standfirst?: string;
+}) {
+  return (
+    <header className="mb-10">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mb-6">
+        <span className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase text-accent">
+          {eyebrow}
+        </span>
+      </div>
+      <h1 className="font-serif font-light text-[clamp(34px,6.5vw,64px)] leading-[1.06] tracking-[-0.02em] max-w-[30ch] text-ink mb-6">
+        {title}
+      </h1>
+      {standfirst ? (
+        <p className="text-ink/90 font-serif text-lg sm:text-xl leading-[1.5] max-w-[70ch]">
+          {standfirst}
+        </p>
+      ) : null}
+    </header>
+  );
+}
+
+// One numbered section, using the grammar of "01 WORK" on the homepage:
+// mono index, mono uppercase label, hairline under both.
+function LabelledRow({
+  index,
+  label,
+  children,
+  rail,
+}: {
+  index: string;
+  label: string;
+  children: React.ReactNode;
+  rail?: React.ReactNode;
+}) {
+  return (
+    <section className="pt-8">
+      <div className="flex items-baseline gap-4 pb-4 border-b border-hairline-strong mb-6">
+        <span className="font-mono text-[11px] tracking-[0.18em] text-accent">{index}</span>
+        <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-body-quiet">
+          {label}
+        </h2>
+      </div>
+      <div className={ROW_GRID}>
+        <div>{children}</div>
+        <div>{rail}</div>
+      </div>
+    </section>
+  );
+}
+
+function Prose({ children }: { children: React.ReactNode }) {
+  return <p className="font-serif text-lg leading-relaxed text-body">{children}</p>;
+}
 
 function List({ items }: { items: string[] }) {
   return (
@@ -54,58 +122,64 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
 
   if (workRow?.caseStudy) {
     const { caseStudy } = workRow;
+    const images = workRow.images ?? [];
+    // Images go in the rail, at rail width. Sections without one carry the
+    // figures or the artifact link instead; an empty rail is fine.
+    const railImage = (image: (typeof images)[number] | undefined) =>
+      image ? (
+        <WorkImage
+          key={image.src}
+          image={image}
+          frame="full"
+          sizes="(min-width: 1024px) 500px, 100vw"
+        />
+      ) : null;
+
     return (
       <>
-        <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-accent mb-4">
-          {workRow.org} · {workRow.year}
-        </div>
-        <h1 className="font-serif font-light text-[clamp(28px,5vw,48px)] leading-[1.08] tracking-[-0.02em] max-w-[24ch] text-ink mb-5">
-          {workRow.title}
-        </h1>
-        <p className="font-mono text-[12px] text-body-quiet tracking-[0.04em] mb-10">
-          {workRow.figures}
-        </p>
+        <HeaderBand
+          eyebrow={`${workRow.org} · ${workRow.year}`}
+          title={workRow.title}
+          standfirst={workRow.body}
+        />
 
-        {/* Two widths: prose stays at a readable measure, screenshots break
-            out to the full content column so they read as evidence. */}
-        <div className={TEXT_COLUMN}>
-          <SectionHeading>What was broken</SectionHeading>
-          <p className="font-serif text-lg leading-relaxed text-body mb-10">{caseStudy.broken}</p>
+        <LabelledRow
+          index="01"
+          label="What was broken"
+          rail={
+            <p className="font-mono text-[12px] text-body-quiet tracking-[0.04em] leading-relaxed">
+              {workRow.figures}
+            </p>
+          }
+        >
+          <Prose>{caseStudy.broken}</Prose>
+        </LabelledRow>
 
-          <SectionHeading>What I built</SectionHeading>
-          <p className="font-serif text-lg leading-relaxed text-body">{caseStudy.built}</p>
-        </div>
+        <LabelledRow index="02" label="What I built" rail={railImage(images[0])}>
+          <Prose>{caseStudy.built}</Prose>
+        </LabelledRow>
 
-        {workRow.images?.length ? (
-          <div className="my-12 flex flex-col gap-12">
-            {workRow.images.map((image) => (
-              <WorkImage
-                key={image.src}
-                image={image}
-                frame="full"
-                sizes="(min-width: 1024px) 1140px, 100vw"
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="mb-10" />
-        )}
+        <LabelledRow
+          index="03"
+          label="What happened"
+          rail={
+            images.length > 1 ? (
+              <div className="flex flex-col gap-8">{images.slice(1).map(railImage)}</div>
+            ) : null
+          }
+        >
+          <Prose>{caseStudy.happened}</Prose>
+        </LabelledRow>
 
-        <div className={TEXT_COLUMN}>
-          <SectionHeading>What happened</SectionHeading>
-          <p className="font-serif text-lg leading-relaxed text-body mb-10">{caseStudy.happened}</p>
-
-          <SectionHeading>What I&apos;d do differently</SectionHeading>
-          <div className="mb-10">
-            <Todo label="not written yet" />
-          </div>
-
-          {caseStudy.artifactSlot ? (
-            <div className="flex flex-wrap gap-7 font-mono text-[13px] tracking-[0.02em] pt-6 border-t border-hairline items-center">
-              <Todo label={`${caseStudy.artifactSlot} link`} />
-            </div>
-          ) : null}
-        </div>
+        <LabelledRow
+          index="04"
+          label="What I'd do differently"
+          rail={
+            caseStudy.artifactSlot ? <Todo label={`${caseStudy.artifactSlot} link`} /> : null
+          }
+        >
+          <Todo label="not written yet" />
+        </LabelledRow>
       </>
     );
   }
@@ -117,12 +191,10 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
 
   return (
     <>
-      <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-accent mb-4">
-        {project.archetype ?? "Work"} {project.year ? `· ${project.year}` : ""}
-      </div>
-      <h1 className="font-serif font-light text-[clamp(28px,5vw,48px)] leading-[1.08] tracking-[-0.02em] max-w-[24ch] text-ink mb-5">
-        {teardown?.heading ?? project.title}
-      </h1>
+      <HeaderBand
+        eyebrow={`${project.archetype ?? "Work"}${project.year ? ` · ${project.year}` : ""}`}
+        title={teardown?.heading ?? project.title}
+      />
       {project.stack ? (
         <p className="font-mono text-[12px] text-body-quiet tracking-[0.04em] mb-8">
           {project.stack}
