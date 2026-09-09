@@ -1,26 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Newsreader, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["300", "400", "500"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
+const THEME_BOOTSTRAP = `
+try {
+  var stored = localStorage.getItem("theme");
+  if (stored === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+} catch (e) {}
+`;
 
 export const metadata: Metadata = {
-  title: "Bharat Kaushik · Program & Ops · IIMA",
+  title: "Bharat Kaushik · Product Manager, SITA Labs",
   description:
     "Execution operator and systems builder with 7 years across " +
     "intelligence, national-scale operations, and enterprise digital " +
-    "transformation. IIMA PGPX. Currently exploring Senior Program, " +
-    "Product Ops, and Founder's Office roles.",
+    "transformation. IIMA PGPX. Product Manager at SITA Labs, Gurugram.",
   openGraph: {
-    title: "Bharat Kaushik · Program & Ops · IIMA",
+    title: "Bharat Kaushik · Product Manager, SITA Labs",
     description:
       "Execution operator building low-friction systems that turn " +
       "messy, human processes into auditable, decision-ready workflows.",
@@ -31,14 +48,14 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Bharat Kaushik — Program & Ops · IIMA",
+        alt: "Bharat Kaushik — Product Manager, SITA Labs",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bharat Kaushik · Program & Ops · IIMA",
+    title: "Bharat Kaushik · Product Manager, SITA Labs",
     description:
       "Execution operator. Systems builder. IIMA MBA. " +
       "7 years across intelligence, national ops, and enterprise " +
@@ -49,15 +66,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  modal,
+}: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP }} />
+      </head>
       <body
         data-gramm="false" // ask Grammarly not to mutate the DOM
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}
         suppressHydrationWarning
       >
         {children}
+        {modal}
       </body>
     </html>
   );

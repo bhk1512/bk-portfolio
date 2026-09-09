@@ -1,33 +1,21 @@
 import ScrollProgress from "./(components)/ui/ScrollProgress";
 import Nav from "./(components)/nav/Nav";
 import Hero from "./(sections)/Hero";
-import WorkPatterns from "./(sections)/WorkPatterns";
-import Projects from "./(sections)/Projects";
-import DesignPhilosophy from "./(sections)/DesignPhilosophy";
-import Impact from "./(sections)/Impact";
-import SocialProof from "./(components)/ui/SocialProof";
-import Skills from "./(sections)/Skills";
-import Certifications from "./(sections)/Certifications";
-import About from "./(sections)/About";
+import Work from "./(sections)/Work";
+import OnTheRecord from "./(sections)/OnTheRecord";
 import Contact from "./(sections)/Contact";
 
 export default function PortfolioApp() {
   return (
-    <div className="bg-[#0b0b0b] min-h-screen text-[#E0E0E0] scroll-smooth overflow-x-hidden">
+    <div className="bg-ground min-h-screen text-body scroll-smooth overflow-x-hidden">
       <ScrollProgress />
       <Nav />
-      <main className="pt-10">
+      <main>
         <Hero />
-        <WorkPatterns />
-        <Projects />
-        <DesignPhilosophy />
-        <Impact />
-        <SocialProof />
-        <Skills />
-        <Certifications />
-        <About />
-        <Contact />
+        <Work />
+        <OnTheRecord />
       </main>
+      <Contact />
     </div>
   );
 }

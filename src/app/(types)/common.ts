@@ -1,13 +1,4 @@
-export const SECTION_IDS = [
-  "home",
-  "flagship",
-  "work",
-  "skills",
-  "certs",
-  "impact",
-  "about",
-  "contact",
-] as const;
+export const SECTION_IDS = ["home", "work", "record"] as const;
 
 export type SectionId = (typeof SECTION_IDS)[number];
 

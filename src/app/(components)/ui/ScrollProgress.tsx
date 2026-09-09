@@ -21,14 +21,10 @@ export default function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent">
+    <div className="fixed inset-x-0 top-16 z-[80] h-px bg-transparent">
       <div
-        className="h-full origin-left transform transition-[transform] duration-150 will-change-transform"
-        style={{
-          transform: `scaleX(${progress})`,
-          background:
-            "linear-gradient(90deg, rgba(224,224,224,0.35), rgba(224,224,224,0.9))",
-        }}
+        className="h-full origin-left transform transition-[transform] duration-150 will-change-transform bg-accent"
+        style={{ transform: `scaleX(${progress})` }}
         aria-hidden
       />
     </div>
