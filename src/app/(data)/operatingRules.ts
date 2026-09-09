@@ -1,8 +1,9 @@
-// Sourced verbatim from the existing (sections)/DesignPhilosophy.tsx copy
-// (not rendered as its own section in the redesign; folded into the
-// Work section's rail instead).
+// Dictated by Bharat. Flat opinions, not maxims -- the previous set was
+// three X-beats-Y constructions in a row, which is the tell we removed
+// everywhere else on the page.
 export const operatingRules: string[] = [
-  "Excel-first, automation-backed — adoption beats elegance.",
-  "Governance without friction — controls that don't slow teams.",
-  "Decision signals over dashboards — insight over instrumentation.",
+  "People don't switch tools because you asked them to. Build where they already are.",
+  "A control that slows the team down gets worked around within a month.",
+  "Nobody opens a dashboard on a Tuesday. Send them the exceptions instead.",
+  "The system still running a year later is usually the dull one.",
 ];

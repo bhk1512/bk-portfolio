@@ -2,6 +2,10 @@ export type WorkImage = {
   src: string;
   alt: string;
   caption: string;
+  // Intrinsic pixel size. Case studies render these uncropped at the full
+  // content width, so the real aspect ratio has to be known up front.
+  width: number;
+  height: number;
 };
 
 export type WorkCaseStudy = {
@@ -48,29 +52,25 @@ export const workRows: WorkRow[] = [
         src: "/images/work/quarterly-block-planning.png",
         alt: "Quarterly block planning interface showing per-month upload status, review, and freeze steps alongside the day-wise activity plan grid.",
         caption: "Quarterly upload and freeze workflow. Names and project codes replaced.",
+        width: 1897,
+        height: 827,
       },
     ],
     caseStudy: {
       broken:
-        "Planning across KEC's Transmission & Distribution projects ran in Excel, " +
-        "project by project. Twenty-four projects meant twenty-four independent " +
-        "files, each on its own cycle, with no shared structure for when a monthly " +
-        "plan had to be in, who reviewed it, or when it stopped moving. A number " +
-        "could shift after submission with no record of when or why.",
+        "Twenty-four projects, twenty-four Excel files, twenty-four different " +
+        "ideas about when a plan was due. Nobody could tell you who had reviewed " +
+        "what. Numbers changed after submission and there was no record of it.",
       built:
-        "A quarterly block-planning workflow inside the enterprise project " +
-        "platform, replacing the Excel cycle for all 24 projects. Projects upload " +
-        "their monthly plans for the quarter in sequence; the platform runs " +
-        "automatic scope validation on submission rather than leaving it to manual " +
-        "review. Uploaded plans go through a central review, and the whole quarter " +
-        "is locked with a hard freeze on day 12 of the cycle. Where a project " +
-        "genuinely can't hold a number, the shortfall doesn't disappear into the " +
-        "next month unannounced — it's reallocated across the remaining months of " +
-        "the quarter through a defined escalation path.",
+        "A quarterly planning workflow inside the platform the projects already " +
+        "used. Plans go up month by month. The system checks each one against " +
+        "remaining scope as it arrives, central review happens in one place, and " +
+        "on day 12 the quarter locks. If a project misses its number, the " +
+        "shortfall gets pushed into the remaining months by someone who has to " +
+        "decide where it goes. It doesn't quietly vanish.",
       happened:
-        "24 projects moved onto the workflow. The planning cycle — upload through " +
-        "to freeze — runs in 12 days. Q2 2026 (Jul–Sep) was planned end-to-end " +
-        "through it, and the workflow was live and in daily use when I left.",
+        "All 24 projects moved onto it. Q2 2026 was planned start to finish " +
+        "through the system. It was running daily when I left.",
       artifactSlot: "Process flow",
     },
   },
@@ -92,26 +92,27 @@ export const workRows: WorkRow[] = [
         src: "/images/work/foundation-quality-capture.png",
         alt: "Milestone-gated foundation quality capture flow showing required video evidence and skip-with-justification controls for one checkpoint.",
         caption: "Milestone capture flow. Project and location codes replaced.",
+        width: 1731,
+        height: 1551,
       },
     ],
     caseStudy: {
       broken:
-        "Foundation quality evidence was collected on paper checklists, filled in " +
-        "after the work was already done. There was no way to confirm a " +
-        "checkpoint had actually been observed at the time it happened, and " +
-        "evidence could be assembled — or reconstructed — well after the fact.",
+        "Foundation quality was recorded on paper checklists, filled in after the " +
+        "work was already done. Nobody could confirm a checkpoint had been " +
+        "watched at the time it happened. Evidence could be put together later, " +
+        "and nothing in the process stopped that.",
       built:
-        "A milestone-gated live capture flow with seven checkpoints across the " +
-        "foundation sequence. Capture only happens live: uploading evidence after " +
-        "the fact isn't possible, and every capture is geo-tagged to the site. If " +
-        "a milestone is skipped, the field team has to give a written " +
-        "justification before moving on — the gap is recorded, not hidden. QA " +
-        "review is then aimed at those exceptions and justifications rather than " +
-        "re-checking every submission.",
+        "Seven checkpoints across the foundation sequence, each one gated. " +
+        "Capture happens live or it doesn't count. There is no way to upload " +
+        "evidence collected earlier, and every capture is geo-tagged to the site. " +
+        "If the field team skips a milestone, they write down why before they can " +
+        "move on. The gap goes on the record. QA reviews those exceptions and " +
+        "the justifications behind them. It no longer re-checks every clean " +
+        "submission.",
       happened:
-        "Seven milestones per foundation, live capture only, running at roughly " +
-        "0.9 GB of evidence per foundation. The flow was released and in active " +
-        "use when I left.",
+        "Seven milestones per foundation. Live capture only. Around 0.9 GB of " +
+        "evidence per foundation. It was released and in active use when I left.",
     },
   },
   {
@@ -134,44 +135,49 @@ export const workRows: WorkRow[] = [
         src: "/images/work/productivity-dashboard-executive.png",
         alt: "Executive overview dashboard with portfolio-level completion, plan attainment, and productivity KPIs plus a RAG status table by project.",
         caption: "Executive overview. Names and project codes replaced.",
+        width: 1891,
+        height: 835,
       },
       {
         src: "/images/work/tower-erection-analytics.png",
         alt: "Tower erection analytics tab showing idle-day hotspots, recoverable output estimates, and a what-if productivity simulator.",
         caption: "Tower erection analytics. Project codes replaced.",
+        width: 1887,
+        height: 841,
       },
       {
         src: "/images/work/execution-report.png",
         alt: "Execution report table breaking down scope, completion, and monthly plan-versus-actual by region, project, and activity.",
         caption: "Execution report, regional breakdown. Names and project codes replaced.",
+        width: 1899,
+        height: 821,
       },
     ],
     caseStudy: {
       broken:
-        "Execution data arrived in Excel, and formats drifted across 25+ projects " +
-        "over time. Manual consolidation was slow, error-prone and reactive, so " +
-        "leadership had no trusted, current view of what was off-plan or why. " +
-        "Separately, the enterprise project platform tracked erection and " +
-        "stringing at status level only — done or not done — with no date-wise " +
-        "quantity or gang-level detail. Productivity had to be assembled by hand " +
-        "outside it: a daily progress report mail chain, separate micro-plan files " +
-        "per project, and a standalone dashboard stitched together from both.",
+        "Execution data came in as Excel files. More than 25 projects, and the " +
+        "formats drifted apart over time. Consolidation was manual and slow, and " +
+        "by the time it was done it described the past. Leadership had no current " +
+        "view of what was off plan or why. The platform had a gap of its own. It " +
+        "tracked erection and stringing as done or not done, with no date-wise " +
+        "quantities and no gang-level detail, so productivity got assembled by " +
+        "hand outside it. A daily progress report mail chain. A micro-plan file " +
+        "for every project. A standalone dashboard stitched out of both.",
       built:
-        "First the standalone dashboard: 25+ project reports consolidated into one " +
-        "leadership view of plan versus actual, built by reading the files site " +
-        "teams were already filing rather than asking them for anything new. A " +
-        "validation layer underneath surfaced exceptions on their own instead of " +
-        "waiting for someone to notice them. Once it was in weekly use, I wrote " +
-        "the case to stop maintaining it as a side tool — extending the enterprise " +
-        "project platform from status-only tracking to date-wise quantities and " +
-        "gangs, so productivity is computed by the platform itself rather than " +
-        "reassembled afterward.",
+        "First the standalone dashboard. It read the files site teams were " +
+        "already filing, so nobody had to send me anything new. More than 25 " +
+        "project reports landed in one view of plan against actual, with a " +
+        "validation layer underneath that raised exceptions on its own. Then it " +
+        "went into weekly use, and I wrote the case to stop maintaining it. The " +
+        "argument was to extend the platform people already used from status-only " +
+        "tracking to date-wise quantities and gangs, so the platform computes " +
+        "productivity itself and nobody rebuilds it afterward.",
       happened:
-        "25+ projects on one view, roughly 80% of manual effort removed, and " +
-        "productivity now visible as MT/day and km/month per gang. The extension " +
+        "More than 25 projects on one view. Around 80% of the manual effort gone. " +
+        "Productivity visible as MT/day and km/month per gang. The extension " +
         "retired the standalone tool, the DPR mail chain and the micro-plan files " +
-        "in the same move — three sources collapsed into one. Institutionalised " +
-        "into the platform. Standalone retired by my own business case, 2026.",
+        "in one move. Three sources became one. Institutionalised into the " +
+        "platform. Standalone retired by my own business case, 2026.",
       artifactSlot: "Requirements document",
     },
   },

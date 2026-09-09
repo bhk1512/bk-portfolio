@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import Nav from "../../(components)/nav/Nav";
 import Contact from "../../(sections)/Contact";
+import BackToWork from "../../(components)/work/BackToWork";
 import CaseStudyBody, {
   caseStudyExists,
   caseStudyTitle,
@@ -43,12 +43,7 @@ export default async function WorkCaseStudyPage({ params }: PageProps) {
       <Nav />
       <main>
         <section className="mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16 pt-24 sm:pt-28 pb-10">
-          <Link
-            href="/#work"
-            className="font-mono text-[11px] tracking-[0.06em] text-body-quiet hover:text-ink transition-colors"
-          >
-            ← All work
-          </Link>
+          <BackToWork slug={slug} />
           <div className="mt-6">
             <CaseStudyBody slug={slug} />
           </div>

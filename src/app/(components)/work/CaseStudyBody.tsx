@@ -20,6 +20,10 @@ export function caseStudyDescription(slug: string): string | undefined {
   return project?.cardSummary ?? project?.summary;
 }
 
+// Prose measure. Wider than this hurts reading, and the empty space to its
+// right is correct -- images are what use the rest of the column.
+const TEXT_COLUMN = "max-w-[640px]";
+
 function List({ items }: { items: string[] }) {
   return (
     <ul className="space-y-2">
@@ -62,13 +66,32 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           {workRow.figures}
         </p>
 
-        <div className="max-w-[70ch]">
+        {/* Two widths: prose stays at a readable measure, screenshots break
+            out to the full content column so they read as evidence. */}
+        <div className={TEXT_COLUMN}>
           <SectionHeading>What was broken</SectionHeading>
           <p className="font-serif text-lg leading-relaxed text-body mb-10">{caseStudy.broken}</p>
 
           <SectionHeading>What I built</SectionHeading>
-          <p className="font-serif text-lg leading-relaxed text-body mb-10">{caseStudy.built}</p>
+          <p className="font-serif text-lg leading-relaxed text-body">{caseStudy.built}</p>
+        </div>
 
+        {workRow.images?.length ? (
+          <div className="my-12 flex flex-col gap-12">
+            {workRow.images.map((image) => (
+              <WorkImage
+                key={image.src}
+                image={image}
+                frame="full"
+                sizes="(min-width: 1024px) 1140px, 100vw"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="mb-10" />
+        )}
+
+        <div className={TEXT_COLUMN}>
           <SectionHeading>What happened</SectionHeading>
           <p className="font-serif text-lg leading-relaxed text-body mb-10">{caseStudy.happened}</p>
 
@@ -76,18 +99,6 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           <div className="mb-10">
             <Todo label="not written yet" />
           </div>
-
-          {workRow.images?.length ? (
-            <div className="grid sm:grid-cols-2 gap-5 mb-10">
-              {workRow.images.map((image) => (
-                <WorkImage
-                  key={image.src}
-                  image={image}
-                  sizes="(min-width: 640px) 420px, 100vw"
-                />
-              ))}
-            </div>
-          ) : null}
 
           {caseStudy.artifactSlot ? (
             <div className="flex flex-wrap gap-7 font-mono text-[13px] tracking-[0.02em] pt-6 border-t border-hairline items-center">
@@ -119,7 +130,7 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
       ) : null}
 
       {teardown ? (
-        <div className="max-w-[70ch]">
+        <div className={TEXT_COLUMN}>
           <p className="font-serif text-lg leading-relaxed text-body mb-10">
             {teardown.description}
           </p>
@@ -202,7 +213,7 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           ) : null}
         </div>
       ) : (
-        <div className="max-w-[70ch]">
+        <div className={TEXT_COLUMN}>
           {project.summary ? (
             <p className="font-serif text-lg leading-relaxed text-body mb-3">{project.summary}</p>
           ) : null}

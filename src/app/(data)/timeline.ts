@@ -52,8 +52,9 @@ export const timeline: TimelineNode[] = [
     short: "KEC",
     year: "2025",
     detail:
-      "KEC International. EPC infrastructure. Their first project-tracking platform, " +
-      "built in Excel on purpose. 25+ projects on one system.",
+      "KEC International. Power transmission and distribution, EPC. Built the first " +
+      "system that put 25 projects in one view, then the planning and quality modules " +
+      "that replaced it inside the platform people already used.",
     weight: 1.4,
   },
   {

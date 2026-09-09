@@ -1,15 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { workRows } from "../(data)/work";
 import { operatingRules } from "../(data)/operatingRules";
+import { RETURN_KEY, rememberRow, rowDomId } from "../(components)/work/returnToRow";
 import Todo from "../(components)/ui/Todo";
 import WorkImage from "../(components)/ui/WorkImage";
 
 export default function Work() {
   const [openId, setOpenId] = useState<string | null>(null);
+
+  // Coming back from a case study (back-link or browser Back): reopen the
+  // row that was left open and put it back under the reader's eye. The row's
+  // own top edge doesn't move when it expands, so anchoring to the element
+  // is stable whether or not the panel has painted yet.
+  useEffect(() => {
+    let slug: string | null = null;
+    try {
+      slug = sessionStorage.getItem(RETURN_KEY);
+      if (slug) sessionStorage.removeItem(RETURN_KEY);
+    } catch {
+      return;
+    }
+    if (!slug || !workRows.some((row) => row.slug === slug)) return;
+
+    setOpenId(slug);
+    document
+      .getElementById(rowDomId(slug))
+      ?.scrollIntoView({ block: "start", behavior: "instant" });
+  }, []);
 
   return (
     <section id="work" className="scroll-mt-16">
@@ -31,7 +52,11 @@ export default function Work() {
                 const isRowOpen = openId === row.slug;
 
                 return (
-                  <div key={row.slug} className="border-b border-hairline">
+                  <div
+                    key={row.slug}
+                    id={rowDomId(row.slug)}
+                    className="border-b border-hairline scroll-mt-20"
+                  >
                     <button
                       type="button"
                       onClick={() => setOpenId(isRowOpen ? null : row.slug)}
@@ -86,7 +111,7 @@ export default function Work() {
                           ) : null}
                           <Link
                             href={`/work/${row.slug}`}
-                            scroll={false}
+                            onClick={() => rememberRow(row.slug)}
                             className="inline-block mt-3 font-mono text-[11.5px] tracking-[0.04em] text-accent border-b border-accent/40 pb-0.5 hover:text-ink hover:border-ink transition-colors"
                           >
                             Read the case study

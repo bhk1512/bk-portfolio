@@ -9,6 +9,10 @@ import type { WorkImage as WorkImageData } from "../../(data)/work";
 type WorkImageProps = {
   image: WorkImageData;
   sizes?: string;
+  // "card" crops to a uniform 16/9 tile for the homepage row grid.
+  // "full" shows the whole screenshot at content width, uncropped, so a
+  // dashboard can actually be read on the case study page.
+  frame?: "card" | "full";
 };
 
 // Site-wide treatment for product-screenshot artifacts: desaturated so a
@@ -18,6 +22,7 @@ type WorkImageProps = {
 export default function WorkImage({
   image,
   sizes = "(min-width: 1024px) 800px, 100vw",
+  frame = "card",
 }: WorkImageProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -46,24 +51,46 @@ export default function WorkImage({
     };
   }, [open]);
 
+  const isFull = frame === "full";
+
   return (
-    <figure className="mt-4">
+    <figure className={isFull ? "" : "mt-4"}>
       <button
         ref={openerRef}
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Open full image: ${image.alt}`}
-        className="group block w-full cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
+        // A tall screenshot is capped by width here rather than by
+        // max-height on the image itself: the image keeps a determinate
+        // width, so its box is reserved from the aspect ratio before the
+        // file loads and nothing shifts underneath it.
+        style={
+          isFull
+            ? { maxWidth: `calc(78vh * ${(image.width / image.height).toFixed(4)})` }
+            : undefined
+        }
+        className="group block w-full cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
       >
-        <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-hairline-strong transition-colors duration-150 motion-reduce:transition-none group-hover:border-accent/60">
+        {isFull ? (
           <Image
             src={image.src}
             alt={image.alt}
-            fill
+            width={image.width}
+            height={image.height}
             sizes={sizes}
-            className="object-cover object-top grayscale-[45%] brightness-90 contrast-95 transition duration-200 motion-reduce:transition-none group-hover:grayscale-[15%] group-hover:brightness-100"
+            className="h-auto w-full rounded-lg border border-hairline-strong grayscale-[45%] brightness-90 contrast-95 transition duration-200 motion-reduce:transition-none group-hover:grayscale-[15%] group-hover:brightness-100 group-hover:border-accent/60"
           />
-        </div>
+        ) : (
+          <div className="relative w-full aspect-[16/9] overflow-hidden rounded-lg border border-hairline-strong transition-colors duration-150 motion-reduce:transition-none group-hover:border-accent/60">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              sizes={sizes}
+              className="object-cover object-top grayscale-[45%] brightness-90 contrast-95 transition duration-200 motion-reduce:transition-none group-hover:grayscale-[15%] group-hover:brightness-100"
+            />
+          </div>
+        )}
       </button>
       <figcaption className="mt-2 font-mono text-[10.5px] text-body-quiet tracking-[0.04em]">
         {image.caption}

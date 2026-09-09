@@ -3,7 +3,7 @@ import type { HeroData } from "../(types)/common";
 export const heroData: HeroData = {
   name: "Bharat Kaushik",
   subhead: "Aligning people, processes, and tech to remove uncertainty from execution",
-  availability: "Product Manager at SITA Labs · Gurugram",
+  availability: "Product Manager at SITA Labs",
   photo: { src: "/images/avatar.jpg", alt: "Bharat Kaushik" },
   ctas: [
     { label: "Download CV", href: "/Bharat_Kaushik_IIMA.pdf", type: "primary" },
