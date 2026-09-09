@@ -20,6 +20,8 @@ export type WorkRow = {
   year: string;
   body: string;
   figures: string;
+  // null renders a visible "still running / handed over" TODO (status not
+  // yet known). "" hides the status line (status doesn't apply to this row).
   then: string | null;
   images?: WorkImage[];
   caseStudy?: WorkCaseStudy;
@@ -205,6 +207,32 @@ export const workRows: WorkRow[] = [
       "essential supply uninterrupted for 90 days in a remote district.",
     figures: "~85% analyst time saved | 90+ days zero supply failure | built solo",
     then: "Handed over.",
+  },
+  {
+    slug: "audible-product-teardown",
+    title: "Audible Product Teardown",
+    org: "Personal",
+    year: "2025",
+    body:
+      "Deep dive into Audible's product experience, retention mechanics, and " +
+      "growth plays backed by 30K+ review signals.",
+    figures: "60% global share",
+    // Personal teardown, not a deployed system -- "still running / handed
+    // over" doesn't apply. Empty string hides the status line entirely.
+    then: "",
+  },
+  {
+    slug: "defence-expo-pmo",
+    title: "Defence Expo PMO",
+    org: "National",
+    year: "2022",
+    body:
+      "Ran 8 workstreams and multi-agency governance to deliver a zero-incident " +
+      "event at national scale.",
+    figures: "250k+ visitors | 75+ delegations | 100% SLA / zero incidents",
+    // The event concluded in 2022 -- "still running / handed over" doesn't
+    // apply. Empty string hides the status line entirely.
+    then: "",
   },
 ];
 

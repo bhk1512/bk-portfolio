@@ -58,11 +58,11 @@ export default function Work() {
                       </div>
                       <div className="grid grid-cols-[16px_minmax(0,1fr)] gap-3 sm:gap-5 mt-1">
                         <span />
-                        {row.then ? (
-                          <span className="font-mono text-[11px] text-muted">{row.then}</span>
-                        ) : (
+                        {row.then === null ? (
                           <Todo label="still running / handed over" />
-                        )}
+                        ) : row.then ? (
+                          <span className="font-mono text-[11px] text-muted">{row.then}</span>
+                        ) : null}
                       </div>
                     </button>
 
