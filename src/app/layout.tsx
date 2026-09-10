@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Bharat Kaushik — Product Manager, SITA Labs",
+        alt: "Bharat Kaushik · Product Manager, SITA Labs",
       },
     ],
     type: "website",

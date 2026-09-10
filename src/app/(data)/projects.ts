@@ -27,10 +27,10 @@ export const projects: Project[] = [
       archetype: "Execution at Scale",
       problem: [
         "India's largest defence exhibition: 250K+ visitors and 75+ international " +
-          "delegations across 5 days — zero-failure tolerance, nationally visible.",
+          "delegations across 5 days. Zero-failure tolerance, nationally visible.",
         "20-day build window to design and deploy full security and logistics " +
           "architecture from scratch, leading 600+ personnel across 6 agencies.",
-        "No existing operational playbook — the scale, profile, and multi-agency " +
+        "No existing operational playbook. The scale, profile, and multi-agency " +
           "complexity made this a first-of-kind program for the unit.",
         "Public-day surge risk: projected attendance could exceed planned capacity, " +
           "requiring contingency architecture to be pre-built and deployable fast.",
@@ -39,41 +39,41 @@ export const projects: Project[] = [
         "Structured the program into 8 workstreams: access control, perimeter " +
           "security, VIP and delegation protocol, logistics, communications, CCTV " +
           "operations, contingency planning, and media coordination.",
-        "Integrated 2,000+ CCTV feeds into a single multi-agency control room — " +
+        "Integrated 2,000+ CCTV feeds into a single multi-agency control room, " +
           "giving real-time situational awareness to CISF, police, intelligence, " +
           "and event management teams simultaneously.",
         "Ran daily standup cadence with all 6 agency leads and weekly RAID-log " +
-          "reviews — any blocker unresolved for 24 hours was escalated same day.",
+          "reviews. Any blocker unresolved for 24 hours was escalated same day.",
         "When public-day attendance surged beyond planned capacity, restructured " +
-          "the entire access and crowd-flow architecture within 12 hours — " +
+          "the entire access and crowd-flow architecture within 12 hours, " +
           "redeploying personnel, adjusting entry sequencing, and reorienting the " +
           "control room to the revised model without event disruption.",
         "Coordinated movement and protocol for 75+ international delegations, " +
-          "including heads of state-adjacent delegations — zero protocol breaches.",
+          "including heads of state-adjacent delegations. Zero protocol breaches.",
         "Managed parallel escalation tracks: operational decisions stayed at " +
           "field level; strategic conflicts and inter-agency disputes escalated " +
           "to principals within the same working day.",
       ],
       outcome: [
-        "100% SLA across all 8 workstreams. Zero incidents across the full event — " +
-          "no security breach, no protocol failure, no SLA miss.",
+        "100% SLA across all 8 workstreams. Zero incidents across the full event. " +
+          "No security breach, no protocol failure, no SLA miss.",
         "Public-day surge absorbed: architecture redesign executed and fully " +
           "redeployed within 12 hours, with no service interruption.",
         "250K+ visitors and 75+ international delegations processed without a " +
           "single reportable incident.",
-        "Recommended for Director General's Commendation Roll — the unit's " +
+        "Recommended for Director General's Commendation Roll, the unit's " +
           "highest program leadership recognition.",
       ],
       learnings: [
         "RAID-log governance under hard deadlines: keeping 8 workstreams on the " +
           "critical path requires structured escalation, not just daily check-ins.",
-        "Contingency architecture is a first-order deliverable, not an afterthought — " +
-          "the 12-hour surge response was only possible because the fallback " +
+        "Contingency architecture is a first-order deliverable, not an afterthought. " +
+          "The 12-hour surge response was only possible because the fallback " +
           "model had been pre-designed.",
         "Cross-agency alignment requires both formal governance (standups, RAID) " +
-          "and interpersonal diplomacy — neither alone works at this scale.",
+          "and interpersonal diplomacy. Neither alone works at this scale.",
         "Operational flexibility under a fixed, public deadline is a distinct " +
-          "skill from project management — decisions have no room for iteration.",
+          "skill from project management. Decisions have no room for iteration.",
       ],
     },
     {
@@ -82,12 +82,12 @@ export const projects: Project[] = [
       year: "2022",
       stack: "Multi-agency · 8 Workstreams · Zero-failure delivery",
       summary:
-        "Directed PMO for India's largest defence exhibition — 600+ personnel, " +
+        "Directed PMO for India's largest defence exhibition. 600+ personnel, " +
         "6 agencies, 250K+ visitors, 75+ international delegations. " +
         "Restructured operational architecture within 12 hours for public-day " +
         "surge. Zero incidents. Zero SLA breaches.",
       cardSummary:
-        "Multi-agency PMO at national scale — 600+ personnel, zero incidents, " +
+        "Multi-agency PMO at national scale. 600+ personnel, zero incidents, " +
         "DG Commendation Roll.",
       proof: "250K+ visitors | 75+ delegations | 100% SLA",
       context:
@@ -107,14 +107,14 @@ export const projects: Project[] = [
         "250K+ visitors, 75+ foreign delegations, zero-failure tolerance.",
         "20 days to design and deploy security + logistics architecture " +
           "while leading 600+ personnel across 6 agencies.",
-        "No existing playbook — operational model had to be built from scratch.",
+        "No existing playbook. The operational model had to be built from scratch.",
       ],
       approach: [
         "Directed 8 workstreams (access control, perimeter, protocol, logistics, " +
           "VIP movement, communications, contingency, and media management).",
         "Integrated 2,000+ CCTV streams into a unified multi-agency control room " +
           "for real-time situational awareness.",
-        "Ran daily standups and RAID-log reviews with 6-agency stakeholders — " +
+        "Ran daily standups and RAID-log reviews with 6-agency stakeholders, " +
           "surfacing blockers within 24 hours of identification.",
         "Restructured the entire public-day operational architecture within " +
           "12 hours when projected visitor surge exceeded planned capacity.",
@@ -123,7 +123,7 @@ export const projects: Project[] = [
       ],
       outcome: [
         "100% SLA across all 8 workstreams. Zero incidents across the full event.",
-        "Public-day surge absorbed without service disruption — architecture " +
+        "Public-day surge absorbed without service disruption. Architecture " +
           "redesign executed and redeployed within 12 hours.",
         "Recommended for Director General's Commendation Roll.",
       ],
@@ -133,7 +133,7 @@ export const projects: Project[] = [
         "Operational flexibility under a fixed deadline requires pre-built " +
           "contingency architecture, not reactive workarounds.",
         "Cross-agency alignment needs both formal governance and interpersonal " +
-          "diplomacy — neither alone is sufficient.",
+          "diplomacy. Neither alone is sufficient.",
       ],
     },
     {
@@ -556,7 +556,7 @@ export const projects: Project[] = [
       stack: "Python · NLP · Random Forest · AWS",
       summary:
         "Built and deployed an NLP classification pipeline from scratch to " +
-        "auto-prioritise high-signal entities from open-source data — no prior " +
+        "auto-prioritise high-signal entities from open-source data. No prior " +
         "infrastructure, no team, no playbook. Reduced analyst processing time " +
         "by ~85%. Separately deployed as field intelligence advisor during " +
         "COVID-19 to a remote tribal district: mapped supply chain failures, " +
@@ -582,7 +582,7 @@ export const projects: Project[] = [
       archetype: "Decision Systems",
       problem: [
         "Manual profiling of high-impact entities from open-source data was " +
-          "draining analyst hours and missing early signals — no automated " +
+          "draining analyst hours and missing early signals. No automated " +
           "triage existed.",
         "During COVID-19 lockdown, a remote tribal district faced supply chain " +
           "collapse: no visibility into blockages, no delivery model, and no " +
@@ -591,15 +591,15 @@ export const projects: Project[] = [
       approach: [
         "Designed and built an NLP classification pipeline (Python, Random " +
           "Forest) with nightly AWS crawlers to ingest, score, and prioritise " +
-          "entities from open-source data — entirely self-initiated and " +
+          "entities from open-source data. Entirely self-initiated and " +
           "self-built.",
         "Tuned keyword and classification logic for domain-specific threat " +
           "signals; balanced precision vs. speed given the sensitivity of outputs.",
         "For the COVID deployment: mapped district-level supply chain blockages " +
           "end-to-end, identified failure nodes, and designed a zone-based " +
           "delivery model.",
-        "Coordinated logistics across multiple agencies with no formal authority " +
-          "— alignment achieved through daily briefings and shared tracking.",
+        "Coordinated logistics across multiple agencies with no formal authority. " +
+          "Alignment achieved through daily briefings and shared tracking.",
       ],
       outcome: [
         "NLP pipeline reduced analyst cycle-time by ~85%, freeing over 1 FTE " +
@@ -609,11 +609,11 @@ export const projects: Project[] = [
       ],
       learnings: [
         "0→1 builds under operational pressure require extreme constraint on " +
-          "scope — ship the 80% solution that works over the perfect system " +
+          "scope. Ship the 80% solution that works, not the perfect system " +
           "that doesn't.",
         "Coordination without authority is a distinct skill: shared tracking " +
           "and daily cadence substitute for formal control.",
-        "Precision vs. speed trade-offs in NLP are real — especially when " +
+        "Precision vs. speed trade-offs in NLP are real, especially when " +
           "false negatives have operational consequences.",
       ],
     },
@@ -646,7 +646,7 @@ export const projects: Project[] = [
       flagship: false,
       archetype: "Product & Strategy",
       problem: [
-        "Tendering estimation relied on individual expertise — no structured " +
+        "Tendering estimation relied on individual expertise. No structured " +
           "knowledge base, no consistent pricing method across the team.",
         "High-value bids had long estimation cycles and inconsistent confidence " +
           "levels, creating bottlenecks before submission.",
@@ -666,14 +666,14 @@ export const projects: Project[] = [
           "format compatible with existing review workflows.",
       ],
       outcome: [
-        "Eliminated the estimation bottleneck for high-value bids — turnaround " +
+        "Eliminated the estimation bottleneck for high-value bids. Turnaround " +
           "time cut significantly.",
         "Standardised pricing confidence across the team with consistent " +
           "scenario framing (low/base/high).",
         "First internal AI product of its kind at the business unit.",
       ],
       learnings: [
-        "Internal products live or die on adoption — output format must match " +
+        "Internal products live or die on adoption. Output format must match " +
           "existing workflows, not force new ones.",
         "LLM-assisted development accelerates 0→1 builds, but architectural " +
           "control and domain knowledge still determine quality.",

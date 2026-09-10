@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 
 import { timeline, defaultTimelineIndex } from "../../(data)/timeline";
+import TimelineGlyph from "./TimelineGlyph";
 
 type RailProps = {
   active: number;
@@ -45,9 +46,26 @@ function Dot({ active }: { active: boolean }) {
   );
 }
 
-function NodeLabel({ short, year, active }: { short: string; year: string; active: boolean }) {
+function NodeLabel({
+  id,
+  short,
+  year,
+  active,
+}: {
+  id: string;
+  short: string;
+  year: string;
+  active: boolean;
+}) {
   return (
     <>
+      <span
+        className={`block mb-1.5 transition-colors duration-150 motion-reduce:transition-none ${
+          active ? "text-ink" : "text-body-quiet group-hover:text-ink"
+        }`}
+      >
+        <TimelineGlyph id={id} />
+      </span>
       <span
         className={`block font-mono text-[9px] sm:text-[11px] tracking-[0.06em] sm:tracking-[0.12em] whitespace-nowrap transition-colors duration-150 motion-reduce:transition-none ${
           active ? "text-ink" : "text-body-quiet group-hover:text-ink"
@@ -100,7 +118,7 @@ function HorizontalRail({ active, onSelect }: RailProps) {
           <span className="absolute left-0 top-0 -translate-y-1/2">
             <Dot active={active === 0} />
           </span>
-          <NodeLabel short={first.short} year={first.year} active={active === 0} />
+          <NodeLabel id={first.id} short={first.short} year={first.year} active={active === 0} />
         </button>
       </div>
 
@@ -132,7 +150,7 @@ function HorizontalRail({ active, onSelect }: RailProps) {
               <span className="absolute left-0 top-0 -translate-y-1/2">
                 <Dot active={active === index} />
               </span>
-              <NodeLabel short={node.short} year={node.year} active={active === index} />
+              <NodeLabel id={node.id} short={node.short} year={node.year} active={active === index} />
             </button>
           </div>
         );

@@ -3,7 +3,7 @@
 const recognitions = [
   {
     quote:
-      "Recognised as Top Talent (OMR 2025) — KEC International's " +
+      "Recognised as Top Talent (OMR 2025). KEC International's " +
       "high-potential designation, valid through 2027.",
     source: "KEC International · RPG Group",
   },

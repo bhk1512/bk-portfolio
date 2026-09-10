@@ -97,7 +97,7 @@ function List({ items }: { items: string[] }) {
     <ul className="space-y-2">
       {items.map((item, index) => (
         <li key={index} className="font-serif text-base leading-relaxed text-body flex gap-3">
-          <span className="text-accent font-mono text-xs pt-1.5">—</span>
+          <span className="text-accent font-mono text-xs pt-1.5">·</span>
           <span>{item}</span>
         </li>
       ))}
