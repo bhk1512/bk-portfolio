@@ -2,7 +2,7 @@ import type { HeroData } from "../(types)/common";
 
 export const heroData: HeroData = {
   name: "Bharat Kaushik",
-  subhead: "Aligning people, processes, and tech to remove uncertainty from execution",
+  subhead: "I build tools for work that happens away from a desk.",
   availability: "Product Manager at SITA Labs",
   photo: { src: "/images/avatar.jpg", alt: "Bharat Kaushik" },
   ctas: [

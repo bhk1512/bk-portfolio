@@ -113,7 +113,7 @@ function HorizontalRail({ active, onSelect }: RailProps) {
           onFocus={() => onSelect(0)}
           onClick={() => onSelect(0)}
           onKeyDown={(event) => handleKeyDown(event, 0)}
-          className="group relative block pt-3 pr-0.5 sm:pt-4 sm:pr-3 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+          className="group relative block w-full pt-3 pr-0.5 sm:pt-4 sm:pr-3 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
         >
           <span className="absolute left-0 top-0 -translate-y-1/2">
             <Dot active={active === 0} />
@@ -145,7 +145,7 @@ function HorizontalRail({ active, onSelect }: RailProps) {
               onFocus={() => onSelect(index)}
               onClick={() => onSelect(index)}
               onKeyDown={(event) => handleKeyDown(event, index)}
-              className="group relative block pt-3 pr-0.5 sm:pt-4 sm:pr-3 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
+              className="group relative block w-full pt-3 pr-0.5 sm:pt-4 sm:pr-3 text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
             >
               <span className="absolute left-0 top-0 -translate-y-1/2">
                 <Dot active={active === index} />

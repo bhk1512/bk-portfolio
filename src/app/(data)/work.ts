@@ -41,10 +41,10 @@ export const workRows: WorkRow[] = [
     org: "KEC",
     year: "2026",
     body:
-      "Replaced Excel-based planning across 24 T&D projects with a governed quarterly " +
-      "cycle inside the enterprise project platform. Sequential upload with automatic " +
-      "scope validation, central review, a hard freeze on day 12, and shortfall " +
-      "reallocation into the remaining months with an escalation path.",
+      "Twenty-four projects, twenty-four Excel files, twenty-four ideas about " +
+      "when a plan was due. Now they plan a quarter at a time inside the " +
+      "platform they already use, the system checks the numbers as they " +
+      "arrive, and on day 12 the quarter locks.",
     figures: "24 projects · 12-day planning cycle",
     then: "Q2 Jul-Sep 2026 planned through it. Live when I left.",
     images: [
@@ -80,11 +80,9 @@ export const workRows: WorkRow[] = [
     org: "KEC",
     year: "2026",
     body:
-      "Replaced paper foundation checklists with milestone-gated live capture at " +
-      "seven checkpoints. Uploads disabled so evidence cannot be assembled after " +
-      "the fact, capture geo-tagged, a written justification required whenever a " +
-      "milestone is skipped, and QA review aimed at exceptions rather than at " +
-      "everything.",
+      "Foundation quality used to be a paper checklist signed at the end. Now " +
+      "the evidence is captured live at seven points during the work, " +
+      "geo-tagged, and if someone skips a step they have to say why.",
     figures: "7 milestones · live capture only · ~0.9 GB evidence per foundation",
     then: "Released and in use when I left.",
     images: [
@@ -121,11 +119,10 @@ export const workRows: WorkRow[] = [
     org: "KEC",
     year: "2025-2026",
     body:
-      "Built a standalone dashboard consolidating 25+ project reports into one " +
-      "leadership view of plan versus actual. Once it was in weekly use, wrote the " +
-      "case to extend the enterprise project platform from status-only tracking to " +
-      "date-wise quantities and gangs — and retired the standalone tool, the DPR " +
-      "mail chain and the micro-plan files with it.",
+      "Built a dashboard that put 25 projects in one view. Once leadership was " +
+      "opening it every week, wrote the case to build it properly inside the " +
+      "platform, and switched off my own tool along with the report mails and " +
+      "the micro-plan files.",
     figures: "25+ projects | ~80% manual effort removed | MT/day and km/month per gang",
     then:
       "Institutionalised into the platform. Standalone retired by my own business " +
@@ -200,8 +197,9 @@ export const workRows: WorkRow[] = [
     org: "KEC",
     year: "2025",
     body:
-      "Weekly Monday 9 AM digest that converts 30+ sources into EPC wins, " +
-      "setbacks, moves & macro signals.",
+      "Thirty-odd sources crawled overnight and sorted into wins, setbacks, " +
+      "moves and macro. Lands at nine on Monday. Three hours of reading became " +
+      "ten minutes.",
     figures: "3 hrs -> <10 min weekly | 30+ sources | weekly cadence",
     then: "Still running.",
   },
@@ -211,8 +209,9 @@ export const workRows: WorkRow[] = [
     org: "IB",
     year: "2019–2020",
     body:
-      "0→1 NLP pipeline cutting analyst time 85% + field deployment keeping " +
-      "essential supply uninterrupted for 90 days in a remote district.",
+      "Analyst intake was a queue someone read top to bottom. Wrote a " +
+      "classifier that pushed the high-value items up. Built it alone, because " +
+      "nobody had asked for it.",
     figures: "~85% analyst time saved | 90+ days zero supply failure | built solo",
     then: "Handed over.",
   },

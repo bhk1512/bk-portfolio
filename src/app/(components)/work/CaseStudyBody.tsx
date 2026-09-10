@@ -29,31 +29,50 @@ const TEXT_COLUMN = "max-w-[620px]";
 const ROW_GRID =
   "grid lg:grid-cols-[minmax(0,620px)_minmax(0,500px)] gap-8 lg:gap-16 items-start";
 
-// The header band mirrors the hero: eyebrow line, display headline at the
-// hero's own scale, standfirst. Nothing here is sized for this page alone.
+// Figures arrive as one string joined by the site's separators. Splitting
+// them lets the header spread them horizontally and the rail stack them.
+function splitFigures(figures: string): string[] {
+  return figures
+    .split(/\s*[·|]\s*/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+const FIGURE_TYPE = "font-mono text-[12px] text-body-quiet tracking-[0.04em]";
+
+// The header band mirrors the hero: eyebrow left with the status right,
+// display headline at the hero's own scale, figures spread underneath.
+// Nothing here is sized for this page alone.
 function HeaderBand({
   eyebrow,
+  status,
   title,
-  standfirst,
+  figures,
 }: {
   eyebrow: string;
+  status?: string;
   title: string;
-  standfirst?: string;
+  figures?: string;
 }) {
   return (
-    <header className="mb-10">
+    <header className="mb-2 pb-6 border-b border-hairline-strong">
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 mb-6">
         <span className="font-mono text-[11px] sm:text-xs tracking-[0.18em] uppercase text-accent">
           {eyebrow}
         </span>
+        {status ? (
+          <span className="font-mono text-[11px] text-muted">{status}</span>
+        ) : null}
       </div>
       <h1 className="font-serif font-light text-[clamp(34px,6.5vw,64px)] leading-[1.06] tracking-[-0.02em] max-w-[30ch] text-ink mb-6">
         {title}
       </h1>
-      {standfirst ? (
-        <p className="text-ink/90 font-serif text-lg sm:text-xl leading-[1.5] max-w-[70ch]">
-          {standfirst}
-        </p>
+      {figures ? (
+        <div className={`flex flex-wrap gap-x-12 gap-y-2 ${FIGURE_TYPE}`}>
+          {splitFigures(figures).map((part) => (
+            <span key={part}>{part}</span>
+          ))}
+        </div>
       ) : null}
     </header>
   );
@@ -139,23 +158,24 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
       <>
         <HeaderBand
           eyebrow={`${workRow.org} · ${workRow.year}`}
+          status={workRow.then ?? undefined}
           title={workRow.title}
-          standfirst={workRow.body}
+          figures={workRow.figures}
         />
 
-        <LabelledRow
-          index="01"
-          label="What was broken"
-          rail={
-            <p className="font-mono text-[12px] text-body-quiet tracking-[0.04em] leading-relaxed">
-              {workRow.figures}
-            </p>
-          }
-        >
+        <LabelledRow index="01" label="What was broken">
           <Prose>{caseStudy.broken}</Prose>
         </LabelledRow>
 
-        <LabelledRow index="02" label="What I built" rail={railImage(images[0])}>
+        <LabelledRow
+          index="02"
+          label="What I built"
+          rail={
+            images.length ? (
+              <div className="flex flex-col gap-8">{images.map(railImage)}</div>
+            ) : null
+          }
+        >
           <Prose>{caseStudy.built}</Prose>
         </LabelledRow>
 
@@ -163,9 +183,11 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           index="03"
           label="What happened"
           rail={
-            images.length > 1 ? (
-              <div className="flex flex-col gap-8">{images.slice(1).map(railImage)}</div>
-            ) : null
+            <div className={`flex flex-col gap-2 ${FIGURE_TYPE}`}>
+              {splitFigures(workRow.figures).map((part) => (
+                <span key={part}>{part}</span>
+              ))}
+            </div>
           }
         >
           <Prose>{caseStudy.happened}</Prose>
@@ -194,15 +216,11 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
       <HeaderBand
         eyebrow={`${project.archetype ?? "Work"}${project.year ? ` · ${project.year}` : ""}`}
         title={teardown?.heading ?? project.title}
+        figures={project.stack}
       />
-      {project.stack ? (
-        <p className="font-mono text-[12px] text-body-quiet tracking-[0.04em] mb-8">
-          {project.stack}
-        </p>
-      ) : null}
 
       {teardown ? (
-        <div className={TEXT_COLUMN}>
+        <div className={`${TEXT_COLUMN} pt-10`}>
           <p className="font-serif text-lg leading-relaxed text-body mb-10">
             {teardown.description}
           </p>
@@ -285,7 +303,7 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           ) : null}
         </div>
       ) : (
-        <div className={TEXT_COLUMN}>
+        <div className={`${TEXT_COLUMN} pt-10`}>
           {project.summary ? (
             <p className="font-serif text-lg leading-relaxed text-body mb-3">{project.summary}</p>
           ) : null}

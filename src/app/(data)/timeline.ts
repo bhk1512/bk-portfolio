@@ -19,7 +19,7 @@ export const timeline: TimelineNode[] = [
     id: "zs",
     short: "ZS",
     year: "2016",
-    detail: "ZS Associates. Analytics, technology consulting.",
+    detail: "ZS Associates. Analytics and technology consulting. First job.",
     breakAfter: true,
   },
   {
@@ -27,8 +27,9 @@ export const timeline: TimelineNode[] = [
     short: "IB",
     year: "2018",
     detail:
-      "Intelligence Bureau · MHA. NLP triage pipeline, self-initiated. " +
-      "-85% analyst cycle time.",
+      "Intelligence Bureau. Risk intelligence for the Ministry of Home " +
+      "Affairs. Two years of analyst work, and the habit of building the " +
+      "tool instead of asking for one.",
     weight: 2,
   },
   {
@@ -36,8 +37,9 @@ export const timeline: TimelineNode[] = [
     short: "CISF",
     year: "2020",
     detail:
-      "Central Industrial Security Force. Armed Force of the Union, critical " +
-      "infrastructure. Paperless HQ, 200 files a day retired. -90% admin turnaround.",
+      "Central Industrial Security Force. Armed Force of the Union, guarding " +
+      "airports, ports and plants. Four years learning how slowly an " +
+      "institution moves, and how to move it anyway.",
     weight: 3.5,
   },
   {
@@ -61,7 +63,7 @@ export const timeline: TimelineNode[] = [
     id: "sita",
     short: "SITA",
     year: "2026",
-    detail: "SITA Labs. Air transport technology. Standing up the India practice.",
+    detail: "SITA Labs. Air transport technology. Building the India practice.",
     weight: 1.2,
   },
 ];

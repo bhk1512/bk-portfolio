@@ -30,12 +30,12 @@ const PATHS: Record<string, React.ReactNode> = {
   ),
   // Guards installations. Straight-sided, geometric, not a crest.
   cisf: <path d="M12 3.5 19 6v5.6L12 20.5 5 11.6V6z" />,
-  // A degree: an open book.
+  // The break: a mortarboard. Board, cap band and tassel.
   iima: (
     <>
-      <path d="M12 7.6v10.9" />
-      <path d="M12 7.6 4.5 5.5v11L12 18.5" />
-      <path d="M12 7.6 19.5 5.5v11L12 18.5" />
+      <path d="M12 4 21 8.2 12 12.4 3 8.2z" />
+      <path d="M7.2 10.4v3.9h9.6v-3.9" />
+      <path d="M21 8.2v4.6" />
     </>
   ),
   // Power transmission: a lattice tower. The top is flat and the crossarms

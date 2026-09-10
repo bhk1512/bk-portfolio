@@ -22,9 +22,9 @@ export default function Hero() {
         </h1>
 
         <p className="text-ink/90 font-serif text-lg sm:text-xl leading-[1.5] max-w-[70ch] mb-8">
-          Seven years in intelligence, armed forces and infrastructure. IIM
-          Ahmedabad MBA; analytics at ZS Associates before that. In each one I
-          built something the organisation did not have.
+          Seven years across analytics, intelligence, critical infrastructure
+          and now air transport, with an IIM Ahmedabad MBA in the middle of it.
+          In each one I built something the organisation didn&apos;t have.
         </p>
 
         <div className="flex flex-wrap gap-7 items-center font-mono text-[13px] tracking-[0.02em]">

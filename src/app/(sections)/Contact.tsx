@@ -30,7 +30,7 @@ export default function Contact() {
 
             <div className="max-w-[46ch]">
               <p className="font-serif font-light text-2xl sm:text-3xl leading-snug text-ink max-w-[24ch] mb-5">
-                Looking for someone who builds systems that last?
+                Get in touch.
               </p>
               <p className="font-serif text-lg text-body-quiet leading-relaxed mb-5">
                 Email or LinkedIn. I check both daily.
