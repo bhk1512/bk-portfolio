@@ -31,9 +31,10 @@ export type WorkRow = {
   caseStudy?: WorkCaseStudy;
 };
 
-// The eight rows shown in the homepage Work section, in this order.
-// Rows 1-3 carry case studies; rows 4-8 keep their existing copy from
-// (data)/projects.ts unchanged.
+// The seven rows shown in the homepage Work section, in this order.
+// Rows 1-3 carry case studies; rows 4-7 fall back to the legacy template
+// in (data)/projects.ts. Audible Product Teardown is archive-only and
+// lives in (data)/archive.ts.
 export const workRows: WorkRow[] = [
   {
     slug: "quarterly-block-planning",
@@ -117,13 +118,13 @@ export const workRows: WorkRow[] = [
     slug: "execution-productivity-platform",
     title: "From dashboard to platform",
     org: "KEC",
-    year: "2025-2026",
+    year: "2025–2026",
     body:
       "Built a dashboard that put 25 projects in one view. Once leadership was " +
       "opening it every week, wrote the case to build it properly inside the " +
       "platform, and switched off my own tool along with the report mails and " +
       "the micro-plan files.",
-    figures: "25+ projects | ~80% manual effort removed | MT/day and km/month per gang",
+    figures: "25+ projects · ~80% manual effort removed · MT/day and km/month per gang",
     then:
       "Institutionalised into the platform. Standalone retired by my own business " +
       "case, 2026.",
@@ -188,7 +189,7 @@ export const workRows: WorkRow[] = [
       "consistent method across the team. I built a pricing engine on a " +
       "structured repository and live market indices. High-value bids come " +
       "back with low, base and high scenarios.",
-    figures: "Estimation bottleneck eliminated | Pricing standardised | 0→1 build",
+    figures: "Estimation bottleneck eliminated · Pricing standardised · 0→1 build",
     then: "Handed over.",
   },
   {
@@ -200,7 +201,7 @@ export const workRows: WorkRow[] = [
       "Thirty-odd sources crawled overnight and sorted into wins, setbacks, " +
       "moves and macro. Lands at nine on Monday. Three hours of reading became " +
       "ten minutes.",
-    figures: "3 hrs -> <10 min weekly | 30+ sources | weekly cadence",
+    figures: "3 hrs to under 10 min, weekly · 30+ sources · weekly cadence",
     then: "Still running.",
   },
   {
@@ -212,21 +213,8 @@ export const workRows: WorkRow[] = [
       "Analyst intake was a queue someone read top to bottom. Wrote a " +
       "classifier that pushed the high-value items up. Built it alone, because " +
       "nobody had asked for it.",
-    figures: "~85% analyst time saved | 90+ days zero supply failure | built solo",
-    then: "Handed over.",
-  },
-  {
-    slug: "audible-product-teardown",
-    title: "Audible Product Teardown",
-    org: "Personal",
-    year: "2025",
-    body:
-      "Audible holds about 60% of the audiobook market. I read 30,000 reviews " +
-      "to see where the product wins and where it struggles.",
-    figures: "60% global share",
-    // Personal teardown, not a deployed system -- "still running / handed
-    // over" doesn't apply. Empty string hides the status line entirely.
-    then: "",
+    figures: "~85% analyst time saved · 90+ days zero supply failure · built solo",
+    then: "Handed over, 2020. No visibility since.",
   },
   {
     slug: "defence-expo-pmo",
@@ -237,10 +225,8 @@ export const workRows: WorkRow[] = [
       "India's largest defence exhibition, with a 20-day build window and no " +
       "playbook. I ran 8 workstreams and 600+ personnel across 6 agencies. " +
       "Five days, zero incidents.",
-    figures: "250k+ visitors | 75+ delegations | 100% SLA / zero incidents",
-    // The event concluded in 2022 -- "still running / handed over" doesn't
-    // apply. Empty string hides the status line entirely.
-    then: "",
+    figures: "250k+ visitors · 75+ delegations · 100% SLA / zero incidents",
+    then: "Event closed, 2022.",
   },
 ];
 

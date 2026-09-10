@@ -16,11 +16,17 @@ const homepageRows: ArchiveRow[] = workRows.map((row) => ({
   outcome: row.figures,
 }));
 
-// Removed from the homepage Work section but kept here: BG & Surety and AI
-// Risk Radar and Content to Insights are archive-only (not deleted).
-// Planning Traceability System was superseded by Quarterly Block Planning
-// and deleted outright -- it does not appear here.
+// Removed from the homepage Work section but kept here: BG & Surety, AI
+// Risk Radar, Content to Insights and Audible are archive-only (not
+// deleted). Planning Traceability System was superseded by Quarterly Block
+// Planning and deleted outright -- it does not appear here.
 const archiveOnlyRows: ArchiveRow[] = [
+  {
+    year: "2025",
+    system: "Audible Product Teardown",
+    at: "Personal",
+    outcome: "60% global share",
+  },
   {
     year: "2025",
     system: "BG & Surety Risk Control System",
