@@ -2,10 +2,13 @@ export type WorkImage = {
   src: string;
   alt: string;
   caption: string;
-  // Intrinsic pixel size. Case studies render these uncropped at the full
-  // content width, so the real aspect ratio has to be known up front.
+  // Intrinsic pixel size. Images render uncropped at container width, so
+  // the real aspect ratio has to be known up front.
   width: number;
   height: number;
+  // Light-UI captures are desaturated to sit inside the dark palette.
+  // Set false for an image that is already dark.
+  desaturate?: boolean;
 };
 
 export type WorkCaseStudy = {
@@ -191,6 +194,23 @@ export const workRows: WorkRow[] = [
       "back with low, base and high scenarios.",
     figures: "Estimation bottleneck eliminated · Pricing standardised · 0→1 build",
     then: "Handed over.",
+    images: [
+      {
+        src: "/images/work/tender-copilot-extract.png",
+        alt: "A pasted tender notice parsed into named fields for voltage, route length, completion period, terrain and customer type, with a prompt to correct any value before confirming.",
+        caption:
+          "Tender details parsed into structured fields. Reference, client and specifications are fabricated.",
+        width: 1920,
+        height: 1648,
+      },
+      {
+        src: "/images/work/tender-copilot-pricing.png",
+        alt: "A pricing run stepping through commodity indices and competitor metrics before returning conservative, median and aggressive rates per unit, with the inputs and signals it used listed underneath.",
+        caption: "Orchestrated pricing run and confidence bands. All values are fabricated.",
+        width: 1920,
+        height: 1926,
+      },
+    ],
   },
   {
     slug: "industry-digest",
@@ -203,6 +223,18 @@ export const workRows: WorkRow[] = [
       "ten minutes.",
     figures: "3 hrs to under 10 min, weekly · 30+ sources · weekly cadence",
     then: "Still running.",
+    images: [
+      {
+        src: "/images/work/industry-digest.png",
+        alt: "A week's digest: three ranked signals tagged market, strategy and risk, each with its supporting points, above a table comparing five competitors on recent orders and strength.",
+        caption:
+          "Weekly signals and competitive snapshot. Internal recommendations removed.",
+        width: 638,
+        height: 1715,
+        // Already dark. The site-wide desaturation is for light-UI captures.
+        desaturate: false,
+      },
+    ],
   },
   {
     slug: "ib-nlp-intelligence",

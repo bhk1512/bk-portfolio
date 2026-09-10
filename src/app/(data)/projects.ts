@@ -176,7 +176,6 @@ export const projects: Project[] = [
         { label: "Open Case Study", kind: "modal" },
         { label: "PRD", href: "/PRDs/Product Requirements Document - Industry Digest.pdf", kind: "link" },
       ],
-      demoLink: "/samples/Industry-Digest-Sample.jpg",
       prdLink: "/PRDs/Product Requirements Document - Industry Digest.pdf",
       flagship: true,
       flagshipLabel: "",

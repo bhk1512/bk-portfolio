@@ -99,12 +99,14 @@ export default function Work() {
                             {row.body}
                           </p>
                           {row.images?.length ? (
-                            <div className="grid sm:grid-cols-2 gap-4 mb-1">
+                            <div className="flex flex-col gap-6 mt-4 mb-1">
                               {row.images.map((image) => (
                                 <WorkImage
                                   key={image.src}
                                   image={image}
-                                  sizes="(min-width: 640px) 400px, 100vw"
+                                  frame="full"
+                                  desaturate={image.desaturate ?? true}
+                                  sizes="(min-width: 640px) 600px, 100vw"
                                 />
                               ))}
                             </div>

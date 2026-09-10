@@ -150,6 +150,7 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           key={image.src}
           image={image}
           frame="full"
+          desaturate={image.desaturate ?? true}
           sizes="(min-width: 1024px) 500px, 100vw"
         />
       ) : null;
