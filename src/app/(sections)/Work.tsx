@@ -7,7 +7,7 @@ import { workRows } from "../(data)/work";
 import { operatingRules } from "../(data)/operatingRules";
 import { RETURN_KEY, rememberRow, rowDomId } from "../(components)/work/returnToRow";
 import Todo from "../(components)/ui/Todo";
-import WorkImage from "../(components)/ui/WorkImage";
+import WorkImage, { ROW_FRAME_ASPECT } from "../(components)/ui/WorkImage";
 
 export default function Work() {
   const [openId, setOpenId] = useState<string | null>(null);
@@ -111,6 +111,7 @@ export default function Work() {
                                 image={row.rowImage}
                                 frame="full"
                                 interactive={false}
+                                frameAspect={ROW_FRAME_ASPECT}
                                 desaturate={row.rowImage.desaturate ?? true}
                                 sizes="(min-width: 640px) 600px, 100vw"
                               />

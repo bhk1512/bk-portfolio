@@ -20,6 +20,10 @@ type WorkImageProps = {
   // case study, and a lightbox there would satisfy the click the row is
   // supposed to be inviting.
   interactive?: boolean;
+  // Width-over-height of the frame. Set it to give a set of images one
+  // shared height whatever the container width; leave it unset to let the
+  // image keep its own height up to FRAME_MAX_HEIGHT.
+  frameAspect?: number;
 };
 
 // A "full" frame never grows past this. Anything taller is clipped from the
@@ -29,6 +33,14 @@ const FRAME_MAX_HEIGHT = 620;
 // Narrowest container a full-frame image renders into (the case study rail).
 // An image taller than the cap at that width is tall everywhere.
 const NARROWEST_CONTAINER = 500;
+
+// Homepage rows share one frame shape, so the work column scrolls evenly
+// instead of jumping between a wide dashboard and a tall digest. Taken from
+// the executive dashboard capture, the widest of the row images.
+export const ROW_FRAME_ASPECT = 1891 / 835;
+
+// Pixels of overflow below which a clip is rounding rather than content.
+const CLIP_TOLERANCE = 8;
 
 // Site-wide treatment for product-screenshot artifacts: desaturated so a
 // light-UI screenshot sits inside the dark palette instead of glowing out
@@ -40,6 +52,7 @@ export default function WorkImage({
   frame = "card",
   desaturate = true,
   interactive = true,
+  frameAspect,
 }: WorkImageProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -78,13 +91,18 @@ export default function WorkImage({
   // measured once mounted, because the container width varies by breakpoint
   // and an image can overflow at 640px but not at 500px.
   const [clipped, setClipped] = useState(
-    (NARROWEST_CONTAINER * image.height) / image.width > FRAME_MAX_HEIGHT
+    frameAspect
+      ? image.height / image.width > 1 / frameAspect
+      : (NARROWEST_CONTAINER * image.height) / image.width > FRAME_MAX_HEIGHT
   );
 
   useEffect(() => {
     const el = frameRef.current;
     if (!el) return undefined;
-    const measure = () => setClipped(el.scrollHeight > el.clientHeight + 1);
+    // Only fade when enough is hidden to be worth explaining. The frame's
+    // border takes a pixel off the content box, so an image cut exactly to
+    // the frame's own ratio overflows by a rounding error, not by content.
+    const measure = () => setClipped(el.scrollHeight > el.clientHeight + CLIP_TOLERANCE);
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(el);
@@ -98,7 +116,11 @@ export default function WorkImage({
           // Nothing is squashed, letterboxed or scaled down to fit.
           <div
             ref={frameRef}
-            style={{ maxHeight: FRAME_MAX_HEIGHT }}
+            style={
+              frameAspect
+                ? { aspectRatio: String(frameAspect) }
+                : { maxHeight: FRAME_MAX_HEIGHT }
+            }
             className="relative overflow-hidden rounded-lg border border-hairline-strong transition-colors duration-150 motion-reduce:transition-none group-hover:border-accent/60"
           >
             <Image

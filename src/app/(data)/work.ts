@@ -57,6 +57,13 @@ export const workRows: WorkRow[] = [
       "arrive, and on day 12 the quarter locks.",
     figures: "24 projects · 12-day planning cycle",
     then: "Q2 Jul-Sep 2026 planned through it. Live when I left.",
+    rowImage: {
+      src: "/images/work/quarterly-block-planning.png",
+      alt: "Quarterly block planning interface showing per-month upload status, review, and freeze steps alongside the day-wise activity plan grid.",
+      caption: "Quarterly upload and freeze workflow. Names and project codes replaced.",
+      width: 1897,
+      height: 827,
+    },
     builtImage: {
       src: "/images/work/quarterly-block-planning.png",
       alt: "Quarterly block planning interface showing per-month upload status, review, and freeze steps alongside the day-wise activity plan grid.",
@@ -93,6 +100,13 @@ export const workRows: WorkRow[] = [
       "geo-tagged, and if someone skips a step they have to say why.",
     figures: "7 milestones · live capture only · ~0.9 GB evidence per foundation",
     then: "Released and in use when I left.",
+    rowImage: {
+      src: "/images/work/foundation-quality-capture.png",
+      alt: "Milestone-gated foundation quality capture flow showing required video evidence and skip-with-justification controls for one checkpoint.",
+      caption: "Milestone capture flow. Project and location codes replaced.",
+      width: 1731,
+      height: 1551,
+    },
     builtImage: {
       src: "/images/work/foundation-quality-capture.png",
       alt: "Milestone-gated foundation quality capture flow showing required video evidence and skip-with-justification controls for one checkpoint.",
