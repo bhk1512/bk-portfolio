@@ -94,31 +94,32 @@ export default function Work() {
                     {isRowOpen ? (
                       <div className="grid grid-cols-[16px_minmax(0,1fr)] gap-3 sm:gap-5 pb-5">
                         <span />
-                        <div className="border-l border-hairline-strong pl-5 max-w-[64ch]">
+                        {/* The whole panel is the link. An expanded row is an
+                            index entry: its job is to invite the click, not
+                            to satisfy it, so the image opens no lightbox. */}
+                        <Link
+                          href={`/work/${row.slug}`}
+                          onClick={() => rememberRow(row.slug)}
+                          className="group block border-l border-hairline-strong pl-5 max-w-[64ch]"
+                        >
                           <p className="font-serif text-base leading-relaxed text-body-quiet mb-3">
                             {row.body}
                           </p>
-                          {row.images?.length ? (
-                            <div className="flex flex-col gap-6 mt-4 mb-1">
-                              {row.images.map((image) => (
-                                <WorkImage
-                                  key={image.src}
-                                  image={image}
-                                  frame="full"
-                                  desaturate={image.desaturate ?? true}
-                                  sizes="(min-width: 640px) 600px, 100vw"
-                                />
-                              ))}
+                          {row.rowImage ? (
+                            <div className="mt-4 mb-1">
+                              <WorkImage
+                                image={row.rowImage}
+                                frame="full"
+                                interactive={false}
+                                desaturate={row.rowImage.desaturate ?? true}
+                                sizes="(min-width: 640px) 600px, 100vw"
+                              />
                             </div>
                           ) : null}
-                          <Link
-                            href={`/work/${row.slug}`}
-                            onClick={() => rememberRow(row.slug)}
-                            className="inline-block mt-3 font-mono text-[11.5px] tracking-[0.04em] text-accent border-b border-accent/40 pb-0.5 hover:text-ink hover:border-ink transition-colors"
-                          >
+                          <span className="inline-block mt-3 font-mono text-[11.5px] tracking-[0.04em] text-accent border-b border-accent/40 pb-0.5 group-hover:text-ink group-hover:border-ink transition-colors">
                             Read the case study
-                          </Link>
-                        </div>
+                          </span>
+                        </Link>
                       </div>
                     ) : null}
                   </div>

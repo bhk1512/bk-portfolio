@@ -2,6 +2,7 @@ import Todo from "../ui/Todo";
 import WorkImage from "../ui/WorkImage";
 import { projects } from "../../(data)/projects";
 import { getWorkRow } from "../../(data)/work";
+import type { WorkImage as WorkImageData } from "../../(data)/work";
 
 export function caseStudyExists(slug: string): boolean {
   return Boolean(getWorkRow(slug)?.caseStudy) || projects.some((item) => item.id === slug);
@@ -111,6 +112,21 @@ function Prose({ children }: { children: React.ReactNode }) {
   return <p className="font-serif text-lg leading-relaxed text-body">{children}</p>;
 }
 
+// A section carries at most one image, anchored to the section it
+// illustrates. A section without one has an empty rail, which is fine: the
+// rail is already occupied at the top of the page by the header band.
+function RailImage({ image }: { image?: WorkImageData }) {
+  if (!image) return null;
+  return (
+    <WorkImage
+      image={image}
+      frame="full"
+      desaturate={image.desaturate ?? true}
+      sizes="(min-width: 1024px) 500px, 100vw"
+    />
+  );
+}
+
 function List({ items }: { items: string[] }) {
   return (
     <ul className="space-y-2">
@@ -141,19 +157,6 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
 
   if (workRow?.caseStudy) {
     const { caseStudy } = workRow;
-    const images = workRow.images ?? [];
-    // Images go in the rail, at rail width. Sections without one carry the
-    // figures or the artifact link instead; an empty rail is fine.
-    const railImage = (image: (typeof images)[number] | undefined) =>
-      image ? (
-        <WorkImage
-          key={image.src}
-          image={image}
-          frame="full"
-          desaturate={image.desaturate ?? true}
-          sizes="(min-width: 1024px) 500px, 100vw"
-        />
-      ) : null;
 
     return (
       <>
@@ -168,28 +171,14 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           <Prose>{caseStudy.broken}</Prose>
         </LabelledRow>
 
-        <LabelledRow
-          index="02"
-          label="What I built"
-          rail={
-            images.length ? (
-              <div className="flex flex-col gap-8">{images.map(railImage)}</div>
-            ) : null
-          }
-        >
+        <LabelledRow index="02" label="What I built" rail={<RailImage image={workRow.builtImage} />}>
           <Prose>{caseStudy.built}</Prose>
         </LabelledRow>
 
         <LabelledRow
           index="03"
           label="What happened"
-          rail={
-            <div className={`flex flex-col gap-2 ${FIGURE_TYPE}`}>
-              {splitFigures(workRow.figures).map((part) => (
-                <span key={part}>{part}</span>
-              ))}
-            </div>
-          }
+          rail={<RailImage image={workRow.happenedImage} />}
         >
           <Prose>{caseStudy.happened}</Prose>
         </LabelledRow>
@@ -304,54 +293,56 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
           ) : null}
         </div>
       ) : (
-        <div className={`${TEXT_COLUMN} pt-10`}>
+        <>
+          {/* Same four labelled rows as a first-party case study. The legacy
+              entry already carries problem / approach / outcome / learnings,
+              so this is a re-homing of existing copy, not a rewrite. */}
           {project.summary ? (
-            <p className="font-serif text-lg leading-relaxed text-body mb-3">{project.summary}</p>
+            <div className={`${TEXT_COLUMN} pt-8 pb-2`}>
+              <p className="font-serif text-lg leading-relaxed text-body mb-3">
+                {project.summary}
+              </p>
+              {project.context ? (
+                <p className="font-serif text-base leading-relaxed text-body-quiet italic">
+                  {project.context}
+                </p>
+              ) : null}
+            </div>
           ) : null}
-          {project.context ? (
-            <p className="font-serif text-base leading-relaxed text-body-quiet italic mb-10">
-              {project.context}
-            </p>
-          ) : (
-            <div className="mb-10" />
-          )}
 
           {project.problem ? (
-            <>
-              <SectionHeading>Problem</SectionHeading>
-              <div className="mb-10">
-                <List items={Array.isArray(project.problem) ? project.problem : [project.problem]} />
-              </div>
-            </>
+            <LabelledRow index="01" label="What was broken">
+              <List items={Array.isArray(project.problem) ? project.problem : [project.problem]} />
+            </LabelledRow>
           ) : null}
 
           {project.approach?.length ? (
-            <>
-              <SectionHeading>Approach</SectionHeading>
-              <div className="mb-10">
-                <List items={project.approach} />
-              </div>
-            </>
+            <LabelledRow
+              index="02"
+              label="What I built"
+              rail={<RailImage image={workRow?.builtImage} />}
+            >
+              <List items={project.approach} />
+            </LabelledRow>
           ) : null}
 
           {project.outcome?.length ? (
-            <>
-              <SectionHeading>Outcome</SectionHeading>
-              <div className="mb-10">
-                <List items={project.outcome} />
-              </div>
-            </>
+            <LabelledRow
+              index="03"
+              label="What happened"
+              rail={<RailImage image={workRow?.happenedImage} />}
+            >
+              <List items={project.outcome} />
+            </LabelledRow>
           ) : null}
 
           {project.learnings?.length ? (
-            <>
-              <SectionHeading>Learnings</SectionHeading>
-              <div className="mb-10">
-                <List items={project.learnings} />
-              </div>
-            </>
+            <LabelledRow index="04" label="What I'd do differently">
+              <List items={project.learnings} />
+            </LabelledRow>
           ) : null}
 
+        <div className={`${TEXT_COLUMN} pt-10`}>
           {project.maskedScreens?.items?.length ? (
             <>
               <SectionHeading>{project.maskedScreens.title}</SectionHeading>
@@ -402,6 +393,7 @@ export default function CaseStudyBody({ slug }: CaseStudyBodyProps) {
             </div>
           ) : null}
         </div>
+        </>
       )}
     </>
   );

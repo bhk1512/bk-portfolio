@@ -16,6 +16,10 @@ type WorkImageProps = {
   // Light-UI screenshots are desaturated so they sit inside the dark
   // palette. An image that is already dark is left alone.
   desaturate?: boolean;
+  // Homepage rows render the image inert: the whole row is a link to the
+  // case study, and a lightbox there would satisfy the click the row is
+  // supposed to be inviting.
+  interactive?: boolean;
 };
 
 // A "full" frame never grows past this. Anything taller is clipped from the
@@ -35,6 +39,7 @@ export default function WorkImage({
   sizes = "(min-width: 1024px) 800px, 100vw",
   frame = "card",
   desaturate = true,
+  interactive = true,
 }: WorkImageProps) {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -86,16 +91,9 @@ export default function WorkImage({
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <figure className={isFull ? "" : "mt-4"}>
-      <button
-        ref={openerRef}
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label={`Open full image: ${image.alt}`}
-        className="group block w-full cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
-      >
-        {isFull ? (
+  const frameMarkup = (
+    <>
+      {isFull ? (
           // The image keeps its natural width and ratio; the frame clips it.
           // Nothing is squashed, letterboxed or scaled down to fit.
           <div
@@ -134,13 +132,30 @@ export default function WorkImage({
               className={`object-cover object-top transition duration-200 motion-reduce:transition-none ${filter}`}
             />
           </div>
-        )}
-      </button>
+      )}
+    </>
+  );
+
+  return (
+    <figure className={isFull ? "" : "mt-4"}>
+      {interactive ? (
+        <button
+          ref={openerRef}
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={`Open full image: ${image.alt}`}
+          className="group block w-full cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
+        >
+          {frameMarkup}
+        </button>
+      ) : (
+        <div className="group block w-full">{frameMarkup}</div>
+      )}
       <figcaption className="mt-2 font-mono text-[10.5px] text-body-quiet tracking-[0.04em]">
         {image.caption}
       </figcaption>
 
-      {open ? (
+      {interactive && open ? (
         <Portal>
           <div
             role="dialog"

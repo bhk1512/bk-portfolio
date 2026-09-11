@@ -30,7 +30,13 @@ export type WorkRow = {
   // null renders a visible "still running / handed over" TODO (status not
   // yet known). "" hides the status line (status doesn't apply to this row).
   then: string | null;
-  images?: WorkImage[];
+  // One image for the homepage row. An expanded row is an index entry, not
+  // a case study, so it never shows more than this.
+  rowImage?: WorkImage;
+  // At most one image per case study section, anchored to the section it
+  // illustrates. More than one would mean there is one image too many.
+  builtImage?: WorkImage;
+  happenedImage?: WorkImage;
   caseStudy?: WorkCaseStudy;
 };
 
@@ -51,15 +57,13 @@ export const workRows: WorkRow[] = [
       "arrive, and on day 12 the quarter locks.",
     figures: "24 projects · 12-day planning cycle",
     then: "Q2 Jul-Sep 2026 planned through it. Live when I left.",
-    images: [
-      {
-        src: "/images/work/quarterly-block-planning.png",
-        alt: "Quarterly block planning interface showing per-month upload status, review, and freeze steps alongside the day-wise activity plan grid.",
-        caption: "Quarterly upload and freeze workflow. Names and project codes replaced.",
-        width: 1897,
-        height: 827,
-      },
-    ],
+    builtImage: {
+      src: "/images/work/quarterly-block-planning.png",
+      alt: "Quarterly block planning interface showing per-month upload status, review, and freeze steps alongside the day-wise activity plan grid.",
+      caption: "Quarterly upload and freeze workflow. Names and project codes replaced.",
+      width: 1897,
+      height: 827,
+    },
     caseStudy: {
       broken:
         "Twenty-four projects, twenty-four Excel files, twenty-four different " +
@@ -89,15 +93,13 @@ export const workRows: WorkRow[] = [
       "geo-tagged, and if someone skips a step they have to say why.",
     figures: "7 milestones · live capture only · ~0.9 GB evidence per foundation",
     then: "Released and in use when I left.",
-    images: [
-      {
-        src: "/images/work/foundation-quality-capture.png",
-        alt: "Milestone-gated foundation quality capture flow showing required video evidence and skip-with-justification controls for one checkpoint.",
-        caption: "Milestone capture flow. Project and location codes replaced.",
-        width: 1731,
-        height: 1551,
-      },
-    ],
+    builtImage: {
+      src: "/images/work/foundation-quality-capture.png",
+      alt: "Milestone-gated foundation quality capture flow showing required video evidence and skip-with-justification controls for one checkpoint.",
+      caption: "Milestone capture flow. Project and location codes replaced.",
+      width: 1731,
+      height: 1551,
+    },
     caseStudy: {
       broken:
         "Foundation quality was recorded on paper checklists, filled in after the " +
@@ -131,29 +133,27 @@ export const workRows: WorkRow[] = [
     then:
       "Institutionalised into the platform. Standalone retired by my own business " +
       "case, 2026.",
-    images: [
-      {
-        src: "/images/work/productivity-dashboard-executive.png",
-        alt: "Executive overview dashboard with portfolio-level completion, plan attainment, and productivity KPIs plus a RAG status table by project.",
-        caption: "Executive overview. Names and project codes replaced.",
-        width: 1891,
-        height: 835,
-      },
-      {
-        src: "/images/work/tower-erection-analytics.png",
-        alt: "Tower erection analytics tab showing idle-day hotspots, recoverable output estimates, and a what-if productivity simulator.",
-        caption: "Tower erection analytics. Project codes replaced.",
-        width: 1887,
-        height: 841,
-      },
-      {
-        src: "/images/work/execution-report.png",
-        alt: "Execution report table breaking down scope, completion, and monthly plan-versus-actual by region, project, and activity.",
-        caption: "Execution report, regional breakdown. Names and project codes replaced.",
-        width: 1899,
-        height: 821,
-      },
-    ],
+    rowImage: {
+      src: "/images/work/productivity-dashboard-executive.png",
+      alt: "Executive overview dashboard with portfolio-level completion, plan attainment, and productivity KPIs plus a RAG status table by project.",
+      caption: "Executive overview. Names and project codes replaced.",
+      width: 1891,
+      height: 835,
+    },
+    builtImage: {
+      src: "/images/work/productivity-dashboard-executive.png",
+      alt: "Executive overview dashboard with portfolio-level completion, plan attainment, and productivity KPIs plus a RAG status table by project.",
+      caption: "Executive overview. Names and project codes replaced.",
+      width: 1891,
+      height: 835,
+    },
+    happenedImage: {
+      src: "/images/work/execution-report.png",
+      alt: "Execution report table breaking down scope, completion, and monthly plan-versus-actual by region, project, and activity.",
+      caption: "The same view, rebuilt inside the platform.",
+      width: 1899,
+      height: 821,
+    },
     caseStudy: {
       broken:
         "Execution data came in as Excel files. More than 25 projects, and the " +
@@ -194,23 +194,27 @@ export const workRows: WorkRow[] = [
       "back with low, base and high scenarios.",
     figures: "Estimation bottleneck eliminated · Pricing standardised · 0→1 build",
     then: "Handed over.",
-    images: [
-      {
-        src: "/images/work/tender-copilot-extract.png",
-        alt: "A pasted tender notice parsed into named fields for voltage, route length, completion period, terrain and customer type, with a prompt to correct any value before confirming.",
-        caption:
-          "Tender details parsed into structured fields. Reference, client and specifications are fabricated.",
-        width: 1920,
-        height: 1648,
-      },
-      {
-        src: "/images/work/tender-copilot-pricing.png",
-        alt: "A pricing run stepping through commodity indices and competitor metrics before returning conservative, median and aggressive rates per unit, with the inputs and signals it used listed underneath.",
-        caption: "Orchestrated pricing run and confidence bands. All values are fabricated.",
-        width: 1920,
-        height: 1926,
-      },
-    ],
+    rowImage: {
+      src: "/images/work/tender-copilot-pricing.png",
+      alt: "A pricing run stepping through commodity indices and competitor metrics before returning conservative, median and aggressive rates per unit, with the inputs and signals it used listed underneath.",
+      caption: "Orchestrated pricing run and confidence bands. All values are fabricated.",
+      width: 1920,
+      height: 1926,
+    },
+    builtImage: {
+      src: "/images/work/tender-copilot-extract.png",
+      alt: "A pasted tender notice parsed into named fields for voltage, route length, completion period, terrain and customer type, with a prompt to correct any value before confirming.",
+      caption: "Tender details parsed into structured fields. Reference, client and specifications are fabricated.",
+      width: 1920,
+      height: 1648,
+    },
+    happenedImage: {
+      src: "/images/work/tender-copilot-pricing.png",
+      alt: "A pricing run stepping through commodity indices and competitor metrics before returning conservative, median and aggressive rates per unit, with the inputs and signals it used listed underneath.",
+      caption: "Orchestrated pricing run and confidence bands. All values are fabricated.",
+      width: 1920,
+      height: 1926,
+    },
   },
   {
     slug: "industry-digest",
@@ -223,18 +227,24 @@ export const workRows: WorkRow[] = [
       "ten minutes.",
     figures: "3 hrs to under 10 min, weekly · 30+ sources · weekly cadence",
     then: "Still running.",
-    images: [
-      {
-        src: "/images/work/industry-digest.png",
-        alt: "A week's digest: three ranked signals tagged market, strategy and risk, each with its supporting points, above a table comparing five competitors on recent orders and strength.",
-        caption:
-          "Weekly signals and competitive snapshot. Internal recommendations removed.",
-        width: 638,
-        height: 1715,
-        // Already dark. The site-wide desaturation is for light-UI captures.
-        desaturate: false,
-      },
-    ],
+    rowImage: {
+      src: "/images/work/industry-digest.png",
+      alt: "A week's digest: three ranked signals tagged market, strategy and risk, each with its supporting points, above a table comparing five competitors on recent orders and strength.",
+      caption: "Weekly signals and competitive snapshot. Internal recommendations removed.",
+      width: 638,
+      height: 1715,
+      // Already dark. The site-wide desaturation is for light-UI captures.
+      desaturate: false,
+    },
+    builtImage: {
+      src: "/images/work/industry-digest.png",
+      alt: "A week's digest: three ranked signals tagged market, strategy and risk, each with its supporting points, above a table comparing five competitors on recent orders and strength.",
+      caption: "Weekly signals and competitive snapshot. Internal recommendations removed.",
+      width: 638,
+      height: 1715,
+      // Already dark. The site-wide desaturation is for light-UI captures.
+      desaturate: false,
+    },
   },
   {
     slug: "ib-nlp-intelligence",
